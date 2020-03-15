@@ -1,0 +1,29 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <style name="AppCannabis" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/cannabis_verde</item>
+        <item name="colorPrimaryDark">@color/cannabis_verde_D</item>
+        <item name="colorAccent">@color/cannabis_oficcial</item>
+    </style>
+
+    <style name="etiqueta">
+        <item name="android:background">@drawable/etiqueta</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+    
+    <style name="transparente_poppup" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <!--<item name="android:windowCloseOnTouchOutside">true</item>-->
+    </style>
+</resources>

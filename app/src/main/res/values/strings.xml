@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">Cannabis Automatico</string>
+    <string name="titulo_email">Correo eletronico</string>
+    <string name="titulo_password">Contraseña</string>
+    <string name="btn_iniciar">Iniciar Sesion</string>
+    <string name="btn_registrar">Registrar</string>
+    <string name="btn_olvide_contraseña">¿ Olvide mi contraseña?</string>
+    <string name="recuperar_password"> Recuperar </string>
+    <string name="indicacion_correo"> Escribe tu Email para recuperar </string>
+    <string name="nombre">Nombre</string>
+    <string name="apellido">Apellido</string>
+    <string name="codigo">Cod_Adm</string>
+    <string name="imagen">imagen</string>
+
+
+    <string name="ejemplo_nombre">Ejemplo : Arturo </string>
+    <string name="ejemplo_apellido">Ejemplo : Perez </string>
+    <string name="ejemplo_email"> Arturo@gmail.com </string>
+    <string name="ejemplo_password"> Primer letra [A-Z] y Numeros[1-9]</string>
+
+    <string name="titulo_app">Cannabis</string>
+
+    <string name="sensor_Temp"> Temperatura </string>
+    <string name="sensor_Humed"> Humedad </string>
+    <string name="sensor_Luz"> Luz </string>
+    <string name="sensor_Ph"> Ph </string>
+    <string name="Info_sensores">Informacion de los sensores</string>
+    <string name="Info_Mantenimiento">Opcion Mantenimiento</string>
+    <string name="Habilitar_Desh"> Habilitar / Deshabilitar </string>
+
+    <string name="Conexion_luetooth"> Activar / Desconectar </string>
+    <string name="info_sensor"> Informacion </string>
+
+    <string name="Ajustes"> Ajustes </string>
+    <string name="hechar_agua"> Agua </string>
+    <string name="subir_luz"> Luz </string>
+    <string name="encender_luz"> Encender </string>
+    <string name="reducir_luz"> Intencidad </string>
+    <string name="Modo_M"> Modo manual </string>
+    <string name="Modo_A"> Modo Automatico </string>
+    <string name="TIEMPO"> Datos en tiempo real </string>
+    <string name="modos"> Modo </string>
+    <string name="dato1"> Dato ideal </string>
+    <string name="dato2"> Dato actual </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

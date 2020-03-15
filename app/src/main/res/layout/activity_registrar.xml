@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_principal"
+    tools:context=".MainActivity">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:contentDescription="@string/imagen"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/titulo_nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:text="@string/nombre"
+        android:textColor="@android:color/black" />
+
+    <EditText
+        android:id="@+id/nombre"
+        android:layout_width="320dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/titulo_nombre"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="0dp"
+        android:ems="10"
+        android:hint="@string/ejemplo_nombre"
+        android:inputType="textEmailAddress" />
+
+    <TextView
+        android:id="@+id/titulo_apellido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nombre"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:text="@string/apellido"
+        android:textColor="@android:color/black" />
+
+    <EditText
+        android:id="@+id/apellido"
+        android:layout_width="320dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/titulo_apellido"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:hint="@string/ejemplo_apellido"
+        android:inputType="textEmailAddress" />
+
+
+    <TextView
+        android:id="@+id/titulo_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/apellido"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:text="@string/titulo_email"
+        android:textColor="@android:color/black" />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="320dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/titulo_email"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:hint="@string/ejemplo_email"
+        android:inputType="textEmailAddress" />
+
+    <TextView
+        android:id="@+id/titulo_password"
+        android:layout_width="77dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/email"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:text="@string/titulo_password"
+        android:textColor="@android:color/black" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="320dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/titulo_password"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:hint="@string/ejemplo_password"
+        android:inputType="textEmailAddress" />
+
+    <TextView
+        android:id="@+id/titulo_codigo"
+        android:layout_width="81dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/password"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:text="@string/codigo"
+        android:textColor="@android:color/black" />
+
+    <EditText
+        android:id="@+id/codigo"
+        android:layout_width="320dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/titulo_codigo"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:hint="@string/codigo"
+        android:inputType="textEmailAddress" />
+
+    <Button
+        android:id="@+id/btn_registrar"
+        android:layout_width="230dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/codigo"
+        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="85dp"
+        android:layout_marginLeft="83dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="91dp"
+        android:layout_marginRight="91dp"
+        android:background="@drawable/btn_efectos"
+        android:text="@string/btn_registrar"
+        android:textColor="@color/cannabis_verde" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:visibility="gone"
+        android:indeterminate="true"
+        android:layout_marginRight="0dp" />
+
+
+</RelativeLayout>

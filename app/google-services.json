@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "285147854043",
+    "firebase_url": "https://cannabis-e478c.firebaseio.com",
+    "project_id": "cannabis-e478c",
+    "storage_bucket": "cannabis-e478c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285147854043:android:edcb76911b9cf42fc208fe",
+        "android_client_info": {
+          "package_name": "com.example.cannabisautomatico"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285147854043-iuqb3d3tggrjt3ffsf6hfmhqj2e34oi6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cannabisautomatico",
+            "certificate_hash": "86b714c50d300bf300090ff669705ac851682cab"
+          }
+        },
+        {
+          "client_id": "285147854043-5ep67fpghdvapb0sopjb46rt61n8ij8d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaqfSsD3IU3vw0KATSLLYE6nL36gAmWuc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285147854043-5ep67fpghdvapb0sopjb46rt61n8ij8d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

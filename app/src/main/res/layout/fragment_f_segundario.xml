@@ -19,7 +19,7 @@
             android:background="?android:attr/listDivider" />
 
         <Switch
-            android:id="@+id/switch1"
+            android:id="@+id/M_manual"
             android:layout_width="300dp"
             android:layout_height="30dp"
             android:layout_marginLeft="20dp"

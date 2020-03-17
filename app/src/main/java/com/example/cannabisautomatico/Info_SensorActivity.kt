@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
+import com.example.hp.bluetoothjhr.BluetoothJhr
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.Legend
@@ -31,6 +32,8 @@ class Info_SensorActivity: AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info__sensor)
+
+
 
         btn_home.setOnClickListener{
             startActivity(Intent(this,HomeActivity::class.java))
@@ -207,6 +210,8 @@ class Info_SensorActivity: AppCompatActivity(){
 
 
     }
+
+
 
 
     private fun  dataValues1(): ArrayList<Entry> {

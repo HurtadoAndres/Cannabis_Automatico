@@ -36,7 +36,7 @@
                 android:background="?android:attr/listDivider" />
 
             <Switch
-                android:id="@+id/switch3"
+                android:id="@+id/M_auto"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"

@@ -1,5 +1,6 @@
 package com.example.cannabisautomatico
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -27,6 +28,23 @@ class F_principal : Fragment() {
 
     }
 
+    //----------------------------------CONEXION BLUETOOTH-----------------------------------------
+
+
+    @Override
+    override fun onResume() {
+        super.onResume()
+     // BT.ConectaBluetooth()
+    }
+
+
+    @Override
+    override fun onPause() {
+        super.onPause()
+      // BT.CierraConexion()
+    }
+    //-------------------------------------FINAL BLUETOOTH------------------------------------------
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,14 +52,15 @@ class F_principal : Fragment() {
         // Inflate the layout for this fragment
         val view : View =  inflater.inflate(R.layout.fragment_f_principal, container, false)
         modo_auto = view.findViewById(R.id.M_auto)
-        modo_manual=view.findViewById(R.id.M_manual)
 
+        modo_auto.isChecked=true
         BT = BluetoothJhr(ConexionBT_Activity::class.java,activity )// bluetooth declaracion
 
         modo_auto.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked){
-                BT.Tx(modo)
-                modo_manual.isChecked=false
+               // BT.Tx(modo)
+                startActivity(Intent(activity,ConexionBT_Activity::class.java))
+
 
             }
             Toast.makeText(activity,"Modo automatico activado", Toast.LENGTH_LONG).show()
@@ -54,22 +73,7 @@ class F_principal : Fragment() {
         return view
     }
 
-    //----------------------------------CONEXION BLUETOOTH-----------------------------------------
 
-
-    @Override
-    override fun onResume() {
-        super.onResume()
-        BT.ConectaBluetooth()
-    }
-
-
-    @Override
-    override fun onPause() {
-        super.onPause()
-        BT.CierraConexion()
-    }
-    //-------------------------------------FINAL BLUETOOTH------------------------------------------
 
 
     companion object {

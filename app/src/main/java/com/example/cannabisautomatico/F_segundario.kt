@@ -14,7 +14,7 @@ class F_segundario : Fragment() {
 
 
     lateinit var  BT : BluetoothJhr //BLUETTOOTH LIBRERIA
-    lateinit var modo_auto : Switch
+
     lateinit var modo_manual : Switch
     var modo : String = "false"
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,14 +29,14 @@ class F_segundario : Fragment() {
         // Inflate the layout for this fragment
        val view = inflater.inflate(R.layout.fragment_f_segundario, container, false)
         modo_manual = view.findViewById(R.id.M_manual)
-        modo_auto = view.findViewById(R.id.M_auto)
+
 
         BT = BluetoothJhr(ConexionBT_Activity::class.java,activity )// bluetooth declaracion
 
             modo_manual.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked){
-                    BT.Tx(modo)
-                    modo_auto.isChecked=false
+                   // BT.Tx(modo)
+
                 }
                 Toast.makeText(activity,"Modo manual activado",Toast.LENGTH_LONG).show()
 
@@ -54,14 +54,14 @@ class F_segundario : Fragment() {
     @Override
     override fun onResume() {
         super.onResume()
-        BT.ConectaBluetooth()
+        //BT.ConectaBluetooth()
     }
 
 
     @Override
     override fun onPause() {
         super.onPause()
-        BT.CierraConexion()
+       // BT.CierraConexion()
     }
     //-------------------------------------FINAL BLUETOOTH------------------------------------------
 

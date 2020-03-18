@@ -19,7 +19,7 @@ class ConexionBT_Activity : AppCompatActivity() {
 
         BT.EncenderBluetooth()
 
-        listaBT.setOnClickListener(object : AdapterView.OnItemClickListener,
+        listaBT.onItemClickListener = object : AdapterView.OnItemClickListener,
             View.OnClickListener {
             override fun onItemClick(
                 parent: AdapterView<*>?,
@@ -31,9 +31,9 @@ class ConexionBT_Activity : AppCompatActivity() {
             }
 
             override fun onClick(v: View?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                TODO("Not yet implemented")
             }
 
-        })
+        }
     }
 }

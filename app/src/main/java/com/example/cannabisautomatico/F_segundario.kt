@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Switch
 import android.widget.Toast
-import com.example.hp.bluetoothjhr.BluetoothJhr
+
 
 
 class F_segundario : Fragment() {

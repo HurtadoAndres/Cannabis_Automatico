@@ -8,10 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Switch
 import android.widget.Toast
-import com.example.hp.bluetoothjhr.BluetoothJhr
-import com.getbase.floatingactionbutton.FloatingActionButton
-import com.getbase.floatingactionbutton.FloatingActionsMenu
-import com.google.android.material.snackbar.Snackbar
+
 
 
 class F_principal : Fragment() {

@@ -15,8 +15,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppCannabis">
-        <activity android:name=".BTconectado_Activity"></activity>
-        <activity android:name=".ConexionBT_Activity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".Info_SensorActivity" />
         <activity android:name=".MainActivity" />

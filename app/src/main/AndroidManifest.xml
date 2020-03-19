@@ -18,11 +18,11 @@
         <activity android:name=".BTconectado_Activity"></activity>
         <activity android:name=".ConexionBT_Activity" />
         <activity android:name=".HomeActivity" />
-        <activity android:name=".AnimacionActivity" />
+        <activity android:name=".Info_SensorActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Olvide_passwordActivity" />
         <activity android:name=".RegistrarActivity" />
-        <activity android:name=".Info_SensorActivity">
+        <activity android:name=".AnimacionActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

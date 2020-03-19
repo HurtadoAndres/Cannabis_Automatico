@@ -15,35 +15,14 @@ import com.google.android.material.snackbar.Snackbar
 
 
 class F_principal : Fragment() {
-
-    lateinit var  BT : BluetoothJhr //BLUETTOOTH LIBRERIA
     lateinit var modo_auto : Switch
-    lateinit var modo_manual : Switch
-    var modo : String = "true"
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
 
-    //----------------------------------CONEXION BLUETOOTH-----------------------------------------
 
-
-    @Override
-    override fun onResume() {
-        super.onResume()
-     // BT.ConectaBluetooth()
-    }
-
-
-    @Override
-    override fun onPause() {
-        super.onPause()
-      // BT.CierraConexion()
-    }
-    //-------------------------------------FINAL BLUETOOTH------------------------------------------
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,12 +33,10 @@ class F_principal : Fragment() {
         modo_auto = view.findViewById(R.id.M_auto)
 
         modo_auto.isChecked=true
-        BT = BluetoothJhr(ConexionBT_Activity::class.java,activity )// bluetooth declaracion
+
 
         modo_auto.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked){
-               // BT.Tx(modo)
-                startActivity(Intent(activity,ConexionBT_Activity::class.java))
 
 
             }

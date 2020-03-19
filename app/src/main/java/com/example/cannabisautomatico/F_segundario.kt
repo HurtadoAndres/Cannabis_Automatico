@@ -12,9 +12,6 @@ import com.example.hp.bluetoothjhr.BluetoothJhr
 
 class F_segundario : Fragment() {
 
-
-    lateinit var  BT : BluetoothJhr //BLUETTOOTH LIBRERIA
-
     lateinit var modo_manual : Switch
     var modo : String = "false"
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,11 +28,8 @@ class F_segundario : Fragment() {
         modo_manual = view.findViewById(R.id.M_manual)
 
 
-        BT = BluetoothJhr(ConexionBT_Activity::class.java,activity )// bluetooth declaracion
-
             modo_manual.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked){
-                   // BT.Tx(modo)
 
                 }
                 Toast.makeText(activity,"Modo manual activado",Toast.LENGTH_LONG).show()
@@ -48,22 +42,7 @@ class F_segundario : Fragment() {
         return view
     }
 
-    //----------------------------------CONEXION BLUETOOTH-----------------------------------------
 
-
-    @Override
-    override fun onResume() {
-        super.onResume()
-        //BT.ConectaBluetooth()
-    }
-
-
-    @Override
-    override fun onPause() {
-        super.onPause()
-       // BT.CierraConexion()
-    }
-    //-------------------------------------FINAL BLUETOOTH------------------------------------------
 
     companion object {
 

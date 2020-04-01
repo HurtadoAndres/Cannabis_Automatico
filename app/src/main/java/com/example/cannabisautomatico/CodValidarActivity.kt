@@ -1,0 +1,85 @@
+package com.example.cannabisautomatico
+
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.View
+import android.widget.EditText
+import android.widget.ProgressBar
+import android.widget.Toast
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.Volley
+import kotlinx.android.synthetic.main.activity_cod_validar.*
+import kotlinx.android.synthetic.main.activity_main.*
+import org.json.JSONException
+import org.json.JSONObject
+
+class CodValidarActivity : AppCompatActivity() {
+   lateinit var codigo : EditText
+    lateinit var email : EditText
+    private lateinit var progressBar: ProgressBar
+    var usuarioID:String?=null
+    var nombreBD:String?=null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_cod_validar)
+        codigo = findViewById(R.id.codigo)
+        email=findViewById(R.id.email)
+
+
+        val bundle = intent.extras
+        if (bundle != null) {
+            usuarioID = bundle.getString("usuario")
+        }
+        email.setText(usuarioID.toString())
+        if (bundle != null) {
+            nombreBD= bundle!!.getString("nombre")
+        }
+
+
+        btn_validar.setOnClickListener {
+            var codigo = codigo.text.toString()
+            var response =  Response.Listener<String> { response ->
+                try {
+                    val json = JSONObject(response)
+                    var success = json.getBoolean("success")
+                    if (success){
+                        ConsultaRequest(email.text.toString(),codigo)
+
+                    }else{
+                        Toast.makeText(this,"Error", Toast.LENGTH_LONG).show()
+                    }
+                }catch (e: JSONException){}
+
+            }
+            var registro = RegisterValidaRequest(email.text.toString(),codigo,response)
+            var queue: RequestQueue = Volley.newRequestQueue(this)
+            queue.add(registro)
+        }
+
+    }
+
+    fun ConsultaRequest(email:String, codigo:String){
+        var response =  Response.Listener<String> { response ->
+            try {
+                val json = JSONObject(response)
+                var success = json.getBoolean("success")
+                if (success){
+                    var validado = json.get("estado")
+                    if (validado=="true") {
+                        Toast.makeText(this, "Registro con exito", Toast.LENGTH_LONG)
+                        startActivity(Intent(this, HomeActivity::class.java))
+                    }
+                }else{
+                    Toast.makeText(this,"Error verifica el codigo", Toast.LENGTH_LONG).show()
+                }
+            }catch (e: JSONException){}
+
+        }
+        var registro = ConsultaCodvalidacion(email,codigo,response)
+        var queue: RequestQueue = Volley.newRequestQueue(this)
+        queue.add(registro)
+    }
+}

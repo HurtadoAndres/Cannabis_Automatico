@@ -26,7 +26,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="70dp"
         android:layout_marginLeft="20dp"
         android:text="@string/nombre"
         android:textColor="@android:color/black" />
@@ -116,38 +116,17 @@
         android:layout_marginTop="5dp"
         android:ems="10"
         android:hint="@string/ejemplo_password"
-        android:inputType="textEmailAddress" />
+        android:inputType="textPassword" />
 
-    <TextView
-        android:id="@+id/titulo_codigo"
-        android:layout_width="81dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/password"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:text="@string/codigo"
-        android:textColor="@android:color/black" />
 
-    <EditText
-        android:id="@+id/codigo"
-        android:layout_width="320dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="20dp"
-        android:layout_below="@+id/titulo_codigo"
-        android:layout_marginTop="5dp"
-        android:ems="10"
-        android:hint="@string/codigo"
-        android:inputType="textEmailAddress" />
+
+
 
     <Button
         android:id="@+id/btn_registrar"
         android:layout_width="230dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/codigo"
+        android:layout_below="@+id/password"
         android:layout_alignParentLeft="true"
         android:layout_centerInParent="true"
         android:layout_marginStart="85dp"

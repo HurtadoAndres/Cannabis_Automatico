@@ -43,6 +43,8 @@
     <string name="dato1"> Dato ideal </string>
     <string name="dato2"> Dato actual </string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="Codigoo"> Codigo </string>
+    <string name="codigoEjem"> Ejemplo: CA-0... </string>
+    <string name="boton_codigo"> Validar </string>
 </resources>

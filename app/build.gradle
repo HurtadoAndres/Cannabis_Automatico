@@ -54,4 +54,11 @@ dependencies {
     implementation project(path: ':volley-1.1.1')
 
 
+    //Menu icono lottie
+
+    implementation "com.airbnb.android:lottie:2.8.0"
+
+    //------------------------------------------------------------------
+
+
 }

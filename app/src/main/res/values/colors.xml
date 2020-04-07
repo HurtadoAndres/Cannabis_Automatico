@@ -4,13 +4,28 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
 
-    <color name="cannabis_verde">#008000</color>
-    <color name="cannabis_verde_D">#003d00</color>
-    <color name="cannabis_oficcial">#4cb13a</color>
-    <color name="cannabis_color_gris">#cfcfcf</color>
+    <color name="cannabis_verde">#388e3c</color>
+    <color name="cannabis_verde_D">#27632a</color>
+    <color name="cannabis_oficcial">#21ABC9</color>
+    <color name="cannabis_color_gris">#FBF8F8</color>
     <color name="cannabis_color_amarillo">#ffea00</color>
     <color name="cannabis_color_gris_osc">#1c313a</color>
     <color name="cannabis_color_oscuro">#718792</color>
+        --Botones sesores--
+    <color name="fondo">#E1E4E8EA</color>
+    <color name="fondo_p">#D7B6BBBF</color>
+    <color name="colorpresionado">#97050008</color>
+
+        --boton mas opciones--
+    <color name="colorfondo">#B9000000</color>
+
+    --Botones floating----
+    <color name="boton_normal">#0D6A8F</color>
+    <color name="boton_press">#003f61</color>
+
+    <color name="boton2_normal">#003f61</color>
+    <color name="boton2_press">#002032</color>
+
 
     --color prueba grafica--
     <color name="color1">#9C27B0</color>

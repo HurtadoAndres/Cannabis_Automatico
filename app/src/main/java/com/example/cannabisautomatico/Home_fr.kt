@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.FragmentTransaction
 import kotlinx.android.synthetic.main.activity_home.*
@@ -28,10 +29,10 @@ class Home_fr : Fragment() {
         // Inflate the layout for this fragment
         val view : View =  inflater.inflate(R.layout.fragment_home_fr, container, false)
 
-        val btn_h = view.findViewById<Button>(R.id.btn_h)
-        val btn_t = view.findViewById<Button>(R.id.btn_t)
-        val btn_l = view.findViewById<Button>(R.id.btn_l)
-        val btn_p = view.findViewById<Button>(R.id.btn_p)
+        val btn_h = view.findViewById<LinearLayout>(R.id.btn_h)
+        val btn_t = view.findViewById<LinearLayout>(R.id.btn_t)
+        val btn_l = view.findViewById<LinearLayout>(R.id.btn_l)
+        val btn_p = view.findViewById<LinearLayout>(R.id.btn_p)
 
         btn_h.setOnClickListener{
             startActivity(Intent(activity,Info_SensorActivity::class.java))

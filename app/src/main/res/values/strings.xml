@@ -20,12 +20,12 @@
 
     <string name="titulo_app">Cannabis</string>
 
-    <string name="sensor_Temp"> Temperatura </string>
-    <string name="sensor_Humed"> Humedad </string>
-    <string name="sensor_Luz"> Luz </string>
-    <string name="sensor_Ph"> Ph </string>
+    <string name="sensor_Temp"> TEMPERATURA </string>
+    <string name="sensor_Humed"> HUMEDAD</string>
+    <string name="sensor_Luz"> LUZ </string>
+    <string name="sensor_Ph"> PH </string>
     <string name="Info_sensores">Informacion de los sensores</string>
-    <string name="Info_Mantenimiento">Opcion Mantenimiento</string>
+    <string name="configuracion"> Configuracion </string>
     <string name="Habilitar_Desh"> Habilitar / Deshabilitar </string>
 
     <string name="Conexion_luetooth"> Activar / Desconectar </string>
@@ -47,4 +47,14 @@
     <string name="Codigoo"> Codigo </string>
     <string name="codigoEjem"> Ejemplo: CA-0... </string>
     <string name="boton_codigo"> Validar </string>
+
+    <string name="btn_mas_opciones"> Mas opciones </string>
+    <string name="Historial"> Historial </string>
+
+    --Menu--
+    <string name="Ajuste"> Ajustes </string>
+    <string name="sesion"> Cerrar Sesion </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

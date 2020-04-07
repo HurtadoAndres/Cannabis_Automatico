@@ -4,65 +4,102 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cannabis_color_gris"
+    android:background="@drawable/fondo_medio"
     android:orientation="vertical"
     tools:context=".HomeActivity">
 
 
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@color/cannabis_verde"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="85dp"
             android:background="@color/cannabis_verde"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="1dp">
 
-            <Button
-                android:id="@+id/btn_home"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_margin="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/charlar" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="20"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                android:background="@color/cannabis_verde"
                 android:gravity="center"
-                android:text="@string/titulo_app"
-                android:textColor="@android:color/background_light"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btn_mante"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_margin="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/mantenimiento" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="20"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Titulop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/titulo_app"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/Descripcion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:text="@string/Info_sensores"
+                        android:textColor="@color/boton2_press"
+                        android:textSize="18sp"
+                        android:textStyle="normal" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_mante"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mantenimiento_s" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
+        <FrameLayout
+            android:id="@+id/contenedor"
+            android:layout_width="match_parent"
+            android:layout_height="490dp"
+            android:layout_marginTop="10dp" />
 
-    </LinearLayout>
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/contenedor"
+    <FrameLayout
+        android:id="@+id/opciones"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="150dp"
+        android:layout_marginBottom="10dp" >
+
+        <LinearLayout
+            android:id="@+id/mas_opciones"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:layout_marginTop="72dp"
+            android:background="@drawable/prueba" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_mas_opciones"
+                android:layout_marginTop="5dp"
+                android:textColor="@android:color/background_light" />
+
+        </LinearLayout>
+
+    </FrameLayout>
 
 
 </LinearLayout>

@@ -13,48 +13,71 @@
 
        <LinearLayout
            android:layout_width="match_parent"
-           android:layout_height="20dp"
-           android:layout_gravity="center"
-           android:background="@color/cannabis_oficcial"
-           android:gravity="center"
-           android:orientation="horizontal">
-
-           <TextView
-               android:id="@+id/textView2"
-               android:layout_width="wrap_content"
-               android:layout_height="match_parent"
-               android:text="@string/Info_sensores"
-               android:textColor="@android:color/background_light" />
-       </LinearLayout>
-
-       <LinearLayout
-           android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:orientation="horizontal">
 
-           <Button
+           <LinearLayout
                android:id="@+id/btn_h"
                android:layout_width="20dp"
+               android:orientation="vertical"
                android:layout_height="180dp"
                android:layout_marginLeft="20dp"
-               android:layout_marginTop="30dp"
+               android:layout_marginTop="10dp"
                android:layout_marginRight="10dp"
                android:layout_weight="1"
                android:background="@drawable/boton_presionar_s"
-
                android:text="@string/sensor_Humed"
-               android:textColor="@android:color/background_light" />
+               android:gravity="center"
+               android:textColor="@android:color/background_light" >
 
-           <Button
+
+
+               <ImageView
+                   android:layout_width="80dp"
+                   android:layout_height="80dp"
+                   android:background="@drawable/humedad_icono"
+                   />
+               <TextView
+                   android:id="@+id/tituloo-hum"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="10dp"
+                   android:text="@string/sensor_Humed"
+                   android:textColor="@color/boton_normal"
+                   android:textStyle="bold" />
+
+               </LinearLayout>
+
+
+           <LinearLayout
                android:id="@+id/btn_t"
                android:layout_width="20dp"
                android:layout_height="180dp"
-               android:layout_marginTop="30dp"
+               android:layout_marginTop="10dp"
                android:layout_marginRight="20dp"
                android:layout_weight="1"
+               android:orientation="vertical"
+               android:gravity="center"
                android:background="@drawable/boton_presionar_s"
                android:text="@string/sensor_Temp"
-               android:textColor="@android:color/background_light" />
+               android:textColor="@android:color/background_light" >
+
+               <ImageView
+                   android:layout_width="80dp"
+                   android:layout_height="80dp"
+                   android:background="@drawable/temp_icono"
+                   />
+
+               <TextView
+                   android:id="@+id/titulo-temp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="10dp"
+                   android:text="@string/sensor_Temp"
+                   android:textColor="@color/boton_normal"
+                   android:textStyle="bold" />
+
+           </LinearLayout>
        </LinearLayout>
 
        <LinearLayout
@@ -62,7 +85,7 @@
            android:layout_height="wrap_content"
            android:orientation="horizontal">
 
-           <Button
+           <LinearLayout
                android:id="@+id/btn_l"
                android:layout_width="20dp"
                android:layout_height="180dp"
@@ -71,11 +94,29 @@
                android:layout_marginRight="10dp"
                android:layout_weight="1"
                android:background="@drawable/boton_presionar_s"
-
+               android:gravity="center"
+               android:orientation="vertical"
                android:text="@string/sensor_Luz"
-               android:textColor="@android:color/background_light" />
+               android:textColor="@android:color/background_light" >
 
-           <Button
+           <ImageView
+               android:layout_width="80dp"
+               android:layout_height="80dp"
+               android:background="@drawable/luz_icono"
+               />
+
+               <TextView
+                   android:id="@+id/titulo-luz"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="10dp"
+                   android:text="@string/sensor_Luz"
+                   android:textColor="@color/boton_normal"
+                   android:textStyle="bold" />
+
+       </LinearLayout>
+
+           <LinearLayout
                android:id="@+id/btn_p"
                android:layout_width="20dp"
                android:layout_height="180dp"
@@ -84,7 +125,26 @@
                android:layout_weight="1"
                android:background="@drawable/boton_presionar_s"
                android:text="@string/sensor_Ph"
-               android:textColor="@android:color/background_light" />
+               android:orientation="vertical"
+               android:gravity="center"
+               android:textColor="@android:color/background_light" >
+
+               <ImageView
+                   android:layout_width="80dp"
+                   android:layout_height="80dp"
+                   android:background="@drawable/ph_icono"
+                   />
+
+               <TextView
+                   android:id="@+id/titulo-ph"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="10dp"
+                   android:text="@string/sensor_Ph"
+                   android:textColor="@color/boton_normal"
+                   android:textStyle="bold" />
+
+           </LinearLayout>
 
        </LinearLayout>
 

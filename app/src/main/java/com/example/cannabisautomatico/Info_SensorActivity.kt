@@ -1,8 +1,11 @@
 package com.example.cannabisautomatico
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.os.AsyncTask
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import com.github.mikephil.charting.charts.LineChart
@@ -17,6 +20,8 @@ import com.github.mikephil.charting.utils.ViewPortHandler
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_info__sensor.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class Info_SensorActivity: AppCompatActivity(){
@@ -25,6 +30,7 @@ class Info_SensorActivity: AppCompatActivity(){
         private lateinit var mDatabase : FirebaseDatabase
         private lateinit var myRef: DatabaseReference
         var myFragmentC:Boolean=true
+        var resul:Int=0
 
 
 
@@ -32,6 +38,8 @@ class Info_SensorActivity: AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info__sensor)
 
+        val time = time(this)
+        time.execute()
 
 
         btn_home.setOnClickListener{
@@ -75,9 +83,9 @@ class Info_SensorActivity: AppCompatActivity(){
 
         //CODIGO DE GRAFICACION EN ONCREATE---------------------------------------------------------
 
-        var mpLineChart= findViewById<LineChart>(R.id.tabla_grafica)
-        var LlineDataSet1 = LineDataSet(dataValues1(),"Data set 1")
-        var LlineDataSet2 = LineDataSet(dataValues2(),"Data set 2")
+        var mpLineChart= findViewById<LineChart>(R.id.grafica)
+        var LlineDataSet1 = LineDataSet(time.dataValues1(),"Data set 1")
+        var LlineDataSet2 = LineDataSet(time.dataValues2(),"Data set 2")
         var datasets : ArrayList<LineDataSet> = ArrayList()
         datasets.add(LlineDataSet1)
         datasets.add(LlineDataSet2)
@@ -213,29 +221,9 @@ class Info_SensorActivity: AppCompatActivity(){
 
 
 
-    private fun  dataValues1(): ArrayList<Entry> {
-        var dataVals: ArrayList<Entry> = ArrayList<Entry>()
 
-            dataVals.add(Entry(0F, 56F))
-            dataVals.add(Entry(1F, 55F))
-            dataVals.add(Entry(2F, 57F))
-            dataVals.add(Entry(3F, 57F))
-            dataVals.add(Entry(4F, 56F))
 
-        return dataVals
-    }
 
-    private fun  dataValues2(): ArrayList<Entry> {
-        var dataVals: ArrayList<Entry> = ArrayList<Entry>()
-
-        dataVals.add(Entry(0F, 56F))
-        dataVals.add(Entry(1F, 56F))
-        dataVals.add(Entry(2F, 56F))
-        dataVals.add(Entry(3F, 56F))
-        dataVals.add(Entry(4F, 56F))
-
-        return dataVals
-    }
 
     private open class ponerTemp: ValueFormatter() {
         override fun getFormattedValue(
@@ -249,6 +237,77 @@ class Info_SensorActivity: AppCompatActivity(){
 
     }
 
+    fun hilo(){
+        try {
+            var thread=Thread.sleep(1000)
+        }catch (e:Exception){}
+
+    }
+
+
+
+
+    class time(c:Context) : AsyncTask<Integer, Integer, Boolean>() {
+        val clase= Info_SensorActivity()
+        var resultado:Int=0
+        var numero:Int=0
+      val c=c
+        var myarray= ArrayList<ArrayList<Int>>(5)
+        override fun doInBackground(vararg params: Integer?): Boolean {
+            for (num in 1..3){
+                clase.hilo()
+            }
+            return true
+        }
+
+        override fun onPostExecute(result: Boolean?) {
+                val time=time(c)
+                 time.execute()
+
+
+                val aleatorio = Random()
+               resultado =(40 + aleatorio.nextInt(60 + 1 - 40))
+            if (numero<5){
+                numero+=numero+1
+            }else{
+                numero=0
+            }
+            Toast.makeText(c,"$numero Hola $resultado",Toast.LENGTH_SHORT).show()
+
+             dataValues1()
+            dataValues2()
+
+
+        }
+
+        fun  dataValues1(): ArrayList<Entry> {
+
+            var resultadoFloat=resultado.toFloat()
+            var numeroFloat=numero.toFloat()
+            var dataVals: ArrayList<Entry> = ArrayList<Entry>()
+
+                dataVals.add(Entry(numeroFloat, resultadoFloat))
+
+
+
+
+            return dataVals
+        }
+
+        fun  dataValues2(): ArrayList<Entry> {
+            var dataVals: ArrayList<Entry> = ArrayList<Entry>()
+
+            dataVals.add(Entry(0F, 56F))
+            dataVals.add(Entry(1F, 56F))
+            dataVals.add(Entry(2F, 56F))
+            dataVals.add(Entry(3F, 56F))
+            dataVals.add(Entry(4F, 56F))
+
+            return dataVals
+        }
+
+
+    }
 
 
 

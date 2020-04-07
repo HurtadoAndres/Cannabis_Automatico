@@ -5,9 +5,7 @@
         android:width="250dp"/>
 
     <corners android:radius="25dp"/>
-    <solid android:color="@color/cannabis_verde_D"/>
+    <solid android:color="@color/fondo_p"/>
 
-    <stroke android:width="10px"
-        android:color="@color/cannabis_verde" />
 
 </shape>

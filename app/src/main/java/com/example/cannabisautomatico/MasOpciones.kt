@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 class MasOpciones : Fragment() {
 
    var verda=0
+    var usuario:String?=null
    lateinit var  mas : LinearLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,12 +36,18 @@ class MasOpciones : Fragment() {
             pciones.visibility=(View.INVISIBLE);
 
             (activity as HomeActivity?)?.verda()
+            usuario= (activity as HomeActivity?)?.usuario
 
         }
 
         historial.setOnClickListener{
-            startActivity(Intent(activity,HistorialActivity::class.java))
+            val intent = Intent(activity,HistorialActivity::class.java)
+            intent.putExtra("usuario",usuario)
+            startActivity(intent)
         }
+
+
+
 
         return view
     }

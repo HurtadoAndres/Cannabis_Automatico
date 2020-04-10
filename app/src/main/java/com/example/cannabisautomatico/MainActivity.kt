@@ -84,7 +84,9 @@ class MainActivity: AppCompatActivity() {
 
                                 Toast.makeText(this, "Bienvenido $nombredBD!", Toast.LENGTH_LONG)
                                     .show()
-                                startActivity(Intent(this, HomeActivity::class.java))
+                                var intent=Intent(this, HomeActivity::class.java)
+                                 intent.putExtra("email", usuarioID.toString())
+                                 startActivity(intent)
                             }else{
                                 alerta()
                             }

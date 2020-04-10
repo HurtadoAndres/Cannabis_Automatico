@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_home.*
 open class HomeActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
 
     var menuInteration:Boolean=true
+    var usuario:String?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -24,6 +25,10 @@ open class HomeActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener
         home.arguments = intent.extras
         supportFragmentManager.beginTransaction().add(R.id.contenedor,home).commit()
 
+        val bundle = intent.extras
+        if (bundle != null) {
+            usuario= bundle.getString("email")
+        }
 
 
 
@@ -45,6 +50,7 @@ open class HomeActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener
                 mas_opciones.visibility=(View.INVISIBLE);
 
         }
+
 
 
     }

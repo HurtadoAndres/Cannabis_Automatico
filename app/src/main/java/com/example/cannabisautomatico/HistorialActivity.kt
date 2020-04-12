@@ -1,41 +1,40 @@
 package com.example.cannabisautomatico
 
-import android.content.Context
+
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
-import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
-import java.util.*
 
 
-class HistorialActivity : AppCompatActivity() {
+class HistorialActivity : AppCompatActivity() , AdapterView.OnItemClickListener {
 
     lateinit var  btn_home:Button
     var contactList = ArrayList<Any>()
     lateinit var lv:ListView
-    var usuario:String?=null
-    lateinit  var fecha : TextView
-    lateinit var hora :TextView
-    lateinit var id :TextView
-    lateinit var acciones :TextView
-    lateinit var lista :String
+    var usuario:String=""
 
-    val contact: HashMap<String, String> = HashMap()
+    var idJ:String=""
+    var fechaJ:String=""
+    var horaJ:String=""
+    var accionesJ:String=""
+
+    var mlista : List<HistorialCl> = ArrayList()
+    lateinit var madapter : ListaAdapter
+
+   // val contact: HashMap<String, String> = HashMap()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_historial)
         btn_home=findViewById(R.id.btn_home)
         lv=findViewById(R.id.HistorialList)
-
+        consultaHistorial()
 
         contactList = ArrayList<Any>()
 
@@ -44,69 +43,67 @@ class HistorialActivity : AppCompatActivity() {
             finish()
         }
 
+        val intent= intent.extras
 
-        consultaHistorial()
+       if (intent!= null) {
+           usuario= intent.getString("email").toString()
+       }
 
-        val bundle = intent.extras
-        if (bundle != null) {
-            usuario= bundle.getString("email")
-        }
 
+    }
+    fun getDataFragment(): String{
+
+        return usuario;
+
+    }
+
+    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
     }
 
     fun consultaHistorial(){
-
+            var nodata = findViewById<TextView>(R.id.Nodata)
             var response =  Response.Listener<String> { response ->
 
+                val json = JSONObject(response)
+                var success = json.getBoolean("success")
+
+                if (success) {
+
+                } else {
+                    nodata.visibility=View.INVISIBLE
                 try {
-
-                    val json = JSONObject(response)
-                    Toast.makeText(this,"Hola $json", Toast.LENGTH_LONG).show()
-                    val jsonarray = json.getJSONArray("Array")
-                    Toast.makeText(this,"Hola $jsonarray", Toast.LENGTH_LONG).show()
-
-                   // var success = json.getBoolean("success")
+                    val jsonarray = json.getJSONArray("historial")
 
 
-                        for (i in 0..jsonarray.length()) {
-                            var jsonob = jsonarray.getJSONObject(i)
-                            var idJ = jsonob.getString("codigo")
-                            var fechaJ = jsonob.getString("fecha")
-                            var horaJ = jsonob.getString("hora")
-                            var accionesJ = jsonob.getString("acciones")
-                            lista = idJ + "" + horaJ + "" + fechaJ + "" + accionesJ
-                            contactList.add(lista)
-                            Toast.makeText(this,"Hola $fechaJ", Toast.LENGTH_LONG).show()
+                        for (i in 0 until jsonarray.length()) {
+                            Toast.makeText(this, "a$i", Toast.LENGTH_LONG).show()
+                            var jsonA = jsonarray.getJSONObject(i)
+                            idJ = jsonA.getString("codigo")
+                            fechaJ = jsonA.getString("fecha")
+                            horaJ = jsonA.getString("hora")
+                            accionesJ = jsonA.getString("acciones")
+                            // contactList.add("Id : $idJ\nHora : $horaJ\nFecha : $fechaJ\nAcciones= $accionesJ")
+                            (mlista as ArrayList<HistorialCl>).add(
+                                HistorialCl(
+                                    "Id : $idJ",
+                                    "Hora : $horaJ",
+                                    "Fecha : $fechaJ",
+                                    "Acciones= $accionesJ"
+                                )
+                            )
                         }
 
-                        /*
-                            for (i in 0 until json.length() step  3){
-
-
-                              fecha = json.getString("fecha")
-                                hora=json.getString("hora")
-                                contact.put("Id", id)
-                                contact.put("Hora", hora)
-                                contact.put("Fecha", fecha)
-
-                                contactList.add(contact)
-
-
-                            }
-                            */
-
-
-
-
                         cargarLisview()
-                        //cargar()
 
 
-                }catch (e: JSONException){}
+                } catch (e: JSONException) {
+                    Toast.makeText(this, "" + e, Toast.LENGTH_LONG).show()
+                }
+            }
 
             }
-            var registro = HistorialRequest("hurtadoandres942@gmail.com",response)
+            var registro = HistorialRequest(usuario,response)
             var queue: RequestQueue = Volley.newRequestQueue(this)
             queue.add(registro)
 
@@ -114,8 +111,11 @@ class HistorialActivity : AppCompatActivity() {
     }
 
     fun cargarLisview(){
-        var adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, contactList)
-        lv.adapter=adapter
+       // var adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, contactList)
+       // lv.adapter=adapter
+
+        madapter =  ListaAdapter(this,R.layout.prest_historial, mlista as ArrayList<HistorialCl>)
+        lv.adapter=madapter
     }
 
 

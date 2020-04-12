@@ -9,33 +9,61 @@
         android:id="@+id/id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#5d5d5d"
-        android:text="Codigo :"
-        android:textStyle="bold" />
-    <TextView
-        android:id="@+id/hora"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="2dip"
-        android:paddingTop="6dip"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
-        android:text="Hora : "
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/numeroH"
+        android:textColor="@color/cannabis_color_gris_osc"
+        android:textSize="14sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/fecha"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="2dip"
-        android:text="Fecha :"
-        android:textColor="@color/colorAccent" />
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/hora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="5dp"
+            android:text="@string/horaH"
+            android:textColor="@color/cannabis_verde"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/dividir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="5dp"
+            android:text="|"
+            android:textColor="@color/boton2_press"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/fecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="2dp"
+            android:text="@string/fechaH"
+            android:textColor="@color/cannabis_verde"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/acciones"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#5d5d5d"
-        android:text="Codigo :"
+        android:layout_marginLeft="8dp"
+        android:text="@string/accionesH"
+        android:textColor="@color/cannabis_color_gris_osc"
         android:textStyle="bold" />
 
 

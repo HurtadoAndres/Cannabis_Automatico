@@ -50,6 +50,11 @@
 
     <string name="btn_mas_opciones"> Mas opciones </string>
     <string name="Historial"> Historial </string>
+    <string name="numeroH"> # </string>
+    <string name="horaH"> Hora </string>
+    <string name="fechaH"> Fecha </string>
+    <string name="accionesH"> Acciones </string>
+    <string name="nodata"> NO HAY DATOS </string>
 
     --Menu--
     <string name="Ajuste"> Ajustes </string>

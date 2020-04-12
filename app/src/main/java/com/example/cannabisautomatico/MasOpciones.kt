@@ -36,7 +36,8 @@ class MasOpciones : Fragment() {
             pciones.visibility=(View.INVISIBLE);
 
             (activity as HomeActivity?)?.verda()
-            usuario= (activity as HomeActivity?)?.usuario
+            usuario= (activity as HistorialActivity?)?.getDataFragment()
+
 
         }
 

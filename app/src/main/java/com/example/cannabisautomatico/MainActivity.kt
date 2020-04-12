@@ -39,8 +39,8 @@ class MainActivity: AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
     private lateinit var auth: FirebaseAuth
 
-    var nombredBD= Any()
-    var usuarioID= Any()
+    var nombredBD: String=""
+    var usuarioID: String=""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,15 +77,15 @@ class MainActivity: AppCompatActivity() {
                         if (success) {
                             progressBar.visibility = View.VISIBLE
                             var estadodBD = json.get("estado")
-                            usuarioID=json.get("Email")
-                            nombredBD = json.get("Nombre")
+                            usuarioID=json.getString("Email")
+                            nombredBD = json.getString("Nombre")
                             if (estadodBD=="true") {
 
 
                                 Toast.makeText(this, "Bienvenido $nombredBD!", Toast.LENGTH_LONG)
                                     .show()
                                 var intent=Intent(this, HomeActivity::class.java)
-                                 intent.putExtra("email", usuarioID.toString())
+                                 intent.putExtra("email", usuario)
                                  startActivity(intent)
                             }else{
                                 alerta()

@@ -18,7 +18,7 @@ class AnimacionActivity : AppCompatActivity() {
 
         handler = Handler()
         handler.postDelayed({
-            startActivity(Intent(this@AnimacionActivity, MainActivity::class.java))
+            startActivity(Intent(this@AnimacionActivity, BienvenidoActivity::class.java))
             finish()
         }, 3000)
 

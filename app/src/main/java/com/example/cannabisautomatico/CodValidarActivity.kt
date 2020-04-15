@@ -3,10 +3,12 @@ package com.example.cannabisautomatico
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.airbnb.lottie.LottieAnimationView
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
@@ -22,11 +24,19 @@ class CodValidarActivity : AppCompatActivity() {
     var usuarioID:String?=null
     var nombreBD:String?=null
 
+    private lateinit var  handler : Handler
+    lateinit var animacion:LottieAnimationView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cod_validar)
         codigo = findViewById(R.id.codigo)
         email=findViewById(R.id.email)
+        animacion=findViewById(R.id.activado)
+        btn_atrasss.setOnClickListener{
+            val intent:Intent = Intent(this, BienvenidoActivity::class.java)
+            startActivity(intent)
+        }
 
 
         val bundle = intent.extras
@@ -70,7 +80,14 @@ class CodValidarActivity : AppCompatActivity() {
                     var validado = json.get("estado")
                     if (validado=="true") {
                         Toast.makeText(this, "Registro con exito", Toast.LENGTH_LONG)
-                        startActivity(Intent(this, HomeActivity::class.java))
+
+                        animacion.visibility=(View.VISIBLE)
+                        handler = Handler()
+                        handler.postDelayed({
+
+                            startActivity(Intent(this, HomeActivity::class.java))
+                        }, 1000)
+
                     }
                 }else{
                     Toast.makeText(this,"Error verifica el codigo", Toast.LENGTH_LONG).show()

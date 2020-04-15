@@ -14,6 +14,7 @@
         --Botones sesores--
     <color name="fondo">#E1E4E8EA</color>
     <color name="fondo_p">#D7B6BBBF</color>
+    <color name="fondo_p2">#85B6BBBF</color>
     <color name="colorpresionado">#97050008</color>
 
         --boton mas opciones--

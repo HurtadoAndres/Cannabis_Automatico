@@ -3,20 +3,25 @@
     <string name="titulo_email">Correo eletronico</string>
     <string name="titulo_password">Contraseña</string>
     <string name="btn_iniciar">Iniciar Sesion</string>
-    <string name="btn_registrar">Registrar</string>
-    <string name="btn_olvide_contraseña">¿ Olvide mi contraseña?</string>
-    <string name="recuperar_password"> Recuperar </string>
+    <string name="btn_inicia">Inicia Sesion</string>
+    <string name="btn_registrar"> Registrar </string>
+    <string name="btn_olvide_contraseña"> Recuperar </string>
+    <string name="recuperar_password"> Recuperar\npassword? </string>
     <string name="indicacion_correo"> Escribe tu Email para recuperar </string>
-    <string name="nombre">Nombre</string>
-    <string name="apellido">Apellido</string>
+    <string name="titulo_recuperar"> Recupera tu password </string>
+    <string name="nombre"> Nombre </string>
+    <string name="apellido"> Apellido </string>
     <string name="codigo">Cod_Adm</string>
     <string name="imagen">imagen</string>
+    <string name="textoR"> Si no te has registrado hazlo aqui </string>
+    <string name="codigoActivar"> Activar codigo </string>
 
-
-    <string name="ejemplo_nombre">Ejemplo : Arturo </string>
-    <string name="ejemplo_apellido">Ejemplo : Perez </string>
-    <string name="ejemplo_email"> Arturo@gmail.com </string>
-    <string name="ejemplo_password"> Primer letra [A-Z] y Numeros[1-9]</string>
+    <string name="ejemplo_nombre"> Nombre : Arturo </string>
+    <string name="ejemplo_apellido"> Apellido : Perez </string>
+    <string name="ejemplo_email">  Email : Arturo@gmail.com </string>
+    <string name="ejemplo_password"> Contraseña : Arturo.. </string>
+    <string name="titulo_registrar"> Registrar </string>
+    <string name="titulo_login"> Iniciar Sesion </string>
 
     <string name="titulo_app">Cannabis</string>
 
@@ -55,6 +60,12 @@
     <string name="fechaH"> Fecha </string>
     <string name="accionesH"> Acciones </string>
     <string name="nodata"> NO HAY DATOS </string>
+
+    <string name="titulo_i"> # </string>
+    <string name="titulo_h"> HORA </string>
+    <string name="titulo_f"> FECHA </string>
+
+    <string name="benvenido"> Bienvenido! </string>
 
     --Menu--
     <string name="Ajuste"> Ajustes </string>

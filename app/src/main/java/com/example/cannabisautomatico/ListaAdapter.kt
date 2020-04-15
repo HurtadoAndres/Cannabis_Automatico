@@ -43,10 +43,6 @@ class ListaAdapter: ArrayAdapter<HistorialCl>{
         if (fecha != null) {
             fecha.text=modelo.getFecha()
         }
-        var acciones = view?.findViewById<TextView>(R.id.acciones)
-        if (acciones != null) {
-            acciones.text=modelo.getAcciones()
-        }
 
 
 

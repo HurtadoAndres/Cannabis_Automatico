@@ -1,6 +1,8 @@
 package com.example.cannabisautomatico
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -8,13 +10,16 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.airbnb.lottie.LottieAnimationView
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_registrar.*
+import kotlinx.android.synthetic.main.activity_registrar.btn_registrar
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -24,16 +29,12 @@ class RegistrarActivity : AppCompatActivity() {
     private lateinit var txtapellido: EditText
     private lateinit var txtemail: EditText
     private lateinit var txtpassword: EditText
-    private lateinit var txtcodigo: EditText
-    private lateinit var dbReferences: DatabaseReference
-    private lateinit var dataBase: FirebaseDatabase
-    private lateinit var auth: FirebaseAuth
-    private lateinit var progressBar: ProgressBar
+  //  private lateinit var dbReferences: DatabaseReference
+  //  private lateinit var dataBase: FirebaseDatabase
+ //   private lateinit var auth: FirebaseAuth
 
-    var ccodigoUSU=Any()
-    var nombreBD= Any()
-    var usuarioID= Any()
 
+    lateinit var animacion: LottieAnimationView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,12 +48,17 @@ class RegistrarActivity : AppCompatActivity() {
             txtpassword = findViewById(R.id.password)
 
 
-            progressBar = findViewById(R.id.progressBar)
+            animacion = findViewById(R.id.cargando)
 
-            dataBase = FirebaseDatabase.getInstance()
-            auth = FirebaseAuth.getInstance()
+          //  dataBase = FirebaseDatabase.getInstance()
+            //auth = FirebaseAuth.getInstance()
 
-            dbReferences = dataBase.reference.child("User")
+        btn_atrass.setOnClickListener{
+            val intent:Intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+           // dbReferences = dataBase.reference.child("User")
 
             btn_registrar.setOnClickListener{
                // Create_nueva_cuenta()
@@ -65,30 +71,31 @@ class RegistrarActivity : AppCompatActivity() {
                         val json = JSONObject(response)
                         var success = json.getBoolean("success")
                         if (success){
-                            progressBar.visibility = View.VISIBLE
+                            animacion.visibility = View.VISIBLE
                             val handler = Handler()
                             handler.postDelayed(Runnable { // acciones que se ejecutan tras los milisegundos
-                                progressBar.visibility = View.GONE
-                            }, 4500)
-                            Toast.makeText(this,"Usuario Registrado con exito", Toast.LENGTH_LONG).show()
-                           val intent= Intent(this, CodValidarActivity::class.java)
-                            intent.putExtra("usuario",usuario )
-                            intent.putExtra("nombre", nombre )
-                            startActivity(intent)
+                                val intent= Intent(this, CodValidarActivity::class.java)
+                                intent.putExtra("usuario",usuario )
+                                intent.putExtra("nombre", nombre )
+                                startActivity(intent)
+                                Toast.makeText(this,"Usuario Registrado con exito", Toast.LENGTH_LONG).show()
+                            }, 1000)
+                            guardando_UsuarioPassword()
+
                         }else{
 
                             Toast.makeText(this,"Error el usuario ya existe", Toast.LENGTH_LONG).show()
-                            progressBar.visibility = View.VISIBLE
+                            animacion.visibility = View.VISIBLE
                             val handler = Handler()
                             handler.postDelayed(Runnable { // acciones que se ejecutan tras los milisegundos
-                                progressBar.visibility = View.GONE
-                            }, 4500)
+                                animacion.visibility = View.GONE
+                            }, 1000)
 
                         }
                     }catch (e: JSONException){}
 
                 }
-                var registro = RegisterRequest(nombre,apellido,usuario,password,response)
+                var registro = RegisterRequest(nombre,apellido,usuario.trim(),password.trim(),response)
                 var queue: RequestQueue = Volley.newRequestQueue(this)
                 queue.add(registro)
 
@@ -96,6 +103,14 @@ class RegistrarActivity : AppCompatActivity() {
             }
 
         }
+
+    fun guardando_UsuarioPassword(){
+        var preferenfs= getSharedPreferences("archivo_usu", Context.MODE_PRIVATE)
+        var editor : SharedPreferences.Editor = preferenfs.edit()
+        editor.putString("email", txtemail.text.toString())
+        editor.putString("password", txtpassword.text.toString())
+        editor.commit()
+    }
 
 
 /*

@@ -128,7 +128,7 @@
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/boton2_normal"
             app:fab_colorPressed="@color/boton2_press"
-            app:fab_icon="@drawable/ayuda"
+            app:fab_icon="@drawable/ico_info"
             app:fab_size="mini"
             app:fab_title="Ayuda" />
 
@@ -139,7 +139,7 @@
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/boton2_normal"
             app:fab_colorPressed="@color/boton2_press"
-            app:fab_icon="@drawable/manual"
+            app:fab_icon="@drawable/icon_manual"
             app:fab_size="normal"
 
             app:fab_title="Manual" />
@@ -150,7 +150,7 @@
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/boton2_normal"
             app:fab_colorPressed="@color/boton2_press"
-            app:fab_icon="@drawable/automatico"
+            app:fab_icon="@drawable/ico_auto"
             app:fab_size="normal"
             app:fab_title="Automatico" />
 

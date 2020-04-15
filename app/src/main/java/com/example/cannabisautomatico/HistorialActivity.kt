@@ -1,8 +1,10 @@
 package com.example.cannabisautomatico
 
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +20,7 @@ class HistorialActivity : AppCompatActivity() , AdapterView.OnItemClickListener 
     lateinit var  btn_home:Button
     var contactList = ArrayList<Any>()
     lateinit var lv:ListView
-    var usuario:String=""
+    var usuarioId:String=""
 
     var idJ:String=""
     var fechaJ:String=""
@@ -27,13 +29,18 @@ class HistorialActivity : AppCompatActivity() , AdapterView.OnItemClickListener 
 
     var mlista : List<HistorialCl> = ArrayList()
     lateinit var madapter : ListaAdapter
+    private lateinit var  handler : Handler
 
-   // val contact: HashMap<String, String> = HashMap()
+    lateinit var fondo_cargando:LinearLayout
+
+    // val contact: HashMap<String, String> = HashMap()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_historial)
+
         btn_home=findViewById(R.id.btn_home)
         lv=findViewById(R.id.HistorialList)
+        fondo_cargando = findViewById(R.id.fondo_cargando)
         consultaHistorial()
 
         contactList = ArrayList<Any>()
@@ -43,21 +50,27 @@ class HistorialActivity : AppCompatActivity() , AdapterView.OnItemClickListener 
             finish()
         }
 
-        val intent= intent.extras
+       handler = Handler()
+       handler.postDelayed({
+           fondo_cargando.visibility=(View.INVISIBLE)
 
-       if (intent!= null) {
-           usuario= intent.getString("email").toString()
-       }
+       }, 3000)
 
 
-    }
-    fun getDataFragment(): String{
-
-        return usuario;
 
     }
+
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+    }
+    fun cargar_UusarioPassword(){
+        var preferenfs= getSharedPreferences("archivo_usu", Context.MODE_PRIVATE)
+        var usuario : String? = preferenfs.getString("email", "")
+        usuarioId=usuario.toString()
+
+
+
 
     }
 
@@ -77,7 +90,6 @@ class HistorialActivity : AppCompatActivity() , AdapterView.OnItemClickListener 
 
 
                         for (i in 0 until jsonarray.length()) {
-                            Toast.makeText(this, "a$i", Toast.LENGTH_LONG).show()
                             var jsonA = jsonarray.getJSONObject(i)
                             idJ = jsonA.getString("codigo")
                             fechaJ = jsonA.getString("fecha")
@@ -86,10 +98,9 @@ class HistorialActivity : AppCompatActivity() , AdapterView.OnItemClickListener 
                             // contactList.add("Id : $idJ\nHora : $horaJ\nFecha : $fechaJ\nAcciones= $accionesJ")
                             (mlista as ArrayList<HistorialCl>).add(
                                 HistorialCl(
-                                    "Id : $idJ",
-                                    "Hora : $horaJ",
-                                    "Fecha : $fechaJ",
-                                    "Acciones= $accionesJ"
+                                    idJ,
+                                    horaJ,
+                                    fechaJ
                                 )
                             )
                         }
@@ -103,7 +114,8 @@ class HistorialActivity : AppCompatActivity() , AdapterView.OnItemClickListener 
             }
 
             }
-            var registro = HistorialRequest(usuario,response)
+            cargar_UusarioPassword()
+            var registro = HistorialRequest(usuarioId,response)
             var queue: RequestQueue = Volley.newRequestQueue(this)
             queue.add(registro)
 

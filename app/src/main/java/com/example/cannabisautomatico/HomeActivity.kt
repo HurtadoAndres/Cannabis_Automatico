@@ -1,12 +1,13 @@
 package com.example.cannabisautomatico
 
 
-import android.R.attr.fragment
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import kotlinx.android.synthetic.main.activity_home.*
@@ -15,21 +16,23 @@ import kotlinx.android.synthetic.main.activity_home.*
 open class HomeActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
 
     var menuInteration:Boolean=true
-    var usuario:String?=null
+    var usua:String=""
+   lateinit var layoutopciones : LinearLayout
+    lateinit var opciones : LinearLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        layoutopciones = findViewById(R.id.mas_opciones)
+        opciones = findViewById(R.id.opciones)
+        val historial=findViewById<LinearLayout>(R.id.Historial)
+
+
 
 
         val home = Home_fr()
         home.arguments = intent.extras
         supportFragmentManager.beginTransaction().add(R.id.contenedor,home).commit()
-
-        val bundle = intent.extras
-        if (bundle != null) {
-            usuario= bundle.getString("email")
-        }
-
 
 
 
@@ -44,12 +47,31 @@ open class HomeActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener
 
         }
 
+//----------------boton ocultar mas ocpiones---------------------------
+        layoutopciones.y= 163F
+        opciones.y=150F
+        var movimiento : Int = 0
+
         mas_opciones.setOnClickListener{
 
-                paginaMasOpciones()
-                mas_opciones.visibility=(View.INVISIBLE);
+            if (movimiento == 0) {
+                layoutopciones.y = 73F
+                opciones.y = 190F
+                movimiento = 1
+            }else{
+                layoutopciones.y= 240F
+                opciones.y=380F
+                movimiento = 0
+            }
 
         }
+        historial.setOnClickListener{
+            val intent = Intent(this,HistorialActivity::class.java)
+            intent.putExtra("email",usua)
+            startActivity(intent)
+        }
+
+//-------------------final---------------------------------------------------
 
 
 
@@ -106,15 +128,6 @@ open class HomeActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener
         trantition1.commit()
     }
 
-    fun paginaMasOpciones(){
-        val fr1= MasOpciones()
-        val trantition1 : FragmentTransaction = supportFragmentManager.beginTransaction()
-        trantition1.replace(R.id.opciones, fr1)
-        trantition1.commit()
-    }
-    fun verda(){
-        mas_opciones.visibility=(View.VISIBLE);
-    }
 
 
 

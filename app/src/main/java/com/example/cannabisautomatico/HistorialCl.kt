@@ -4,13 +4,13 @@ class HistorialCl {
     private var id: String? = null
     private var hora: String? = null
     private var fecha: String? = null
-    private var  acciones: String? = null
 
-    constructor(id: String?, hora: String?, fecha: String?, acciones: String?) {
+
+    constructor(id: String?, hora: String?, fecha: String?) {
         this.id = id
         this.hora = hora
         this.fecha = fecha
-        this.acciones = acciones
+
     }
 
 
@@ -38,11 +38,4 @@ class HistorialCl {
         this.fecha = fecha
     }
 
-    fun getAcciones(): String? {
-        return acciones
-    }
-
-    fun setAcciones(acciones: String) {
-        this.acciones = acciones
-    }
 }

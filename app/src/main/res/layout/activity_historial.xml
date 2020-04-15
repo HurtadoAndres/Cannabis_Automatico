@@ -6,8 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    tools:context=".HomeActivity"
+        tools:ignore="NamespaceTypo">
 
-    tools:context=".HomeActivity">
     <LinearLayout
         android:id="@+id/linear"
         android:layout_width="match_parent"
@@ -61,51 +62,145 @@
 
     </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/historial"
+
+    <LinearLayout
+        android:id="@+id/titulo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="70dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/linear"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:gravity="center"
         android:background="@drawable/fondo_segundario"
         android:orientation="horizontal">
 
-        <ListView
-            android:id="@+id/HistorialList"
-            android:layout_width="fill_parent"
+        <TextView
+            android:id="@+id/titulo_id"
+            android:layout_width="85dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="0dp">
-
-        </ListView>
+            android:text="@string/titulo_i"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:textSize="20sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="|"
+            android:textSize="20sp"/>
 
         <TextView
-            android:id="@+id/Nodata"
-            android:layout_width="match_parent"
+            android:id="@+id/titulo_hora"
+            android:layout_width="85dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
+            android:text="@string/titulo_h"
             android:layout_gravity="center"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="200dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="200dp"
             android:gravity="center"
-            android:text="@string/nodata"
-            android:textColor="@color/boton2_press"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textSize="20sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="|"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/titulo_fecha"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:text="@string/titulo_f"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:textSize="20sp" />
 
+    </LinearLayout>
 
-    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="620dp"
+        android:layout_below="@+id/titulo"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="-1dp">
 
+        <RelativeLayout
+            android:id="@+id/historial"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/fondo_segundario"
+            android:orientation="horizontal">
+
+            <ListView
+                android:id="@+id/HistorialList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp">
+
+
+            </ListView>
+
+            <TextView
+                android:id="@+id/Nodata"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="200dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="200dp"
+                android:gravity="center"
+                android:text="@string/nodata"
+                android:textColor="@color/boton2_press"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:id="@+id/fondo_cargando"
+                android:layout_width="wrap_content"
+                android:layout_height="600dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/fondo_segundario"
+                android:gravity="center">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/cargando"
+                    android:layout_width="200dp"
+                    android:layout_height="100dp"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/cargando" />
+            </LinearLayout>
+
+
+
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
 
 
 

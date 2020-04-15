@@ -12,14 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppCannabis"
         android:usesCleartextTraffic="true">
-        <activity android:name=".HistorialActivity"></activity>
+        <activity android:name=".BienvenidoActivity"></activity>
+        <activity android:name=".HistorialActivity" />
+        <activity android:name=".HomeActivity" />
         <activity android:name=".CodValidarActivity" />
-        <activity android:name=".AnimacionActivity" />
         <activity android:name=".Info_SensorActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Olvide_passwordActivity" />
         <activity android:name=".RegistrarActivity" />
-        <activity android:name=".HomeActivity">
+        <activity android:name=".AnimacionActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

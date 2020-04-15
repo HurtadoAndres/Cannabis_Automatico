@@ -54,4 +54,11 @@ dependencies {
     implementation project(path: ':volley-1.1.1')
 
 
+    //LOTTIE Animacion-----------------------------------------------
+
+    implementation "com.airbnb.android:lottie:3.4.0"
+
+    //------------------final-----------------------------------------
+
+
 }

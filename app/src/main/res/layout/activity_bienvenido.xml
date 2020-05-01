@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,68 +11,63 @@
         android:id="@+id/bienvenido"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="66dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="60dp"
         android:text="@string/benvenido"
         android:textColor="@color/cannabis_color_gris"
         android:textSize="30sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/bienvenido2"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bienvenido"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="161dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
         android:text="Cannabis Automatico "
+
         android:textColor="@color/fondo"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bienvenido" />
 
     <Button
         android:id="@+id/btn_iniciar"
-        android:layout_width="230dp"
+        android:layout_width="180dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/bienvenido2"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_gravity="center"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="57dp"
-        android:layout_marginEnd="135dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="55dp"
         android:background="@drawable/btn_befectos"
         android:text="@string/btn_inicia"
         android:textColor="@color/cannabis_color_gris"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bienvenido2" />
 
     <TextView
         android:id="@+id/textoregistrar"
         android:layout_width="wrap_content"
-        android:layout_height="26dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
+        android:layout_height="40dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="670dp"
-        android:layout_marginBottom="30dp"
-        android:text="@string/textoR" />
+        android:layout_marginBottom="25dp"
+        android:gravity="center"
+        android:text="@string/textoR"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_registrar"
         style="?android:attr/buttonBarButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center"
-        android:layout_marginStart="2dp"
+        android:layout_marginStart="4dp"
         android:layout_marginBottom="25dp"
-        android:layout_toEndOf="@+id/textoregistrar"
         android:text="@string/btn_registrar"
-        android:textColor="@color/cannabis_verde" />
+        android:textColor="@color/cannabis_verde"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textoregistrar" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

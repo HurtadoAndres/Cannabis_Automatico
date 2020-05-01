@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo_medio"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/fondo_p_actual"
     android:orientation="vertical"
+    app:menu="@menu/bottom_navigation_menu"
     tools:context=".HomeActivity">
 
 
@@ -13,7 +15,6 @@
         android:id="@+id/menu"
         android:layout_width="match_parent"
         android:layout_height="85dp"
-        android:background="@color/cannabis_verde"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +23,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="85dp"
-            android:background="@color/cannabis_verde"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -47,23 +47,29 @@
                     android:id="@+id/Descripcion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
+                    android:layout_marginLeft="28dp"
                     android:text="@string/Info_sensores"
                     android:textColor="@color/boton2_press"
                     android:textSize="18sp"
                     android:textStyle="normal" />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btn_mante"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="35dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/mantenimiento_s" />
+            <LinearLayout
+                android:id="@+id/btn_home"
+                android:gravity="center"
+                android:layout_width="100dp"
+
+                android:layout_height="75dp">
+
+                <LinearLayout
+                    android:layout_marginTop="12dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/btn_home_c"
+                    android:background="@drawable/mantenimiento_s"/>
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
@@ -78,75 +84,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/menu" />
 
-    <RelativeLayout
-        android:id="@+id/menu_abajo"
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/botonNvegacion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/fondo_p2"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contenedor">
-
-        <LinearLayout
-            android:id="@+id/mas_opciones"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="22dp"
-            android:layout_marginEnd="0dp"
-            android:background="@drawable/estilo_mas_opciones"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="@string/btn_mas_opciones"
-                android:textColor="@android:color/background_light" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/opciones"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_below="@+id/mas_opciones"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="-2dp"
-            android:layout_marginTop="-1dp"
-            android:layout_marginEnd="0dp"
-            android:background="@color/colorfondo"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:id="@+id/Historial"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginBottom="2dp"
-                android:background="@drawable/historial"
-                android:orientation="horizontal" />
-
-            <LinearLayout
-                android:id="@+id/Calendario"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginLeft="80dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginBottom="2dp"
-                android:background="@drawable/calendario"
-                android:orientation="horizontal" />
-
-
-        </LinearLayout>
-
-    </RelativeLayout>
-
-
+        app:menu="@menu/bottom_navigation_menu" />
 
 
 

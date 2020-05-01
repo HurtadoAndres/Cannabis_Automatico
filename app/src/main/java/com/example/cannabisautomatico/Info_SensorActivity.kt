@@ -5,7 +5,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.AsyncTask
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import com.github.mikephil.charting.charts.LineChart
@@ -70,7 +69,11 @@ class Info_SensorActivity: AppCompatActivity(){
 
             grupofab.collapse()
 
+            val claseTIme = time(this)
+            val args = Bundle()
+            args.putString("textFromActivityB", claseTIme.resultado.toString())
             val fr4 = F_principal()
+            fr4.arguments = args
             val trantition1 : FragmentTransaction = supportFragmentManager.beginTransaction()
             trantition1.replace(R.id.fragm, fr4)
             trantition1.commit()
@@ -272,7 +275,7 @@ class Info_SensorActivity: AppCompatActivity(){
             }else{
                 numero=0
             }
-            Toast.makeText(c,"$numero Hola $resultado",Toast.LENGTH_SHORT).show()
+
 
              dataValues1()
             dataValues2()

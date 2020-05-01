@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 
-
-class Mantenimiento_fr : Fragment() {
+class calendario : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,13 +20,15 @@ class Mantenimiento_fr : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mantenimiento_fr, container, false)
+        val view : View = inflater.inflate(R.layout.fragment_calendario, container, false)
+        var texto = view.findViewById<TextView>(R.id.texto)
+        return view
     }
 
     companion object {
 
         fun newInstance(param1: String, param2: String) =
-            Mantenimiento_fr().apply {
+            calendario().apply {
 
             }
     }

@@ -5,7 +5,7 @@
     <color name="colorAccent">#03DAC5</color>
 
     <color name="cannabis_verde">#388e3c</color>
-    <color name="cannabis_verde_D">#27632a</color>
+    <color name="cannabis_verde_D">#0D6A8F</color>
     <color name="cannabis_oficcial">#21ABC9</color>
     <color name="cannabis_color_gris">#FFFFFF</color>
     <color name="cannabis_color_amarillo">#ffea00</color>
@@ -14,7 +14,7 @@
         --Botones sesores--
     <color name="fondo">#E1E4E8EA</color>
     <color name="fondo_p">#D7B6BBBF</color>
-    <color name="fondo_p2">#85B6BBBF</color>
+    <color name="fondo_p2">#97F1EEEE</color>
     <color name="colorpresionado">#97050008</color>
 
         --boton mas opciones--
@@ -33,4 +33,13 @@
     <color name="color2">#FF9800</color>
     <color name="color3">#009688</color>
     <color name="color4">#4CAF50</color>
+
+
+    --color poppup perfil--
+    <color name="fondo_perfil">#2F333F</color>
+    <color name="fondo_perfil_n">#Eaad43</color>
+    <color name="fondo_perfil_v"> #45bc62</color>
+    <color name="fondo_perfil_a">#0581B3</color>
+
+
 </resources>

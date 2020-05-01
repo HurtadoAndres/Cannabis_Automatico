@@ -1,14 +1,13 @@
 package com.example.cannabisautomatico
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Switch
+import android.widget.TextView
 import android.widget.Toast
-
+import androidx.fragment.app.Fragment
 
 
 class F_principal : Fragment() {
@@ -30,7 +29,12 @@ class F_principal : Fragment() {
         modo_auto = view.findViewById(R.id.M_auto)
 
         modo_auto.isChecked=true
+        var dato_ideal = view.findViewById<TextView>(R.id.dato_ideal_r)
+        var dato_cargando = view.findViewById<TextView>(R.id.dato_actual_r)
 
+        dato_ideal.text= 45.toString()
+        val texto = arguments?.getString("textFromActivityB")
+        dato_cargando.text=texto
 
         modo_auto.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked){

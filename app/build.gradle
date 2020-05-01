@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -28,7 +29,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.core:core-ktx:1.0.2'
@@ -37,28 +38,20 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
     //Implementacion para la base de datos de firebase
     implementation 'com.google.firebase:firebase-database:17.0.0'
     implementation 'com.google.firebase:firebase-auth:17.0.0'
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
     //---------------------------------------------------------------
-
     //Implementacion para poder graficar los datos
-
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'com.google.android.material:material:1.0.0'
-
     //-------------------------------------------------------------
     implementation 'com.getbase:floatingactionbutton:1.10.1'
     implementation project(path: ':volley-1.1.1')
-
-
     //LOTTIE Animacion-----------------------------------------------
-
-    implementation "com.airbnb.android:lottie:3.4.0"
-
+    implementation 'com.airbnb.android:lottie:3.4.0'
     //------------------final-----------------------------------------
-
-
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation files('libs/mail.jar')
 }

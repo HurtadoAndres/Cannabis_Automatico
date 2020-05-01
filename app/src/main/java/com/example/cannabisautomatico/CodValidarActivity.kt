@@ -1,5 +1,6 @@
 package com.example.cannabisautomatico
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.os.Handler
 import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import com.airbnb.lottie.LottieAnimationView
 import com.android.volley.RequestQueue
@@ -31,8 +33,12 @@ class CodValidarActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cod_validar)
         codigo = findViewById(R.id.codigo)
-        email=findViewById(R.id.email)
-        animacion=findViewById(R.id.activado)
+        email = findViewById(R.id.email)
+        animacion = findViewById(R.id.activado)
+
+        var campo_email = findViewById<TextView>(R.id.email)
+        campo_email.isEnabled=false
+
         btn_atrasss.setOnClickListener{
             val intent:Intent = Intent(this, BienvenidoActivity::class.java)
             startActivity(intent)
@@ -43,10 +49,7 @@ class CodValidarActivity : AppCompatActivity() {
         if (bundle != null) {
             usuarioID = bundle.getString("usuario")
         }
-        email.setText(usuarioID.toString())
-        if (bundle != null) {
-            nombreBD= bundle!!.getString("nombre")
-        }
+        email.setText(obtenerUsuario())
 
 
         btn_validar.setOnClickListener {
@@ -98,5 +101,11 @@ class CodValidarActivity : AppCompatActivity() {
         var registro = ConsultaCodvalidacion(email,codigo,response)
         var queue: RequestQueue = Volley.newRequestQueue(this)
         queue.add(registro)
+    }
+
+
+    fun obtenerUsuario(): String? {
+        var preferenfs= getSharedPreferences("archivo_usu", Context.MODE_PRIVATE)
+        return  preferenfs.getString("email","")
     }
 }

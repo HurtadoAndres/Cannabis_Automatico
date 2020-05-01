@@ -55,6 +55,7 @@
 
     <string name="btn_mas_opciones"> Mas opciones </string>
     <string name="Historial"> Historial </string>
+    <string name="Calendario"> Calendario </string>
     <string name="numeroH"> # </string>
     <string name="horaH"> Hora </string>
     <string name="fechaH"> Fecha </string>
@@ -73,4 +74,20 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_cerrar_sesion">No cerrar sesion</string>
+    <string name="perfil">Perfil</string>
+    <string name="cerrar_sesion">Cerrar Sesion</string>
+    <string name="cuenta">Cuenta</string>
+
+
+    <string name="contenido">
+    <h3>Te damos la bienvenida a CannabisAutomaticoApp,</h3> <br>
+    tu nueva cuenta ha sido creada. </br>
+    Aquí encontrarás algunas sugerencias para comenzar, <br>
+    tu codigo para terminar de activar </br>
+    tu cuenta es:<h2> CA-001VP </h2> <br></br><br></br><br>
+    Por favor no responder a este correo ya que solo </br>
+    es de enviar mensaje y no recibir. <br></br><br></br><br></br><br></br><br></br>
+    <h3><p>Cannabis Automatico App</p></h3>
+    </string>
 </resources>

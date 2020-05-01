@@ -13,6 +13,7 @@ import android.service.voice.VoiceInteractionSession
 import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.lottie.LottieAnimationView
@@ -49,6 +50,11 @@ class MainActivity: AppCompatActivity() {
 
     lateinit var animacion: LottieAnimationView
 
+    lateinit var RBNoCerarSesion : RadioButton
+    var estActivadoRBSession : Boolean = false
+    var USU = ""
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -56,12 +62,24 @@ class MainActivity: AppCompatActivity() {
         txtemail = findViewById(R.id.email)
         txtpassword = findViewById(R.id.password)
         auth = FirebaseAuth.getInstance()
+        USU = findViewById<EditText>(R.id.email).text.toString()
 
         animacion=findViewById(R.id.cargando)
+        RBNoCerarSesion = findViewById(R.id.NoCerrarSesion)
 
        // var usuario=email.text.toString()
        // var password = password.text.toString()
-        cargar_UusarioPassword()
+
+
+
+        estActivadoRBSession = RBNoCerarSesion.isChecked
+        RBNoCerarSesion.setOnClickListener{
+            if (estActivadoRBSession){
+                RBNoCerarSesion.isChecked=false
+            }
+            estActivadoRBSession = RBNoCerarSesion.isChecked
+        }
+
 
         btn_registrar.setOnClickListener{
             val intent:Intent = Intent(this, RegistrarActivity::class.java)
@@ -98,17 +116,11 @@ class MainActivity: AppCompatActivity() {
                             usuarioID = json.getString("Email")
                             nombredBD = json.getString("Nombre")
                             if (estadodBD=="true") {
-
-
+                                obtenerEstadoNoCerrarSesion() //preferens
                                 animacion.visibility = View.VISIBLE
-                                val handler = Handler()
-                                handler.postDelayed(Runnable { // acciones que se ejecutan tras los milisegundos
-                                    var intent=Intent(this, HomeActivity::class.java)
-                                    var usu = usuarioID
-                                    intent.putExtra("email", usu)
-                                    startActivity(intent)
-                                    finish()
-                                }, 1000)
+                                guardando_UsuarioPassword()
+                                irhome()
+
 
                             }else{
                                 alerta()
@@ -133,27 +145,50 @@ class MainActivity: AppCompatActivity() {
                 Toast.makeText(this, "Los campos estan vacios", Toast.LENGTH_LONG).show()
             }
 
-            guardando_UsuarioPassword()
+
+            estadoNoCerrarSesion()
+
+
         }
 
 
+
+
     }
+    fun irhome(){
+        val handler = Handler()
+        handler.postDelayed(Runnable { // acciones que se ejecutan tras los milisegundos
+            var intent=Intent(this, HomeActivity::class.java)
+            var usu = usuarioID
+            intent.putExtra("email", usu)
+            startActivity(intent)
+            finish()
+        }, 1000)
+    }
+
+    fun estadoNoCerrarSesion(){
+        var preferenfs= getSharedPreferences("archivo_Sesion", Context.MODE_PRIVATE)
+        var editor : SharedPreferences.Editor = preferenfs.edit()
+        editor.putBoolean("estado.sesion", RBNoCerarSesion.isChecked)
+        editor.apply()
+    }
+    fun obtenerEstadoNoCerrarSesion():Boolean{
+        var preferenfs= getSharedPreferences("archivo_Sesion", Context.MODE_PRIVATE)
+        return  preferenfs.getBoolean("estado.sesion",false)
+    }
+
+
 
     fun guardando_UsuarioPassword(){
         var preferenfs= getSharedPreferences("archivo_usu", Context.MODE_PRIVATE)
         var editor : SharedPreferences.Editor = preferenfs.edit()
-        editor.putString("email", txtemail.text.toString())
-        editor.putString("password", txtpassword.text.toString())
-        editor.commit()
+            editor.putString("email", txtemail.text.toString())
+            editor.putString("password", txtpassword.text.toString())
+        editor.apply()
     }
-    fun cargar_UusarioPassword(){
-        var preferenfs= getSharedPreferences("archivo_usu", Context.MODE_PRIVATE)
-        var usuario : String? = preferenfs.getString("email", "")
-        var password : String? = preferenfs.getString("password", "")
 
-        txtemail.setText(usuario)
-        txtpassword.setText(password)
-    }
+
+
 
 
     fun alerta(): AlertDialog? {
@@ -175,6 +210,8 @@ class MainActivity: AppCompatActivity() {
         builder.setTitle("Activar cuenta").show()
         return builder.create()
     }
+
+
 
     /* METODO PARA INGRESAR CON FIREBASE
     private fun loginUser(){

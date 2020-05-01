@@ -5,23 +5,23 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
+import android.os.StrictMode
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.lottie.LottieAnimationView
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_registrar.*
-import kotlinx.android.synthetic.main.activity_registrar.btn_registrar
 import org.json.JSONException
 import org.json.JSONObject
+import java.util.*
+import javax.mail.*
+import javax.mail.internet.InternetAddress
+import javax.mail.internet.MimeMessage
 
 
 class RegistrarActivity : AppCompatActivity() {
@@ -29,141 +29,148 @@ class RegistrarActivity : AppCompatActivity() {
     private lateinit var txtapellido: EditText
     private lateinit var txtemail: EditText
     private lateinit var txtpassword: EditText
-  //  private lateinit var dbReferences: DatabaseReference
-  //  private lateinit var dataBase: FirebaseDatabase
- //   private lateinit var auth: FirebaseAuth
-
-
     lateinit var animacion: LottieAnimationView
+    lateinit var btn_atras : Button
+
+   var correoOficial = ""
+   var contraseñaOficial = ""
+    lateinit var session : Session
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_registrar)
 
-            //Buscamos las vistas (elementos creados en la vista)
+        correoOficial  = "cannabisautomatico@gmail.com"
+        contraseñaOficial  = "CannabisAutomaticoFup2020"
+
+
+        //Buscamos las vistas (elementos creados en la vista)
             txtnombre = findViewById(R.id.nombre)
             txtapellido = findViewById(R.id.apellido)
             txtemail = findViewById(R.id.email)
             txtpassword = findViewById(R.id.password)
-
-
+            btn_atras=findViewById(R.id.btn_atras)
             animacion = findViewById(R.id.cargando)
 
-          //  dataBase = FirebaseDatabase.getInstance()
-            //auth = FirebaseAuth.getInstance()
-
-        btn_atrass.setOnClickListener{
+        btn_atras.setOnClickListener{
             val intent:Intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 
-           // dbReferences = dataBase.reference.child("User")
+
 
             btn_registrar.setOnClickListener{
-               // Create_nueva_cuenta()
-                var nombre :String = txtnombre.text.toString()
-                var apellido :String = txtapellido.text.toString()
-                var usuario :String = txtemail.text.toString()
-                var password :String = txtpassword.text.toString()
-                var response =  Response.Listener<String> { response ->
-                    try {
-                        val json = JSONObject(response)
-                        var success = json.getBoolean("success")
-                        if (success){
-                            animacion.visibility = View.VISIBLE
-                            val handler = Handler()
-                            handler.postDelayed(Runnable { // acciones que se ejecutan tras los milisegundos
-                                val intent= Intent(this, CodValidarActivity::class.java)
-                                intent.putExtra("usuario",usuario )
-                                intent.putExtra("nombre", nombre )
-                                startActivity(intent)
-                                Toast.makeText(this,"Usuario Registrado con exito", Toast.LENGTH_LONG).show()
-                            }, 1000)
-                            guardando_UsuarioPassword()
 
-                        }else{
+                var nombre :String = txtnombre.text.toString().trim()
+                var apellido :String = txtapellido.text.toString().trim()
+                var usuario :String = txtemail.text.toString().trim()
+                var password :String = txtpassword.text.toString().trim()
 
-                            Toast.makeText(this,"Error el usuario ya existe", Toast.LENGTH_LONG).show()
-                            animacion.visibility = View.VISIBLE
-                            val handler = Handler()
-                            handler.postDelayed(Runnable { // acciones que se ejecutan tras los milisegundos
-                                animacion.visibility = View.GONE
-                            }, 1000)
+                if(!nombre.isEmpty() && !apellido.isEmpty() && !usuario.isEmpty() && !password.isEmpty()) {
+                    var response = Response.Listener<String> { response ->
+                        try {
+                            val json = JSONObject(response)
+                            var success = json.getBoolean("success")
+                            if (success) {
+                                animacion.visibility = View.VISIBLE
+                                val handler = Handler()
+                                handler.postDelayed(Runnable { // acciones que se ejecutan tras los milisegundos
+                                    val intent = Intent(this, CodValidarActivity::class.java)
+                                    intent.putExtra("usuario", usuario)
+                                    intent.putExtra("nombre", nombre)
+                                    startActivity(intent)
+                                    Toast.makeText(
+                                        this,
+                                        "Usuario Registrado con exito",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }, 1000)
+                                metodoCorreo()
+                                guardando_UsuarioPassword()
 
+                            } else {
+
+                                Toast.makeText(
+                                    this,
+                                    "Error el usuario ya existe",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                animacion.visibility = View.VISIBLE
+                                val handler = Handler()
+                                handler.postDelayed(Runnable { // acciones que se ejecutan tras los milisegundos
+                                    animacion.visibility = View.GONE
+                                }, 1000)
+
+                            }
+                        } catch (e: JSONException) {
                         }
-                    }catch (e: JSONException){}
 
-                }
-                var registro = RegisterRequest(nombre,apellido,usuario.trim(),password.trim(),response)
+                    }
+
+                var registro = RegisterRequest(nombre,apellido,usuario,password,response)
                 var queue: RequestQueue = Volley.newRequestQueue(this)
                 queue.add(registro)
-
+                }else{
+                    Toast.makeText(this, "Los campos estan vacios", Toast.LENGTH_LONG).show()
+                }
 
             }
 
         }
+
+
+    fun metodoCorreo(){
+        var Contenido: String ="<h1>Te damos la bienvenida a CannabisAutomaticoApp,</h1>"+
+                "        <h2>tu nueva cuenta ha sido creada.</h2>" + "<br>" +
+                "        <p>Aquí encontrarás algunas sugerencias para comenzar," +
+                "        tu codigo para terminar de activar</p>" +
+                "        <p>tu codigo es:<b> CA-001VP </b>" + "<br>" + "<br>" +
+                "        <p>Por favor no responder a este correo ya que solo</p>" +
+                "        <p> es de enviar mensaje y no recibir.</p>" + "<br>" +
+                "        <h3><p>Cannabis Automatico App</p></h3>"
+
+        val politica : StrictMode.ThreadPolicy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(politica)
+
+        val properties = Properties()
+            properties["mail.smtp.host"] = "smtp.googlemail.com"
+            properties["mail.smtp.socketFactory.port"] = "465"
+            properties["mail.smtp.socketFactory.class"] = "javax.net.ssl.SSLSocketFactory"
+            properties["mail.smtp.auth"] = "true"
+            properties["mail.smtp.port"] = "465"
+
+
+        try {
+           session = Session.getDefaultInstance(properties,object:Authenticator(){
+               override fun getPasswordAuthentication(): PasswordAuthentication {
+                   return PasswordAuthentication(correoOficial,contraseñaOficial)
+               }
+           })
+
+            val mensaje: Message = MimeMessage(session)
+            mensaje.setFrom(InternetAddress(correoOficial))
+            mensaje.subject = "Hola, ${txtnombre.text}"
+            mensaje.setRecipients(
+                Message.RecipientType.TO,
+                InternetAddress.parse(txtemail.text.toString())
+            )
+            mensaje.setContent(Contenido,"text/html; charset=utf-8")
+            Transport.send(mensaje)
+
+
+        }catch (e:Exception){e.printStackTrace()}
+
+
+
+    }
 
     fun guardando_UsuarioPassword(){
         var preferenfs= getSharedPreferences("archivo_usu", Context.MODE_PRIVATE)
         var editor : SharedPreferences.Editor = preferenfs.edit()
         editor.putString("email", txtemail.text.toString())
         editor.putString("password", txtpassword.text.toString())
-        editor.commit()
+        editor.apply()
     }
 
-
-/*
-
-        private fun Create_nueva_cuenta(){
-            val name:String = txtnombre.text.toString()
-            val lastName:String = txtapellido.text.toString()
-            val email:String = txtemail.text.toString()
-            val password:String = txtpassword.text.toString()
-            val codigo:String = txtcodigo.text.toString()
-
-            if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(lastName)  && !TextUtils.isEmpty(email)
-                && !TextUtils.isEmpty(password)  && !TextUtils.isEmpty(codigo) ){
-
-                progressBar.visibility = View.VISIBLE
-
-                auth.createUserWithEmailAndPassword(email,password)
-                    .addOnCompleteListener(this){
-                            task ->
-
-                        if (task.isComplete){
-                            val user:FirebaseUser?= auth.currentUser
-                            verificarEmail(user)
-
-                            val userBD = dbReferences.child(user!!.uid)
-
-
-                            userBD.child("Name").setValue(name)
-                            userBD.child("lastName").setValue(lastName)
-                            llevaralogin()
-
-                        }
-                    }
-            }
-
-        }
-
-        private fun llevaralogin(){
-            startActivity(Intent(this, MainActivity::class.java))
-        }
-
-        private fun verificarEmail(user:FirebaseUser?){
-            user?.sendEmailVerification()
-                ?.addOnCompleteListener(this){
-                        task ->
-                    if (task.isComplete){
-                        Toast.makeText(this,"Correo enviado", Toast.LENGTH_LONG).show()
-                    }else{
-                        Toast.makeText(this,"Error al enviar Correo ", Toast.LENGTH_LONG).show()
-                    }
-                }
-
-        }
-
-*/
     }

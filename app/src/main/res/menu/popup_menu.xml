@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/Ajustes"
-        android:icon="@drawable/icono_configuracion"
-        android:title="@string/Ajuste"/>
+    <item android:id="@+id/Perfil"
+        android:icon="@drawable/ic_perfil"
+        android:title="@string/perfil"/>
 
     <item android:id="@+id/Sesion"
-        android:icon="@drawable/icono_cerrar_sesion"
-        android:title="@string/sesion"/>
+        android:icon="@drawable/ic_acerca_de"
+        android:title="Acerca de"/>
 </menu>

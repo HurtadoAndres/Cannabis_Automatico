@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".add_invernadero_Activity">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/marihuana"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Crea tu invernadero"
+        android:textColor="@color/cannabis_color_gris"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginStart="150dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_home"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/flecha"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+   <LinearLayout
+       android:id="@+id/imagen"
+       android:layout_width="match_parent"
+       android:layout_height="250dp"
+       android:layout_marginTop="10dp"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/linearLayout2" >
+
+    <ImageView
+           android:id="@+id/imagen_subir"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:src="@drawable/imagen_no_disponible"
+           android:layout_gravity="center" />
+
+   </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_buscar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/select_camara"
+        android:src="@drawable/camara_n"
+        android:orientation="vertical"
+        android:layout_marginTop="260dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imagen" />
+    <EditText
+        android:id="@+id/titulo"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Nombre del invernadero"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_buscar" />
+
+    <EditText
+        android:id="@+id/titulo_s"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="titulo planta"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titulo" />
+
+    <EditText
+        android:id="@+id/descripcion"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Descripcion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titulo_s" />
+
+    <Button
+        android:id="@+id/crear_invernadero"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="170dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/btn_recuperar"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="center"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="25dp"
+        android:text="Crear invernadero"
+        android:background="@drawable/btn_efectos"
+        android:textColor="@color/cannabis_verde"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textoregistrar" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

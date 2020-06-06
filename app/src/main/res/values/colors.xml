@@ -11,6 +11,7 @@
     <color name="cannabis_color_amarillo">#ffea00</color>
     <color name="cannabis_color_gris_osc">#1c313a</color>
     <color name="cannabis_color_oscuro">#718792</color>
+    <color name="cannabis_color_negro">#000000</color>
         --Botones sesores--
     <color name="fondo">#E1E4E8EA</color>
     <color name="fondo_p">#D7B6BBBF</color>
@@ -29,9 +30,11 @@
 
 
     --color prueba grafica--
-    <color name="color1">#9C27B0</color>
+    <color name="color1">#760888</color>
+    <color name="color1_1">#52760888</color>
     <color name="color2">#FF9800</color>
     <color name="color3">#009688</color>
+    <color name="color3_1">#63009688</color>
     <color name="color4">#4CAF50</color>
 
 

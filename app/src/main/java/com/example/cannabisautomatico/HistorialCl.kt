@@ -1,26 +1,16 @@
 package com.example.cannabisautomatico
 
 class HistorialCl {
-    private var id: String? = null
     private var hora: String? = null
     private var fecha: String? = null
 
 
-    constructor(id: String?, hora: String?, fecha: String?) {
-        this.id = id
+    constructor(hora: String?, fecha: String?) {
         this.hora = hora
         this.fecha = fecha
 
     }
 
-
-    fun getId(): String? {
-        return id
-    }
-
-    fun setId(id: String) {
-        this.id = id
-    }
 
     fun getHora(): String? {
         return hora

@@ -67,6 +67,7 @@
     <string name="titulo_f"> FECHA </string>
 
     <string name="benvenido"> Bienvenido! </string>
+    <string name="Invernadero_titulo"> Mis invernaderos </string>
 
     --Menu--
     <string name="Ajuste"> Ajustes </string>
@@ -90,4 +91,5 @@
     es de enviar mensaje y no recibir. <br></br><br></br><br></br><br></br><br></br>
     <h3><p>Cannabis Automatico App</p></h3>
     </string>
+    <string name="no_tienes_internet_n_comprueba_tu_conexion">No tienes INTERNET \n Comprueba tu conexion.</string>
 </resources>

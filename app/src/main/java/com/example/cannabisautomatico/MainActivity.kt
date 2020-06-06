@@ -20,21 +20,12 @@ import com.airbnb.lottie.LottieAnimationView
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
-import com.android.volley.VolleyError
-import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
-import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
-import java.io.BufferedInputStream
-import java.io.BufferedReader
-import java.io.InputStream
-import java.io.InputStreamReader
-import java.lang.Exception
-import java.net.HttpURLConnection
-import java.net.URL
+
 
 
 class MainActivity: AppCompatActivity() {
@@ -45,6 +36,7 @@ class MainActivity: AppCompatActivity() {
 
     var nombredBD: String=""
     var usuarioID: String=""
+    var apellidodBD: String=""
 
     var context : Context = this
 
@@ -115,6 +107,7 @@ class MainActivity: AppCompatActivity() {
                             var estadodBD = json.get("estado")
                             usuarioID = json.getString("Email")
                             nombredBD = json.getString("Nombre")
+                            apellidodBD = json.getString("Apellido")
                             if (estadodBD=="true") {
                                 obtenerEstadoNoCerrarSesion() //preferens
                                 animacion.visibility = View.VISIBLE
@@ -184,6 +177,8 @@ class MainActivity: AppCompatActivity() {
         var editor : SharedPreferences.Editor = preferenfs.edit()
             editor.putString("email", txtemail.text.toString())
             editor.putString("password", txtpassword.text.toString())
+            editor.putString("nombre", nombredBD)
+            editor.putString("apellido", apellidodBD)
         editor.apply()
     }
 

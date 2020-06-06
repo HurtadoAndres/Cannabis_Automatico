@@ -35,9 +35,10 @@ open class HomeActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener
 
 
 
-        val home = Home_fr()
-        home.arguments = intent.extras
-        supportFragmentManager.beginTransaction().add(R.id.contenedor,home).commit()
+        val invernadero = List_Invernaderos()
+        Descripcion?.text= resources.getText(R.string.Invernadero_titulo)
+        invernadero.arguments = intent.extras
+        supportFragmentManager.beginTransaction().add(R.id.contenedor,invernadero).commit()
 
 
 
@@ -52,39 +53,11 @@ open class HomeActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener
 
         }
 
-//----------------boton ocultar mas ocpiones---------------------------
-        /*
-        opciones.visibility=(View.GONE)
-
-        var movimiento : Int = 0
-
-        mas_opciones.setOnClickListener{
-
-            if (movimiento == 0) {
-               opciones.visibility=(View.VISIBLE)
-
-                movimiento = 1
-            }else{
-              opciones.visibility=(View.GONE)
-                movimiento = 0
-            }
-
-        }
-        historial.setOnClickListener{
-            val intent = Intent(this,HistorialActivity::class.java)
-            intent.putExtra("email",usua)
-            startActivity(intent)
-            opciones.visibility=(View.GONE)
-
-        }
-        */
-
-//-------------------final---------------------------------------------------
 
             navegacion.setOnNavigationItemSelectedListener { item ->
                 when (item.itemId) {
                     R.id.home -> {
-                        paginaHome()
+                        paginaInvernadero()
                     }
                     R.id.historial -> {
                         paginaHistorial()
@@ -149,6 +122,14 @@ open class HomeActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener
     fun paginaHome(){
         Descripcion.text= resources.getText(R.string.Info_sensores)
         val fr1= Home_fr()
+        val trantition1 : FragmentTransaction = supportFragmentManager.beginTransaction()
+        trantition1.replace(R.id.contenedor, fr1)
+        trantition1.commit()
+    }
+
+    fun paginaInvernadero(){
+        Descripcion?.text= resources.getText(R.string.Invernadero_titulo)
+        val fr1= List_Invernaderos()
         val trantition1 : FragmentTransaction = supportFragmentManager.beginTransaction()
         trantition1.replace(R.id.contenedor, fr1)
         trantition1.commit()

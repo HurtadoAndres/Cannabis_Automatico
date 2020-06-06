@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Home" android:id="@+id/home" android:icon="@drawable/ic_home"/>
-    <item android:title="Historial" android:id="@+id/historial" android:icon="@drawable/ic_historial"/>
+    <item android:title="Incio" android:id="@+id/home" android:icon="@drawable/ic_home"/>
     <item android:title="Calendario" android:id="@+id/calendario" android:icon="@drawable/ic_calendario"/>
-    <item android:title="Ajustes" android:id="@+id/ajustes" android:icon="@drawable/ic_settings"/>
+    <item android:title="Historial" android:id="@+id/historial" android:icon="@drawable/ic_historial"/>
+    <item android:title="Más" android:id="@+id/ajustes" android:icon="@drawable/ic_mas"/>
 </menu>

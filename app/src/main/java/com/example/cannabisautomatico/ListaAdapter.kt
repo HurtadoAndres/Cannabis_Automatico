@@ -13,7 +13,7 @@ class ListaAdapter: ArrayAdapter<HistorialCl>{
      var mcontext : Context
      var resorcelayout : Int
 
-    constructor(context: Context, resource: Int, objects: ArrayList<HistorialCl>) :   super(
+    constructor(context: Context, resource: Int, objects: List<HistorialCl>) :   super(
         context,
         resource,
         objects
@@ -31,10 +31,7 @@ class ListaAdapter: ArrayAdapter<HistorialCl>{
             view = LayoutInflater.from(mcontext).inflate(resorcelayout, null)
 
         var modelo : HistorialCl = mlist.get(position)
-        var id = view?.findViewById<TextView>(R.id.id)
-        if (id != null) {
-            id.text=modelo.getId()
-        }
+
         var hora= view?.findViewById<TextView>(R.id.hora)
         if (hora != null) {
             hora.text=modelo.getHora()

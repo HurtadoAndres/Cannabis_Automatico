@@ -13,18 +13,22 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import kotlinx.android.synthetic.main.activity_registrar.*
 
 class Perfil : AppCompatActivity() {
 
     lateinit var imagen : ImageView
     var imagenSiguiente : Int = 0
     var usuarioId: String = ""
+    lateinit var nombre_P : TextView
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP_MR1)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_perfil)
 
         imagen = findViewById(R.id.imageView)
+        nombre_P = findViewById(R.id.nombre_p)
 
         val medidaventana = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(medidaventana)
@@ -33,8 +37,11 @@ class Perfil : AppCompatActivity() {
 
         window.setLayout((ancho * 0.95).toInt(),(alto * 0.70).toInt())
 
+
         mostrarPerfil()
         cargar_UusarioPassword()
+        nombre_P.text=obtenerNombreApellido()
+
         imagenSiguiente = obtenerEstadoImagen()
         if (imagenSiguiente==1){
             imagen.setBackgroundResource(R.drawable.burro)
@@ -66,6 +73,13 @@ class Perfil : AppCompatActivity() {
         var editor : SharedPreferences.Editor = preferenfs.edit()
         editor.putBoolean("estado.sesion",b)
         editor.apply()
+    }
+
+    fun obtenerNombreApellido(): String? {
+        var preferenfs= getSharedPreferences("archivo_usu", Context.MODE_PRIVATE)
+        var nombre = preferenfs.getString("nombre","")
+        var apellido =  preferenfs.getString("apellido","")
+        return "$nombre $apellido"
     }
 
     fun mostrarPerfil() {

@@ -41,19 +41,19 @@
 
    <LinearLayout
        android:id="@+id/imagen"
-       android:layout_width="match_parent"
-       android:layout_height="250dp"
+       android:layout_width="200dp"
+       android:layout_height="200dp"
        android:layout_marginTop="10dp"
+       android:layout_gravity="center_horizontal"
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" >
 
     <ImageView
            android:id="@+id/imagen_subir"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:src="@drawable/imagen_no_disponible"
-           android:layout_gravity="center" />
+           android:layout_width="200dp"
+           android:layout_height="200dp"
+           android:src="@drawable/imagen_no_disponible" />
 
    </LinearLayout>
 

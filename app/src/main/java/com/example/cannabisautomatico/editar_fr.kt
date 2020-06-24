@@ -19,76 +19,152 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
-import android.widget.*
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import com.android.volley.AuthFailureError
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.bumptech.glide.Glide
+import de.hdodenhof.circleimageview.CircleImageView
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.util.*
 
 
-class add_invernadero_Activity : AppCompatActivity() {
+class editar_fr : Fragment() {
+    var titu_e: String? = null
+    var titu_s_e: String? = null
+    var des_e: String? = null
+    var id_e: String? = null
+    var ruta_e: String? = null
 
+    lateinit var txttitulo : EditText
+    lateinit var txttitulo_s : EditText
+    lateinit var txtdescripcion : EditText
+    lateinit var imagen_mostrar : CircleImageView
+    lateinit var thiscontext :Context
 
-    lateinit var crear_invernadero: Button
-    lateinit var titulo: TextView
-    lateinit var titulo_s: TextView
-    lateinit var descripcion: TextView
+    var update : String = "false"
 
-    lateinit var btn_buscar: LinearLayout
-    lateinit var imagen_subir: ImageView
-    lateinit var bitmap: Bitmap
-
-
+    var KEY_CODIGO = "codigo"
     var KEY_IMAGE = "imagen"
     var KEY_TITULO = "titulo"
-    var KEY_IMAGE_D = "imagen"
     var KEY_TITULO_S = "titulo_s"
-    var KEY_DESCRIPCION = "descripcion"
-    var KEY_EMAIL= "email"
-    var KEY_CODIGO = "codigo"
-
+    var KEY_DES = "descripcion"
+    var URL_EDITAR ="https://cannabisautomatico.000webhostapp.com/ServicioWeb/actualizarInvernadero.php"
     var UPLOAD_URL = "https://cannabisautomatico.000webhostapp.com/ServicioWeb/subir_imagen.php"
-    var UPLOAD_URL2 = "https://cannabisautomatico.000webhostapp.com/ServicioWeb/invernaderoCrear.php"
-
 
     var carpetaRAIZ: String = "Cannabis_Automatico/"
     var rutaIMAGEN: String = carpetaRAIZ + "MyCannabis"
     var path: String = ""
     var COD_SELECCIONA: Int = 10
     var COD_FOTO: Int = 11
+    lateinit var bitmap: Bitmap
+
+    lateinit var btn_confirmar : Button
+    lateinit var btn_subir_imagen :LinearLayout
+    var click_imagen :Boolean = false
 
 
-    @RequiresApi(Build.VERSION_CODES.M)
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_invernadero_)
-        crear_invernadero = findViewById(R.id.crear_invernadero)
-        titulo = findViewById(R.id.titulo)
-        titulo_s = findViewById(R.id.titulo_s)
-        descripcion = findViewById(R.id.descripcion)
-        btn_buscar = findViewById(R.id.btn_buscar)
-        imagen_subir = findViewById(R.id.imagen_subir)
-
-
-        btn_buscar.setOnClickListener {
-        seleccionarImagen()
+        if (arguments != null){
+           titu_e = arguments?.getString("titulo")
+           titu_s_e = arguments?.getString("titulo_s")
+           des_e = arguments?.getString("descripcion")
+           id_e = arguments?.getString("id")
+           ruta_e = arguments?.getString("ruta_img")
 
         }
 
+    }
 
-        crear_invernadero.setOnClickListener {
+    @RequiresApi(Build.VERSION_CODES.M)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val view : View = inflater.inflate(R.layout.fragment_editar_fr, container, false)
+        txttitulo = view.findViewById(R.id.titulo)
+        txttitulo_s = view.findViewById(R.id.titulo_s)
+        txtdescripcion = view.findViewById(R.id.descripcion)
+        imagen_mostrar = view.findViewById(R.id.profile_image)
+        btn_confirmar = view.findViewById(R.id.btn_confirmar)
+        btn_subir_imagen = view.findViewById(R.id.btn_buscar)
 
-            insertDatosInfromacion()
+        txttitulo.setText(titu_e)
+        txttitulo_s.setText(titu_s_e)
+        txtdescripcion.setText(des_e)
 
+
+        if (container != null) {
+            thiscontext = container.context
         }
 
+        Glide.with(thiscontext).load(ruta_e).into(imagen_mostrar)
+
+        btn_confirmar.setOnClickListener {
+            editar()
+        }
+
+        btn_subir_imagen.setOnClickListener {
+            click_imagen = true
+            seleccionarImagen()
+        }
+
+        return view
+    }
+    fun editar() {
+        val stringRequest: StringRequest = object : StringRequest(
+            Method.POST, URL_EDITAR,
+            Response.Listener { response ->
+                if (click_imagen){
+                    update == "true"
+                    uploadImage()
+                }
+                startActivity(Intent(thiscontext, HomeActivity::class.java))
+
+            }, Response.ErrorListener { error ->
+
+                Toast.makeText(thiscontext, error.message.toString(), Toast.LENGTH_LONG)
+                    .show()
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getParams(): Map<String, String> {
+                var imagen: String = update
+                var titulo :String = txttitulo.text.toString().trim()
+                var titulo_s :String = txttitulo_s.text.toString().trim()
+                var descripcion :String = txtdescripcion.text.toString().trim()
+
+                var params: MutableMap<String, String> =
+                    Hashtable<String, String>()
+                params[KEY_IMAGE] = imagen
+                params[KEY_TITULO] = titulo
+                params[KEY_TITULO_S] = titulo_s
+                params[KEY_DES] = descripcion
+                params[KEY_CODIGO] = id_e.toString()
+
+                return params
+            }
+
+        }
+        val requestQueue = Volley.newRequestQueue(thiscontext)
+        requestQueue.add(stringRequest)
 
     }
 
@@ -97,15 +173,15 @@ class add_invernadero_Activity : AppCompatActivity() {
     {
         val REQUEST_CODE_ASK_PERMISSIONS = 111
 
-        var permisoCAMARA :Int = ActivityCompat.checkSelfPermission (this, Manifest.permission.CAMERA);
-        var permisoALMACENAMIENTO :Int = ActivityCompat.checkSelfPermission (this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        var permisoCAMARA :Int = ActivityCompat.checkSelfPermission (thiscontext, Manifest.permission.CAMERA);
+        var permisoALMACENAMIENTO :Int = ActivityCompat.checkSelfPermission (thiscontext, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
         if (permisoALMACENAMIENTO != PackageManager.PERMISSION_GRANTED || permisoCAMARA != PackageManager.PERMISSION_GRANTED)
         {
-            if ( Build.VERSION.SDK_INT>=Build.VERSION_CODES.N){
+            if ( Build.VERSION.SDK_INT>= Build.VERSION_CODES.N){
 
             }
-            requestPermissions( arrayOf( Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA  ),
+            requestPermissions( arrayOf( Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA  ),
                 REQUEST_CODE_ASK_PERMISSIONS );
 
         }
@@ -120,7 +196,7 @@ class add_invernadero_Activity : AppCompatActivity() {
         val baos = ByteArrayOutputStream()
         bmp.compress(Bitmap.CompressFormat.JPEG,100,baos)
         var imagenbytes: ByteArray = baos.toByteArray()
-        var encodeImagen : String = Base64.encodeToString(imagenbytes,Base64.DEFAULT)
+        var encodeImagen : String = Base64.encodeToString(imagenbytes, Base64.DEFAULT)
 
         return encodeImagen
     }
@@ -143,8 +219,8 @@ class add_invernadero_Activity : AppCompatActivity() {
         var intent: Intent? = null
         intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            val authorities = this.packageName + ".provider"
-            val imageUri = FileProvider.getUriForFile(this, authorities, imagen)
+            val authorities = thiscontext.packageName + ".provider"
+            val imageUri = FileProvider.getUriForFile(thiscontext, authorities, imagen)
             intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
         } else {
             intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(imagen))
@@ -160,7 +236,7 @@ class add_invernadero_Activity : AppCompatActivity() {
         permisoCAMARA()
 
         var opciones: Array<CharSequence> = arrayOf("Tomar foto", "Cargar imagen", "Cancelar")
-        var alertOpciones: AlertDialog.Builder = AlertDialog.Builder(this)
+        var alertOpciones: AlertDialog.Builder = AlertDialog.Builder(thiscontext)
         alertOpciones.setTitle("Seleccione una Opción")
         alertOpciones.setItems(opciones) { dialog, which ->
             if (opciones[which] == "Tomar foto"){
@@ -189,43 +265,43 @@ class add_invernadero_Activity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (resultCode == Activity.RESULT_OK){
-          try {
+            try {
 
-            when(requestCode) {
-                COD_SELECCIONA->
-                 {
+                when(requestCode) {
+                    COD_SELECCIONA->
+                    {
                         var filePath : Uri? = data?.data!!
                         //como tener el mapa de bitts de la galeria
                         bitmap =when {
                             Build.VERSION.SDK_INT < 28 -> MediaStore.Images.Media.getBitmap(
-                                this.contentResolver,
+                                thiscontext.contentResolver,
                                 filePath
                             )
                             else -> {
-                                val source = ImageDecoder.createSource(this.contentResolver, filePath!!)
+                                val source = ImageDecoder.createSource(thiscontext.contentResolver, filePath!!)
                                 ImageDecoder.decodeBitmap(source)
                             }
                         }
                         //configurar la imagen en el ImageView
-                        imagen_subir.setImageBitmap(bitmap)
+                        imagen_mostrar.setImageBitmap(bitmap)
 
 
-                  }
-                COD_FOTO ->
-                  {
-                      Toast.makeText(this,"aqui",Toast.LENGTH_LONG).show()
-                        MediaScannerConnection.scanFile(this, arrayOf(path),null
-                        ) { path:String, uri:Uri ->
+                    }
+                    COD_FOTO ->
+                    {
+                        Toast.makeText(thiscontext,"aqui",Toast.LENGTH_LONG).show()
+                        MediaScannerConnection.scanFile(thiscontext, arrayOf(path),null
+                        ) { path:String, uri: Uri ->
                             Log.i("Ruta de almacenamiento", "Path: $path")
 
                         }
 
-                      var bitmap :Bitmap = BitmapFactory.decodeFile(path)
-                        imagen_subir.setImageBitmap(bitmap)
+                        var bitmap : Bitmap = BitmapFactory.decodeFile(path)
+                        imagen_mostrar.setImageBitmap(bitmap)
 
 
-                  }
-            }
+                    }
+                }
 
 
 
@@ -239,7 +315,7 @@ class add_invernadero_Activity : AppCompatActivity() {
 
     }
 
-    fun redimencionarBitmap(bitmap:Bitmap, an: Float, al:Float):Bitmap{
+    fun redimencionarBitmap(bitmap: Bitmap, an: Float, al:Float): Bitmap {
 
         var ancho = bitmap.width
         var alto = bitmap.height
@@ -257,92 +333,40 @@ class add_invernadero_Activity : AppCompatActivity() {
 
     }
 
-
-    fun uploadImage(response: String) {
-        var codigo = response
-        val loading = ProgressDialog.show(this, "Subiendo...", "Espere por favor")
+    fun uploadImage() {
         val stringRequest: StringRequest = object : StringRequest(
             Method.POST, UPLOAD_URL,
             Response.Listener { response ->
-                loading.dismiss()
-                startActivity(Intent(this,HomeActivity::class.java))
-
             }, Response.ErrorListener { error ->
-                loading.dismiss()
-                Toast.makeText(this, error.message.toString(), Toast.LENGTH_LONG)
+                Toast.makeText(thiscontext, error.message.toString(), Toast.LENGTH_LONG)
                     .show()
             }) {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
                 var imagen: String = convertirImagenString(bitmap)
-                var titulo :String = titulo.text.toString().trim()
+                var titulo :String =  txttitulo.text.toString().trim()
                 var params: MutableMap<String, String> =
                     Hashtable<String, String>()
                 params[KEY_IMAGE] = imagen
                 params[KEY_TITULO] = titulo
-                params[KEY_CODIGO] =  codigo
+                params[KEY_CODIGO] = id_e.toString()
 
 
                 return params
             }
 
         }
-        val requestQueue = Volley.newRequestQueue(this)
+        val requestQueue = Volley.newRequestQueue(thiscontext)
         requestQueue.add(stringRequest)
 
     }
 
-    fun insertDatosInfromacion(){
-        val stringRequest: StringRequest = object : StringRequest(
-            Method.POST, UPLOAD_URL2,
-            Response.Listener { response ->
-                uploadImage(response)
-                Toast.makeText(this, "$response", Toast.LENGTH_LONG)
-                    .show()
-            }, Response.ErrorListener { error ->
+    companion object {
 
-                Toast.makeText(this, error.message.toString(), Toast.LENGTH_LONG)
-                    .show()
-            }) {
-            @Throws(AuthFailureError::class)
-            override fun getParams(): Map<String, String> {
-              var titulo: String = titulo.text.toString().trim()
-                var imagen_nombre :String = "imagenes/$titulo.png"
-                var titulo_s :String = titulo_s.text.toString().trim()
-                var descripcion :String = descripcion.text.toString().trim()
-                var email:String = obtenerEmail().toString()
-                //var email:String = "hurtadoandres942@gmail.com"
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            editar_fr().apply {
 
-                var params: MutableMap<String, String> =
-                    Hashtable<String, String>()
-                params[KEY_EMAIL] = email
-                params[KEY_TITULO] = titulo
-                params[KEY_TITULO_S] = titulo_s
-                params[KEY_DESCRIPCION] = descripcion
-                params[KEY_IMAGE_D] = imagen_nombre
-
-
-                return params
             }
-
-        }
-        val requestQueue = Volley.newRequestQueue(this)
-        requestQueue.add(stringRequest)
-
     }
-
-    fun obtenerEmail(): String? {
-        var preferenfs= this.getSharedPreferences("archivo_usu", Context.MODE_PRIVATE)
-        return  preferenfs?.getString("email","")
-    }
-
-
 }
-
-
-
-
-
-
-
-

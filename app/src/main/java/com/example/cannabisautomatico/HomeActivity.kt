@@ -30,7 +30,6 @@ open class HomeActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener
 
 //        layoutopciones = findViewById(R.id.mas_opciones)
   //      opciones = findViewById(R.id.opciones)
-        val historial=findViewById<LinearLayout>(R.id.Historial)
         navegacion = findViewById(R.id.botonNvegacion)
 
 

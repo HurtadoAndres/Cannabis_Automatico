@@ -101,8 +101,6 @@ class Adapter_invernadero: BaseExpandableListAdapter {
 
         txttitulo = view?.findViewById(R.id.titulo)!!
         txttitulo.text = invernadero?.getTitulo()
-        var sele: LinearLayout
-        sele = view.findViewById(R.id.seleccionado)
 
         if (isExpanded) {
             txttitulo.setTextColor(view.resources.getColor(R.color.cannabis_verde_D))
@@ -110,16 +108,6 @@ class Adapter_invernadero: BaseExpandableListAdapter {
         } else {
             txttitulo.setTextColor(view.resources.getColor(R.color.cannabis_color_negro))
             // txttitulo.textSize = 18f
-        }
-
-         sele = view.findViewById(R.id.seleccionado)
-        var b : Boolean = seleccionado
-        Toast.makeText(context,""+b,Toast.LENGTH_LONG).show()
-
-        if (seleccionado){
-            sele.visibility = (View.VISIBLE)
-        }else{
-            sele.visibility = (View.INVISIBLE)
         }
 
         return view

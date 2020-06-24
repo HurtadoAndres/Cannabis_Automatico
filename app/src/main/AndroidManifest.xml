@@ -18,7 +18,9 @@
         android:theme="@style/AppCannabis"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".Menu_select"></activity>
+        <activity android:name=".pantalla_home_opciones"
+            android:theme="@style/transparente"  />
+
         <activity android:name=".Modo_Manual" />
         <activity android:name=".Info_Sensor_Activity" />
         <activity

@@ -24,6 +24,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.bumptech.glide.request.target.BitmapThumbnailImageViewTarget
 import com.getbase.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_home.*
 import org.json.JSONException
@@ -47,6 +48,7 @@ class List_Invernaderos() : Fragment() {
     var descripcion : String = ""
     var ruta_imagen : String = ""
     var email : String = ""
+    var codigo : String = ""
     var urlImagen : String = ""
     var KEY_EMAIL = "email"
     lateinit var request : RequestQueue
@@ -69,6 +71,28 @@ class List_Invernaderos() : Fragment() {
     //AnimatorSet -> Reproduce un conjunto de ObjectAnimator en un orden especificado. Las animaciones pueden ser todas a la vez o secuenciadas
     private val animatorSet: AnimatorSet? = null
 
+    lateinit var eliminar : LinearLayout
+    lateinit var editar : LinearLayout
+    lateinit var cancelar : Button
+
+
+    var tituloArray : ArrayList<String> = ArrayList()
+    var titulo_sArray : ArrayList<String> = ArrayList()
+    var descripcionArray : ArrayList<String> = ArrayList()
+    var idArray : ArrayList<String> = ArrayList()
+    var rutaImagenArray : ArrayList<String> = ArrayList()
+
+    var posicionCheck: ArrayList<String> = ArrayList()
+
+    var t : String = ""
+    var t_s : String = ""
+    var d : String = ""
+    var i : String = ""
+    var r : String = ""
+
+    var posicion :Int = 0
+    var KEY_CODIGO = "codigo"
+    var URL_ELIMINAR = "https://cannabisautomatico.000webhostapp.com/ServicioWeb/eliminar_campo.php"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -94,6 +118,10 @@ class List_Invernaderos() : Fragment() {
         imagen_sinConexion.visibility = (View.INVISIBLE)
         mensaje_cone.visibility = (View.INVISIBLE)
 
+        eliminar = view.findViewById(R.id.eliminar)
+        cancelar = view.findViewById(R.id.cancelar)
+        editar = view.findViewById(R.id.editar)
+
         expandableTITULO = ArrayList()
         listaDETALLE = HashMap()
 
@@ -110,9 +138,27 @@ class List_Invernaderos() : Fragment() {
         }
 
 
+        editar.setOnClickListener {
+            editar()
+        }
+
+        eliminar.setOnClickListener {
+            for (i in 0 until posicionCheck.size){
+                eliminarInvernadero(posicionCheck[i].toInt())
+            }
+
+        }
+
+        cancelar.setOnClickListener {
+            startActivity(Intent(activity,HomeActivity::class.java))
+        }
+
+
+
 
         return view
     }
+
 
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -140,33 +186,70 @@ class List_Invernaderos() : Fragment() {
         this.expandableTITULO = ArrayList(listaDETALLE.keys)
 
         expandablelistview?.setOnGroupExpandListener { position ->
-            /*
+
             if (expandablePosition != -1 && position != expandablePosition){
                 expandablelistview?.collapseGroup(expandablePosition)
             }
             expandablePosition = position
 
-             */
+
         }
 
 
 
         expandablelistview?.onItemLongClickListener = AdapterView.OnItemLongClickListener { av, v, pos, id ->
             // TransitionManager.beginDelayedTransition(contenedorP)
+            var check = v.findViewById<CheckBox>(R.id.seleccionado)
             seleccionado = !seleccionado
-            if (seleccionado) {
-                animacion("alpha")
-                menu.visibility = (View.VISIBLE)
+            posicion = pos
+
+/*
+
+            if (posicionCheck.size >= 0) {
                 btn_mas_invernadero.visibility = (View.INVISIBLE)
-                 Adapter_invernadero(thiscontext,seleccionado)
+                menu.visibility = (View.VISIBLE)
+                animacion("alpha")
+                check.visibility = (View.VISIBLE)
+
 
             }else{
-                TransitionManager.beginDelayedTransition(contenedorP)
                 menu.visibility = (View.INVISIBLE)
                 btn_mas_invernadero.visibility = (View.VISIBLE)
-                Adapter_invernadero(thiscontext,seleccionado)
+                TransitionManager.beginDelayedTransition(contenedorP)
+                check.visibility = (View.INVISIBLE)
 
             }
+            */
+
+            animacion("alpha")
+            btn_mas_invernadero.visibility = (View.INVISIBLE)
+            menu.visibility = (View.VISIBLE)
+            check.visibility = (View.VISIBLE)
+
+            check.isChecked = true
+            posicionCheck.add(pos.toString())
+
+            check.setOnClickListener {
+
+
+                if (check.isChecked){
+                    posicionCheck.add(pos.toString())
+                }else{
+                    posicionCheck.remove(pos.toString())
+                }
+
+                if ( posicionCheck.isEmpty()){
+                    TransitionManager.beginDelayedTransition(contenedorP)
+                    btn_mas_invernadero.visibility = (View.VISIBLE)
+                    menu.visibility = (View.INVISIBLE)
+                    check.visibility = (View.INVISIBLE)
+
+                  ///  Toast.makeText(thiscontext,"$pos",Toast.LENGTH_LONG).show()
+                }
+            }
+
+
+
 
 
             true
@@ -191,6 +274,27 @@ class List_Invernaderos() : Fragment() {
 
 
     }
+
+    fun editar(){
+        var position  = posicion
+        t = tituloArray[position]
+        t_s = titulo_sArray[position]
+        d = descripcionArray[position]
+        i = idArray[position]
+        r = rutaImagenArray[position]
+        var numero :Int = 0
+
+        var intent = Intent(thiscontext,pantalla_home_opciones::class.java)
+        intent.putExtra("id_e", i)
+        intent.putExtra("ti_e", t)
+        intent.putExtra("ti_s_e", t_s)
+        intent.putExtra("des_e", d)
+        intent.putExtra("rutaIMG_e", r)
+        intent.putExtra("numero", numero)
+        startActivity(intent)
+
+    }
+
 
     private fun animacion(animacion: String) {
         when (animacion) {
@@ -219,6 +323,7 @@ class List_Invernaderos() : Fragment() {
                     for (i in 0 until jsonarray.length()) {
 
                         var jsonA = jsonarray.getJSONObject(i)
+                        codigo = jsonA.getString("codigo")
                         titulo= jsonA.getString("nombre")
                         titulo_s = jsonA.getString("titulo")
                         descripcion = jsonA.getString("descripcion")
@@ -231,6 +336,12 @@ class List_Invernaderos() : Fragment() {
                             titulo, titulo_s, descripcion, urlImagen
                         )
                         metodoAtador()
+
+                        idArray.add(codigo)
+                        tituloArray.add(titulo)
+                        titulo_sArray.add(titulo_s)
+                        descripcionArray.add(descripcion)
+                        rutaImagenArray.add(urlImagen)
                     }
 
                 } catch (e: JSONException) {
@@ -244,7 +355,7 @@ class List_Invernaderos() : Fragment() {
             }) {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
-                var email:String = "hurtadoandres942@gmail.com"
+                var email:String = obtenerEmail().toString()
 
                 var params: MutableMap<String, String> =
                     Hashtable<String, String>()
@@ -259,6 +370,33 @@ class List_Invernaderos() : Fragment() {
 
 
     }
+
+    fun eliminarInvernadero(posicion_r:Int) {
+        val stringRequest: StringRequest = object : StringRequest(
+            Method.POST, URL_ELIMINAR,
+            Response.Listener { response ->
+                startActivity(Intent(activity,HomeActivity::class.java))
+            }, Response.ErrorListener { error ->
+                Toast.makeText(thiscontext, error.message.toString(), Toast.LENGTH_LONG)
+                    .show()
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getParams(): Map<String, String> {
+
+                var params: MutableMap<String, String> =
+                    Hashtable<String, String>()
+                params[KEY_CODIGO] = idArray[posicion_r]
+
+
+                return params
+            }
+
+        }
+        val requestQueue = Volley.newRequestQueue(thiscontext)
+        requestQueue.add(stringRequest)
+
+    }
+
 
 
 

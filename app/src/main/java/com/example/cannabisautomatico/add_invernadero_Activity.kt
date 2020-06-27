@@ -42,8 +42,9 @@ class add_invernadero_Activity : AppCompatActivity() {
     lateinit var descripcion: TextView
 
     lateinit var btn_buscar: LinearLayout
+    lateinit var btn_atras: LinearLayout
     lateinit var imagen_subir: ImageView
-    lateinit var bitmap: Bitmap
+    var bitmap: Bitmap?=null
 
 
     var KEY_IMAGE = "imagen"
@@ -64,6 +65,18 @@ class add_invernadero_Activity : AppCompatActivity() {
     var COD_SELECCIONA: Int = 10
     var COD_FOTO: Int = 11
 
+    lateinit var etapa1 :LinearLayout
+    lateinit var etapa2 :LinearLayout
+    lateinit var etapa3 :LinearLayout
+    lateinit var etapa4 :LinearLayout
+
+    var seleccionado_etapa1 : Boolean = false
+    var seleccionado_etapa2 : Boolean = false
+    var seleccionado_etapa3 : Boolean = false
+    var seleccionado_etapa4 : Boolean = false
+
+
+
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,6 +88,11 @@ class add_invernadero_Activity : AppCompatActivity() {
         descripcion = findViewById(R.id.descripcion)
         btn_buscar = findViewById(R.id.btn_buscar)
         imagen_subir = findViewById(R.id.imagen_subir)
+        btn_atras = findViewById(R.id.btn_atras)
+        etapa1 = findViewById(R.id.select_etapa1)
+        etapa2 = findViewById(R.id.select_etapa2)
+        etapa3 = findViewById(R.id.select_etapa3)
+        etapa4 = findViewById(R.id.select_etapa4)
 
 
         btn_buscar.setOnClickListener {
@@ -82,6 +100,9 @@ class add_invernadero_Activity : AppCompatActivity() {
 
         }
 
+        btn_atras.setOnClickListener {
+            finish()
+        }
 
         crear_invernadero.setOnClickListener {
 
@@ -89,7 +110,42 @@ class add_invernadero_Activity : AppCompatActivity() {
 
         }
 
+        etapa1.setOnClickListener {
+            seleccionado_etapa1 = !seleccionado_etapa1
+            if (seleccionado_etapa1) {
+                etapa1.background = getDrawable(R.drawable.btn_select_etapa_s)
+            }else{
+                etapa1.background = getDrawable(R.drawable.btn_select_etapa)
+            }
+        }
 
+
+        etapa2.setOnClickListener {
+            seleccionado_etapa2 = !seleccionado_etapa2
+            if (seleccionado_etapa2) {
+                etapa2.background = getDrawable(R.drawable.btn_select_etapa2_s)
+            }else{
+                etapa2.background = getDrawable(R.drawable.btn_select_etapa2)
+            }
+        }
+
+        etapa3.setOnClickListener {
+            seleccionado_etapa3 = !seleccionado_etapa3
+            if (seleccionado_etapa3) {
+                etapa3.background = getDrawable(R.drawable.btn_select_etapa3_s)
+            }else{
+                etapa3.background = getDrawable(R.drawable.btn_select_etapa3)
+            }
+        }
+
+        etapa4.setOnClickListener {
+            seleccionado_etapa4 = !seleccionado_etapa4
+            if (seleccionado_etapa4) {
+                etapa4.background = getDrawable(R.drawable.btn_select_etapa4_s)
+            }else{
+                etapa4.background = getDrawable(R.drawable.btn_select_etapa4)
+            }
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -116,9 +172,9 @@ class add_invernadero_Activity : AppCompatActivity() {
 
 
     //COnvertir imagen a String para poder subirla  a la BD
-    fun convertirImagenString(bmp : Bitmap):String{
+    fun convertirImagenString(bmp : Bitmap?):String{
         val baos = ByteArrayOutputStream()
-        bmp.compress(Bitmap.CompressFormat.JPEG,100,baos)
+        bmp?.compress(Bitmap.CompressFormat.JPEG,100,baos)
         var imagenbytes: ByteArray = baos.toByteArray()
         var encodeImagen : String = Base64.encodeToString(imagenbytes,Base64.DEFAULT)
 
@@ -129,7 +185,7 @@ class add_invernadero_Activity : AppCompatActivity() {
     fun tomarFoto() {
         var nombreImagen = ""
         val fileImagen =
-            File(Environment.getExternalStorageDirectory(), rutaIMAGEN)
+            File(this.getExternalFilesDir(Environment.DIRECTORY_PICTURES), rutaIMAGEN)
         var isCreada = fileImagen.exists()
         if (!isCreada) {
             isCreada = fileImagen.mkdirs()
@@ -137,8 +193,7 @@ class add_invernadero_Activity : AppCompatActivity() {
         if (isCreada) {
             nombreImagen = (System.currentTimeMillis() / 1000).toString() + ".jpg"
         }
-        path = Environment.getExternalStorageDirectory()
-            .toString() + File.separator + rutaIMAGEN + File.separator + nombreImagen
+        path = this.getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString() + File.separator + rutaIMAGEN + File.separator + nombreImagen
         val imagen = File(path)
         var intent: Intent? = null
         intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -234,7 +289,7 @@ class add_invernadero_Activity : AppCompatActivity() {
         }
 
         try {
-            bitmap = redimencionarBitmap(bitmap, 600F, 800F)
+            bitmap = redimencionarBitmap(bitmap!!, 600F, 800F)
         }catch (e:java.lang.Exception){e.printStackTrace()}
 
     }

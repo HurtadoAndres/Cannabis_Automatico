@@ -349,9 +349,7 @@ class List_Invernaderos() : Fragment() {
                 }
 
             }, Response.ErrorListener { error ->
-
-                Toast.makeText(activity, error.message.toString(), Toast.LENGTH_LONG)
-                    .show()
+                Toast.makeText(activity, error.message.toString(), Toast.LENGTH_LONG).show()
             }) {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {

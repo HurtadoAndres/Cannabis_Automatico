@@ -16,7 +16,8 @@
     <color name="fondo">#E1E4E8EA</color>
     <color name="fondo_p">#D7B6BBBF</color>
     <color name="fondo_p2">#97F1EEEE</color>
-    <color name="colorpresionado">#97050008</color>
+    <color name="colorpresionado">#5B050008</color>
+    <color name="colorpresionado_s">#54B7B6B8</color>
 
         --boton mas opciones--
     <color name="colorfondo">#AD000000</color>
@@ -30,10 +31,10 @@
 
 
     --color prueba grafica--
-    <color name="color1">#760888</color>
+    <color name="color1">#0EAA34</color>
     <color name="color1_1">#52760888</color>
     <color name="color2">#FF9800</color>
-    <color name="color3">#009688</color>
+    <color name="color3">#F82424</color>
     <color name="color3_1">#63009688</color>
     <color name="color4">#4CAF50</color>
 

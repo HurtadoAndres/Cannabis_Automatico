@@ -3,6 +3,7 @@ package com.example.cannabisautomatico
 import android.os.Bundle
 import android.util.DisplayMetrics
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 
 class pantalla_home_opciones : AppCompatActivity() {
@@ -12,6 +13,11 @@ class pantalla_home_opciones : AppCompatActivity() {
     var id_e : String ? = null
     var ruta_e : String ? = null
     var numero : Int = 0
+
+    var id_h: String ? = null
+    var fecha_h : String ? = null
+    var hora_h : String ? = null
+    var accion_h : String ? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +37,11 @@ class pantalla_home_opciones : AppCompatActivity() {
         ruta_e =  intent.getStringExtra("rutaIMG_e")
         numero =  intent.getIntExtra("numero", 0)
 
+        id_h =  intent.getStringExtra("id")
+        fecha_h = intent.getStringExtra("fecha")
+        hora_h = intent.getStringExtra("hora")
+        accion_h =  intent.getStringExtra("accion")
+
 
 
          opcionesMostrar(numero)
@@ -44,13 +55,14 @@ class pantalla_home_opciones : AppCompatActivity() {
                 paginaEditar()
             }
             1-> {
-
+                paginaCuenta()
             }
             2-> {
-
+                paginaHistorial()
             }
             3 ->{
 
+                paginaNotificaciones(Notificaciones_fr())
 
             }
 
@@ -74,6 +86,31 @@ class pantalla_home_opciones : AppCompatActivity() {
         editar.setArguments(args)
         val trantition1 : FragmentTransaction = supportFragmentManager.beginTransaction()
         trantition1.replace(R.id.contenedor, editar)
+        trantition1.commit()
+    }
+
+    fun paginaCuenta(){
+        val cuenta = cuenta_fr()
+        val trantition1 : FragmentTransaction = supportFragmentManager.beginTransaction()
+        trantition1.replace(R.id.contenedor, cuenta)
+        trantition1.commit()
+    }
+    fun paginaNotificaciones(fragmento : Fragment){
+        val opciones = fragmento
+        val trantition1 : FragmentTransaction = supportFragmentManager.beginTransaction()
+        trantition1.replace(R.id.contenedor, opciones)
+        trantition1.commit()
+    }
+    fun paginaHistorial(){
+        val historial = historial_fr()
+        val args = Bundle()
+        args.putString("id", id_h)
+        args.putString("fecha", fecha_h)
+        args.putString("hora", hora_h)
+        args.putString("accion", accion_h)
+        historial.setArguments(args)
+        val trantition1 : FragmentTransaction = supportFragmentManager.beginTransaction()
+        trantition1.replace(R.id.contenedor,  historial)
         trantition1.commit()
     }
 }

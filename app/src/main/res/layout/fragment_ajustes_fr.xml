@@ -75,70 +75,10 @@
                     android:background="?android:attr/listDivider" />
             </LinearLayout>
 
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_Modo"
-            android:clickable="true"
-            android:background="@drawable/btn_ajustes_n_p"
-            android:orientation="horizontal"
-            android:focusable="true">
-
-            <ImageView
-                android:id="@+id/icon_modo"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="13dp"
-                app:srcCompat="@drawable/automatico" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/Modo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:text="Modo"/>
-
-                <TextView
-                    android:id="@+id/Modo_des"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:text="Guardar automatico, manual"/>
-
-            </LinearLayout>
-
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <View
-                android:id="@+id/divider2"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:layout_marginTop="1dp"
-                android:background="?android:attr/listDivider" />
-        </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/notificacion"
+                android:id="@+id/btn_notificacion"
                 android:clickable="true"
                 android:background="@drawable/btn_ajustes_n_p"
                 android:orientation="horizontal"
@@ -178,6 +118,65 @@
 
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:background="?android:attr/listDivider" />
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_atribuciones"
+            android:clickable="true"
+            android:background="@drawable/btn_ajustes_n_p"
+            android:orientation="horizontal"
+            android:focusable="true">
+
+            <ImageView
+                android:id="@+id/icon_modo"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="13dp"
+                app:srcCompat="@drawable/automatico" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Modo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:text="Atribuciones"/>
+
+                <TextView
+                    android:id="@+id/Modo_des"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:text="Icono, Imagenes de los creadores"/>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"

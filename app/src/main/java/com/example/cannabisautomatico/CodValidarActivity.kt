@@ -6,10 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.airbnb.lottie.LottieAnimationView
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -26,6 +23,8 @@ class CodValidarActivity : AppCompatActivity() {
     var usuarioID:String?=null
     var nombreBD:String?=null
 
+    lateinit var btn_atras : LinearLayout
+
     private lateinit var  handler : Handler
     lateinit var animacion:LottieAnimationView
 
@@ -35,13 +34,15 @@ class CodValidarActivity : AppCompatActivity() {
         codigo = findViewById(R.id.codigo)
         email = findViewById(R.id.email)
         animacion = findViewById(R.id.activado)
+        btn_atras = findViewById(R.id.btn_atras)
 
         var campo_email = findViewById<TextView>(R.id.email)
         campo_email.isEnabled=false
 
-        btn_atrasss.setOnClickListener{
-            val intent:Intent = Intent(this, BienvenidoActivity::class.java)
-            startActivity(intent)
+        btn_atras.setOnClickListener{
+           // val intent:Intent = Intent(this, BienvenidoActivity::class.java)
+            //startActivity(intent)
+            finish()
         }
 
 

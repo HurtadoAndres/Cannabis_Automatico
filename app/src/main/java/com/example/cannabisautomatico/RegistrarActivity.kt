@@ -9,6 +9,7 @@ import android.os.StrictMode
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.lottie.LottieAnimationView
@@ -30,7 +31,7 @@ class RegistrarActivity : AppCompatActivity() {
     private lateinit var txtemail: EditText
     private lateinit var txtpassword: EditText
     lateinit var animacion: LottieAnimationView
-    lateinit var btn_atras : Button
+    lateinit var btn_atras : LinearLayout
 
    var correoOficial = ""
    var contraseñaOficial = ""
@@ -46,16 +47,17 @@ class RegistrarActivity : AppCompatActivity() {
 
 
         //Buscamos las vistas (elementos creados en la vista)
-            txtnombre = findViewById(R.id.nombre)
-            txtapellido = findViewById(R.id.apellido)
-            txtemail = findViewById(R.id.email)
-            txtpassword = findViewById(R.id.password)
-            btn_atras=findViewById(R.id.btn_atras)
+            txtnombre = findViewById(R.id.nombre_e)
+            txtapellido = findViewById(R.id.apellido_e)
+            txtemail = findViewById(R.id.email_e)
+            txtpassword = findViewById(R.id.password_e)
+            btn_atras = findViewById(R.id.btn_atras)
             animacion = findViewById(R.id.cargando)
 
         btn_atras.setOnClickListener{
-            val intent:Intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+          //  val intent:Intent = Intent(this, MainActivity::class.java)
+           // startActivity(intent)
+            finish()
         }
 
 

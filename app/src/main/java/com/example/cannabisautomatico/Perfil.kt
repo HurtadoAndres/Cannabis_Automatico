@@ -9,18 +9,30 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.annotation.RequiresApi
+import com.android.volley.AuthFailureError
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_registrar.*
+import org.json.JSONObject
+import java.util.*
 
 class Perfil : AppCompatActivity() {
 
-    lateinit var imagen : ImageView
+    lateinit var imagen : CircleImageView
     var imagenSiguiente : Int = 0
     var usuarioId: String = ""
     lateinit var nombre_P : TextView
+    lateinit var sesion : Button
+    lateinit var btn_atras :LinearLayout
+    lateinit var invernidad_cantida :TextView
+
+    var URL_USUARIO = "https://cannabisautomatico.000webhostapp.com/ServicioWeb/ConsultaUsuario.php"
+    var URL_INVERNADERO = "https://cannabisautomatico.000webhostapp.com/ServicioWeb/consultaInvernadero.php"
+    var KEY_EMAIL = "email"
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP_MR1)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,18 +41,16 @@ class Perfil : AppCompatActivity() {
 
         imagen = findViewById(R.id.imageView)
         nombre_P = findViewById(R.id.nombre_p)
+        sesion = findViewById(R.id.Sesion)
+        btn_atras = findViewById(R.id.btn_atras)
+        invernidad_cantida = findViewById(R.id.invernadero_cantidad)
 
-        val medidaventana = DisplayMetrics()
-        windowManager.defaultDisplay.getMetrics(medidaventana)
-        val ancho : Int = medidaventana.widthPixels
-        val alto : Int = medidaventana.heightPixels
+        obtnerNombre()
+        obtnerInvernadero()
 
-        window.setLayout((ancho * 0.95).toInt(),(alto * 0.70).toInt())
-
-
-        mostrarPerfil()
-        cargar_UusarioPassword()
-        nombre_P.text=obtenerNombreApellido()
+        btn_atras.setOnClickListener {
+            finish()
+        }
 
         imagenSiguiente = obtenerEstadoImagen()
         if (imagenSiguiente==1){
@@ -66,6 +76,71 @@ class Perfil : AppCompatActivity() {
 
         }
 
+        sesion.setOnClickListener{
+            estadoNoCerrarSesion(false)
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+
+    }
+
+    fun obtnerNombre() {
+        val stringRequest: StringRequest = object : StringRequest(
+            Method.POST, URL_USUARIO,
+            Response.Listener { response ->
+                 val json = JSONObject(response)
+                var success = json.getBoolean("success")
+                if (success) {
+                    var nombre = json.getString("nombre")
+                    var apellido = json.getString("apellido")
+                    nombre_P.text = "$nombre $apellido"
+                }
+            }, Response.ErrorListener { error ->
+                Toast.makeText(this, error.message.toString(), Toast.LENGTH_LONG)
+                    .show()
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getParams(): Map<String, String> {
+
+                var params: MutableMap<String, String> =
+                    Hashtable<String, String>()
+                params[KEY_EMAIL] = obtenerEmail().toString()
+
+
+                return params
+            }
+
+        }
+        val requestQueue = Volley.newRequestQueue(this)
+        requestQueue.add(stringRequest)
+
+    }
+
+    fun obtnerInvernadero() {
+        val stringRequest: StringRequest = object : StringRequest(
+            Method.POST, URL_INVERNADERO,
+            Response.Listener { response ->
+                    invernidad_cantida.text = "$response"
+
+            }, Response.ErrorListener { error ->
+                Toast.makeText(this, error.message.toString(), Toast.LENGTH_LONG)
+                    .show()
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getParams(): Map<String, String> {
+
+                var params: MutableMap<String, String> =
+                    Hashtable<String, String>()
+                params[KEY_EMAIL] = obtenerEmail().toString()
+
+
+                return params
+            }
+
+        }
+        val requestQueue = Volley.newRequestQueue(this)
+        requestQueue.add(stringRequest)
+
     }
 
     fun estadoNoCerrarSesion(b:Boolean){
@@ -82,27 +157,10 @@ class Perfil : AppCompatActivity() {
         return "$nombre $apellido"
     }
 
-    fun mostrarPerfil() {
-        val salir: TextView
-        val sesion: LinearLayout
 
-        salir=findViewById(R.id.salir)
-        sesion = findViewById(R.id.Sesion)
-        salir.setOnClickListener {
-            finish()
-        }
-        sesion.setOnClickListener{
-            estadoNoCerrarSesion(false)
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }
-
-    }
-
-    fun cargar_UusarioPassword(){
-        var preferenfs= getSharedPreferences("archivo_usu", Context.MODE_PRIVATE)
-        var usuario : String? = preferenfs.getString("email", "")
-        usuarioId=usuario.toString()
+    fun obtenerEmail(): String? {
+        var preferenfs= this.getSharedPreferences("archivo_usu", Context.MODE_PRIVATE)
+        return  preferenfs?.getString("email","")
     }
     fun estadoImagen(imagen : Int){
         var preferenfs= getSharedPreferences(usuarioId, Context.MODE_PRIVATE)

@@ -11,6 +11,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.widget.Button
+import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
@@ -39,7 +40,7 @@ class Info_Sensor_Activity: AppCompatActivity() {
     lateinit var op2 : FloatingActionButton
     lateinit var op3 : FloatingActionButton
 
-    lateinit var atras : Button
+    lateinit var atras : LinearLayout
 
     private var grafica1: Runnable? = null
     private var thread = Thread()
@@ -47,14 +48,15 @@ class Info_Sensor_Activity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info__sensor)
-        atras = findViewById(R.id.btn_home)
+        atras = findViewById(R.id.btn_atras)
 
         op1 = findViewById(R.id.fab1)
         op2 = findViewById(R.id.fab2)
 
 
         atras.setOnClickListener {
-            startActivity(Intent(this,HomeActivity::class.java))
+           // startActivity(Intent(this,HomeActivity::class.java))
+            finish()
         }
 
 

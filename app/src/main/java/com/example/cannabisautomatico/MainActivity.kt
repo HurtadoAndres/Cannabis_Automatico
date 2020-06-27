@@ -11,17 +11,13 @@ import android.os.Bundle
 import android.os.Handler
 import android.service.voice.VoiceInteractionSession
 import android.view.View
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.RadioButton
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.lottie.LottieAnimationView
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -32,7 +28,12 @@ class MainActivity: AppCompatActivity() {
 
     private lateinit var txtemail: EditText
     private lateinit var txtpassword: EditText
-    private lateinit var auth: FirebaseAuth
+
+    lateinit var btn_atras :LinearLayout
+    lateinit var btn_iniciar :Button
+    lateinit var btn_recuperar : Button
+    lateinit var btn_registrar : Button
+
 
     var nombredBD: String=""
     var usuarioID: String=""
@@ -51,19 +52,22 @@ class MainActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        btn_atras = findViewById(R.id.btn_atras)
+        btn_iniciar = findViewById(R.id.btn_iniciar)
+        btn_recuperar = findViewById(R.id.btn_recuperar)
+        btn_registrar = findViewById(R.id.btn_registrar)
+
         txtemail = findViewById(R.id.email)
         txtpassword = findViewById(R.id.password)
-        auth = FirebaseAuth.getInstance()
+
         USU = findViewById<EditText>(R.id.email).text.toString()
 
         animacion=findViewById(R.id.cargando)
         RBNoCerarSesion = findViewById(R.id.NoCerrarSesion)
 
-       // var usuario=email.text.toString()
-       // var password = password.text.toString()
-
-
-
+        if (obtenerEstado()){
+            obtenerEmail()
+        }
         estActivadoRBSession = RBNoCerarSesion.isChecked
         RBNoCerarSesion.setOnClickListener{
             if (estActivadoRBSession){
@@ -182,8 +186,16 @@ class MainActivity: AppCompatActivity() {
         editor.apply()
     }
 
+    fun obtenerEstado(): Boolean {
+        var preferenfs= this.getSharedPreferences("estado_usu", Context.MODE_PRIVATE)
+        return  preferenfs.getBoolean("estado", false)
+    }
 
-
+    fun obtenerEmail() {
+        var preferenfs= this.getSharedPreferences("archivo_usu", Context.MODE_PRIVATE)
+         txtemail.setText( preferenfs?.getString("email",""))
+        txtpassword.setText( preferenfs?.getString("password",""))
+    }
 
 
     fun alerta(): AlertDialog? {
@@ -205,36 +217,6 @@ class MainActivity: AppCompatActivity() {
         builder.setTitle("Activar cuenta").show()
         return builder.create()
     }
-
-
-
-    /* METODO PARA INGRESAR CON FIREBASE
-    private fun loginUser(){
-        val user:String = txtemail.text.toString()
-        val password:String = txtpassword.text.toString()
-
-        if(!TextUtils.isEmpty(user) && !TextUtils.isEmpty(password)) {
-                progressBar.visibility= View.VISIBLE
-
-            auth.signInWithEmailAndPassword(user,password)
-                .addOnCompleteListener(this){
-                    task ->
-
-                    if (task.isSuccessful){
-                        IrAlHome()
-                    }else{
-                        Toast.makeText(this,"Error en la Autenticacion", Toast.LENGTH_LONG).show()
-                    }
-        }
-        }
-    }
-  */
-
-    /* utilizado con el metodo firebase
-    private fun IrAlHome(){
-        startActivity(Intent(this,HomeActivity::class.java))
-    }
-    */
 
 
 

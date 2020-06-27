@@ -92,4 +92,30 @@
     <h3><p>Cannabis Automatico App</p></h3>
     </string>
     <string name="no_tienes_internet_n_comprueba_tu_conexion">No tienes INTERNET \n Comprueba tu conexion.</string>
+    <string name="iniciar_app">Guardar usuario al\niniciar la app  \u0020 \u0020 \u0020 \u0020 \u0020 \u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020</string>
+    <string name="contenido_mensaje">Se le ha enviado un codigo a \nsu correo si no aparece en su \nventana de entrada, busca en \nla carpeta de Spam</string>
+    <string name="confirmar">confirmar</string>
+    <string name="enviarr">Enviar</string>
+    <string name="mensaje_btn">No he recibido el codigo :</string>
+    <string name="cannabis_lo_que_hace">Esta aplicacion permite que tus cultivos de cannabis crescan saludable de manera automatica, permitiendote saber todos los datos de acuerdo al estado de la planta, donde de manera automatica la aplicacion cannabis automatico va ir mejorando el estado de acuerdo a lo que necesite la planta de manera facil y agil reduciendo costos y efuerzos</string>
+    <string name="creadores">Creado por : \n\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020Andres Hurtado\n \u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020Miller Olaya</string>
+    <string name="atribuciones">
+        - Icono de humedad atribuye a Good Ware \n
+        - Icono temperatura atribuye a Freepik \n
+        - Icono de ph atribuye a Smashicons \n
+        - Icono Luz atribuye a Freepik \n
+        - Icono de historial atribuye a Freepik \n
+        - Icono de calendario atribuye a Smashicons \n
+        - Icono de cuenta atribuye a Freepik \n
+        - Icono de cuenta atribuye a pixel perfect \n
+        - Icono de video camara atribuye a Icon Monk \n
+        - Icono de hora atribuye a Freepik \n
+        - Icono invernadero atribuye a inipagistudio \n
+        - Icono de fecha atribuye a Freepik \n
+        - Icono de planta de una hoja Pixel perfect \n
+        - Icono de planta de dos hoja Pixel perfect \n
+        - Icono de planta de cuatro hojas a dDara
+
+
+    </string>
 </resources>

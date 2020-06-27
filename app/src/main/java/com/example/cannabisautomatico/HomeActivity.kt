@@ -15,12 +15,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_home.*
 
 
-open class HomeActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
+class HomeActivity : AppCompatActivity() {
 
     var menuInteration:Boolean=true
     var usua:String=""
     lateinit var layoutopciones : LinearLayout
-    lateinit var opciones : LinearLayout
+    lateinit var btn_home: LinearLayout
     lateinit var  navegacion : BottomNavigationView
 
 
@@ -31,24 +31,24 @@ open class HomeActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener
 //        layoutopciones = findViewById(R.id.mas_opciones)
   //      opciones = findViewById(R.id.opciones)
         navegacion = findViewById(R.id.botonNvegacion)
+        btn_home = findViewById(R.id.btn_home)
 
-
-
-        val invernadero = List_Invernaderos()
-        Descripcion?.text= resources.getText(R.string.Invernadero_titulo)
-        invernadero.arguments = intent.extras
-        supportFragmentManager.beginTransaction().add(R.id.contenedor,invernadero).commit()
+        var numero = intent?.getIntExtra("pagina_fr", 0)
+        if (numero == 4){
+            paginaAjustes()
+        }else if (numero == 3){
+            paginaHistorial()
+        }else {
+            val invernadero = List_Invernaderos()
+            Descripcion?.text = resources.getText(R.string.Invernadero_titulo)
+            invernadero.arguments = intent.extras
+            supportFragmentManager.beginTransaction().add(R.id.contenedor, invernadero).commit()
+        }
 
 
 
         btn_home.setOnClickListener{
-
-            if (menuInteration){
-                menu(it)
-            }else{
-                paginaHome()
-                menuInteration=true
-            }
+            mostrarPerfil()
 
         }
 
@@ -75,40 +75,6 @@ open class HomeActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener
 
     }
 
-   fun menu(v: View){
-
-      var m = PopupMenu(this, v)
-      m.setOnMenuItemClickListener(this)
-       m.inflate(R.menu.popup_menu)
-       m.show()
-   }
-
-    override fun onMenuItemClick(item: MenuItem?): Boolean {
-        when(item?.itemId){
-
-            R.id.Perfil->
-            {
-                mostrarPerfil()
-                 menuInteration=false
-
-                 return true
-            }
-
-            R.id.Sesion->
-            {
-                estadoNoCerrarSesion(false)
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
-                return true
-            }
-
-            else->{
-
-                return false
-            }
-        }
-
-    }
 
     fun paginaAjustes(){
         Descripcion.text= resources.getText(R.string.configuracion)

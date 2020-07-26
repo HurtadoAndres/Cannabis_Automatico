@@ -12,15 +12,22 @@ import android.os.Bundle
 import android.os.Handler
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.FragmentTransaction
+import com.android.volley.AuthFailureError
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.getbase.floatingactionbutton.FloatingActionButton
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_info__sensor.*
+import org.json.JSONObject
 import java.lang.ref.WeakReference
 import java.util.*
 import kotlin.concurrent.thread
@@ -42,8 +49,11 @@ class Info_Sensor_Activity: AppCompatActivity() {
 
     lateinit var atras : LinearLayout
 
-    private var grafica1: Runnable? = null
-    private var thread = Thread()
+    var URL_SENSOR : String = ""
+    var KEY_CODIGO : String = ""
+    var tipo_Sensor : String = ""
+
+
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +62,8 @@ class Info_Sensor_Activity: AppCompatActivity() {
 
         op1 = findViewById(R.id.fab1)
         op2 = findViewById(R.id.fab2)
+
+        tipo_Sensor = intent?.getStringExtra("sensor").toString()
 
 
         atras.setOnClickListener {
@@ -97,20 +109,39 @@ class Info_Sensor_Activity: AppCompatActivity() {
     }
 
 
-    fun addEntry(){
-        var ramdon = (40 + random.nextInt((60 + 1) - 40)).toDouble()
+    fun addEntry(ramdon:Double){
+        //var ramdon = (40 + random.nextInt((60 + 1) - 40)).toDouble()
         lastX++
-        serie.appendData(DataPoint((lastX).toDouble(),ramdon), false, 5)
-        d_ideal.text=lastX.toString()
+        serie.appendData(DataPoint((lastX).toDouble(),ramdon), false, 10)
         d_actual.text=ramdon.toString()
     }
 
     fun addEntry2(){
-        serie2.appendData(DataPoint((lastX).toDouble(),46.0), false, 5)
+        serie2.appendData(DataPoint((lastX).toDouble(),46.0), false, 10)
+    }
+
+    fun tableroDatosSensor() {
+        when (tipo_Sensor) {
+            "humedad" -> {
+                d_ideal.text = lastX.toString()
+            }
+            "temperatura" -> {
+                d_ideal.text = "25°C" //Promedio de temperatura ya que se reuiere que este entre 23°c  y 27°c
+            }
+            "ph" -> {
+                d_ideal.text = "6.5" //promedio de PH ya que es entre 6.0 y 7.0
+            }
+            "humedad_t" -> {
+                d_ideal.text = lastX.toString()
+            }
+            else -> {
+                d_ideal.text = lastX.toString()
+            }
+        }
     }
 
 
-
+/*
     override fun onResume() {
         super.onResume()
         var num : Int = 1
@@ -121,8 +152,8 @@ class Info_Sensor_Activity: AppCompatActivity() {
             for (i in 0..99) {
 
                 runOnUiThread {
-                    addEntry()
-                    addEntry2()
+                    //addEntry()
+                    //addEntry2()
                 }
 
                 // sleep to slow down the add of entries
@@ -138,15 +169,67 @@ class Info_Sensor_Activity: AppCompatActivity() {
 
     }
 
-    override fun onStop() {
-        super.onStop()
+ */
+
+    fun SensorDatos():Double {
+        var dato_sensor : Double = 0.0
+        val stringRequest: StringRequest = object : StringRequest(
+            Method.POST, URL_SENSOR,
+            Response.Listener { response ->
+                val json = JSONObject(response)
+                var humedad_tierra = json.getString("humedad_t")
+                var humedad_ambiente = json.getString("humedad_a")
+                var temperatura = json.getString("temperatura")
+                var ph = json.getString("ph")
+
+               when(tipo_Sensor){
+                   "humedad"->
+                           {
+                               dato_sensor = humedad_ambiente.toDouble()
+                           }
+                   "temperatura"->
+                           {
+                               dato_sensor = temperatura.toDouble()
+                           }
+                   "ph"->
+                           {
+                               dato_sensor = ph.toDouble()
+                           }
+                   "humedad_t"->
+                           {
+                               dato_sensor = humedad_tierra.toDouble()
+                           }
+                   else->{
+                                dato_sensor = 0.0
+                   }
+               }
+
+
+            }, Response.ErrorListener { error ->
+                Toast.makeText(this, error.message.toString(), Toast.LENGTH_LONG)
+                    .show()
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getParams(): Map<String, String> {
+
+                var params: MutableMap<String, String> =
+                    Hashtable<String, String>()
+                params[KEY_CODIGO] =
+
+
+                return params
+            }
+
+        }
+        val requestQueue = Volley.newRequestQueue(this)
+        requestQueue.add(stringRequest)
+
+
+        return dato_sensor
 
     }
 
 
-    fun update(numero: Int) {
-
-    }
 
     fun hilo() {
         try {
@@ -170,6 +253,9 @@ class Info_Sensor_Activity: AppCompatActivity() {
         private var activityReference: WeakReference<Info_Sensor_Activity>? = null
         var activity: Info_Sensor_Activity? = null
 
+        var dato_sensor:Double=0.0
+
+
         constructor(context: Info_Sensor_Activity) : super() {
             activityReference = WeakReference<Info_Sensor_Activity>(context)
             activity = activityReference!!.get()
@@ -179,6 +265,7 @@ class Info_Sensor_Activity: AppCompatActivity() {
             for (i in 1..3) {
                 activity?.hilo()
                 numeroX++
+
             }
 
             return true
@@ -186,12 +273,13 @@ class Info_Sensor_Activity: AppCompatActivity() {
 
         override fun onPostExecute(result: Boolean?) {
             activity?.ejecutar()
-            activity?.update(numero)
 
-
-            //  activity?.addEntry(numeroX.toDouble(),numero.toDouble())
-
-
+               var ramdon = (40 + activity!!.random.nextInt((60 + 1) - 40)).toDouble()
+              //dato_sensor = activity!!.SensorDatos()
+              //activity!!.addEntry(dato_sensor)
+              //activity!!.tableroDatosSensor()
+              activity!!.addEntry(ramdon)
+              activity!!.addEntry2()
 
         }
     }

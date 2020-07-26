@@ -36,16 +36,28 @@ class Home_fr : Fragment() {
 
 
         btn_h.setOnClickListener{
-            startActivity(Intent(activity,Info_Sensor_Activity::class.java))
+           var sensor : String = "humedad"
+           var intent = Intent(activity,Info_Sensor_Activity::class.java)
+               intent.putExtra("sensor", sensor)
+               startActivity(intent)
         }
         btn_t.setOnClickListener{
-            startActivity(Intent(activity,Info_Sensor_Activity::class.java))
+            var sensor : String = "temperatura"
+            var intent = Intent(activity,Info_Sensor_Activity::class.java)
+            intent.putExtra("sensor", sensor)
+            startActivity(intent)
         }
         btn_l.setOnClickListener{
-            startActivity(Intent(activity,Info_Sensor_Activity::class.java))
+            var sensor : String = "humedad_t"
+            var intent = Intent(activity,Info_Sensor_Activity::class.java)
+            intent.putExtra("sensor", 1)
+            startActivity(intent)
         }
         btn_p.setOnClickListener{
-            startActivity(Intent(activity,Info_Sensor_Activity::class.java))
+            var sensor : String = "ph"
+            var intent = Intent(activity,Info_Sensor_Activity::class.java)
+            intent.putExtra("sensor", sensor)
+            startActivity(intent)
         }
 
         btn_c.setOnClickListener{

@@ -76,24 +76,13 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/fragmento"
+
+    <FrameLayout
+        android:id="@+id/contenedor"
         android:layout_width="match_parent"
-        android:layout_height="570dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="580dp"
         app:layout_constraintBottom_toTopOf="@+id/botonNvegacion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menu">
-
-        <FrameLayout
-            android:id="@+id/contenedor"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp" />
-
-    </LinearLayout>
-
+        app:layout_constraintTop_toBottomOf="@+id/menu" />
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

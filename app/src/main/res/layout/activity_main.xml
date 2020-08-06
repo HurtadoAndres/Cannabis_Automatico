@@ -24,8 +24,8 @@
             android:gravity="center">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="24dp"
+                android:layout_height="25dp"
                 android:background="@drawable/flecha" />
 
         </LinearLayout>
@@ -57,11 +57,11 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email_p"
-        android:layout_width="320dp"
-        android:layout_height="50sp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:background="@drawable/efectologin"
         android:ems="10"
         android:hint="@string/ejemplo_email"
         android:inputType="textEmailAddress"
@@ -82,11 +82,11 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password_p"
-        android:layout_width="320dp"
-        android:layout_height="50sp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        android:background="@drawable/efectologin"
         android:drawableLeft="@drawable/ico_p"
         android:ems="10"
         app:startIconDrawable="@drawable/ico_p"
@@ -122,33 +122,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_p" />
 
-    <Button
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_iniciar"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="170dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/NoCerrarSesion"
-        android:layout_alignParentStart="true"
         android:layout_gravity="center"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/btn_efectos"
+        android:layout_marginTop="5dp"
         android:text="@string/btn_iniciar"
+        app:cornerRadius="14dp"
+        app:strokeColor="@color/cannabis_verde"
+        app:strokeWidth="2dp"
         android:textColor="@color/cannabis_verde"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NoCerrarSesion" />
 
-    <Button
-        android:id="@+id/btn_recuperar"
-        style="?android:attr/buttonBarButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
 
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_recuperar"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="60dp"
         android:text="@string/recuperar_password"
         android:textColor="@color/cannabis_verde"
+        android:textStyle="bold"
+        app:strokeColor="@color/cannabis_color_gris"
         app:layout_constraintStart_toEndOf="@+id/btn_iniciar"
         app:layout_constraintTop_toBottomOf="@+id/password_p" />
 
@@ -165,18 +170,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_registrar"
-        style="?android:attr/buttonBarButtonStyle"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_below="@+id/btn_recuperar"
-        android:layout_alignParentStart="true"
-        android:layout_gravity="center"
+        android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginBottom="20dp"
         android:text="@string/btn_registrar"
         android:textColor="@color/cannabis_verde"
+        android:textStyle="bold"
+        app:strokeColor="@color/cannabis_color_gris"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textoregistrar" />
 

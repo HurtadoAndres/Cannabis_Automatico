@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".cuenta_fr"
     android:background="@drawable/fondo_poppup_opciones">
 
@@ -42,17 +43,18 @@
         android:layout_marginTop="120dp"
         android:background="?android:attr/listDivider" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_canbiar_clave"
-        style="?android:attr/buttonBarButtonStyle"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="130dp"
         android:text="Cambiar clave de usuario"
-        android:textSize="18sp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="?android:attr/textColorPrimary" />
+        android:textColor="@color/cannabis_verde"
+        android:textStyle="bold"
+        app:strokeColor="@color/cannabis_color_gris"/>
+
     <View
         android:id="@+id/divider9"
         android:layout_width="match_parent"

@@ -88,13 +88,14 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/titulo_p"
-            android:layout_width="300dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="310dp"
+            android:layout_gravity="center_horizontal"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:hint="Nombre del invernadero"
-            android:background="@drawable/efectologin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_buscar">
@@ -102,8 +103,9 @@
             <EditText
                 android:id="@+id/titulo"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:textSize="18sp"
+                android:inputType="textPersonName"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -112,13 +114,14 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/titulo_ss"
-            android:layout_width="300dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="310dp"
+            android:layout_gravity="center_horizontal"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:hint="Titulo planta"
-            android:background="@drawable/efectologin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/titulo_p">
@@ -128,6 +131,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
+                android:inputType="textPersonName"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -136,13 +140,14 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/descripcion_s"
-            android:layout_width="300dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="310dp"
+            android:layout_gravity="center_horizontal"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:hint="Descripcion"
-            android:background="@drawable/efectologin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/titulo_ss" >
@@ -151,28 +156,28 @@
                 android:id="@+id/descripcion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:inputType="textPersonName"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/crear_invernadero"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="170dp"
-            android:layout_height="40dp"
-            android:layout_alignParentStart="true"
-            android:layout_gravity="center"
-            android:layout_marginTop="80dp"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="Crear Invernadero"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="30dp"
-            android:background="@drawable/btn_efectos"
-            android:text="Crear invernadero"
+            app:cornerRadius="14dp"
+            app:strokeColor="@color/cannabis_verde"
+            app:strokeWidth="2dp"
             android:textColor="@color/cannabis_verde"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
-
 
         <LinearLayout
             android:id="@+id/linearLayout5"
@@ -184,27 +189,41 @@
             app:layout_constraintTop_toBottomOf="@+id/descripcion_s">
 
             <LinearLayout
-                android:id="@+id/select_etapa1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/btn_select_etapa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:src="@drawable/hoja"
-                android:layout_margin="10dp"
-                android:gravity="center"
-                app:layout_constraintBottom_toBottomOf="@+id/imagen"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imagen" >
+                android:gravity="center">
+                <LinearLayout
+                    android:id="@+id/select_etapa1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/btn_select_etapa"
+                    android:orientation="vertical"
+                    android:src="@drawable/hoja"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="@+id/imagen"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imagen" >
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/hoja"/>
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/hoja"/>
 
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Etapa 1"/>
+            </LinearLayout>
 
-        </LinearLayout>
-
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
             <LinearLayout
                 android:id="@+id/select_etapa2"
                 android:layout_width="50dp"
@@ -226,7 +245,17 @@
 
 
             </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Etapa 2"/>
+        </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
             <LinearLayout
                 android:id="@+id/select_etapa3"
                 android:layout_width="50dp"
@@ -246,9 +275,18 @@
                     android:layout_height="30dp"
                     android:src="@drawable/tres_hojas"/>
 
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Etapa 3"/>
+    </LinearLayout>
 
-            </LinearLayout>
-
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
             <LinearLayout
                 android:id="@+id/select_etapa4"
                 android:layout_width="50dp"
@@ -269,6 +307,11 @@
 
 
             </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Etapa 4"/>
+        </LinearLayout>
 
         </LinearLayout>
 

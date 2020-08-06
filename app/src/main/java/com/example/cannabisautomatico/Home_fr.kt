@@ -14,9 +14,17 @@ import kotlinx.android.synthetic.main.fragment_home_fr.*
 
 class Home_fr : Fragment() {
 
+    var codigo_inver:String = ""
+
  var expande :Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (arguments != null){
+            codigo_inver = arguments?.getString("id").toString()
+
+
+        }
 
     }
 
@@ -31,43 +39,41 @@ class Home_fr : Fragment() {
         val btn_t = view.findViewById<LinearLayout>(R.id.btn_t)
         val btn_l = view.findViewById<LinearLayout>(R.id.btn_l)
         val btn_p = view.findViewById<LinearLayout>(R.id.btn_p)
-        val btn_m = view.findViewById<LinearLayout>(R.id.btn_m)
         val btn_c = view.findViewById<LinearLayout>(R.id.btn_c)
 
 
         btn_h.setOnClickListener{
-           var sensor : String = "humedad"
+           var sensor : String = "humedad_ambiente"
            var intent = Intent(activity,Info_Sensor_Activity::class.java)
                intent.putExtra("sensor", sensor)
+               intent.putExtra("codigo", codigo_inver)
                startActivity(intent)
         }
         btn_t.setOnClickListener{
             var sensor : String = "temperatura"
             var intent = Intent(activity,Info_Sensor_Activity::class.java)
             intent.putExtra("sensor", sensor)
+            intent.putExtra("codigo", codigo_inver)
             startActivity(intent)
         }
         btn_l.setOnClickListener{
-            var sensor : String = "humedad_t"
+            var sensor : String = "humedad_tierra"
             var intent = Intent(activity,Info_Sensor_Activity::class.java)
-            intent.putExtra("sensor", 1)
+            intent.putExtra("sensor", sensor)
+            intent.putExtra("codigo", codigo_inver)
             startActivity(intent)
         }
         btn_p.setOnClickListener{
             var sensor : String = "ph"
             var intent = Intent(activity,Info_Sensor_Activity::class.java)
             intent.putExtra("sensor", sensor)
+            intent.putExtra("codigo", codigo_inver)
             startActivity(intent)
         }
 
         btn_c.setOnClickListener{
             //startActivity(Intent(activity,Info_Sensor_Activity::class.java))
         }
-
-        btn_m.setOnClickListener{
-            //startActivity(Intent(activity,Info_Sensor_Activity::class.java))
-        }
-
         return view
     }
 

@@ -1,24 +1,18 @@
 package com.example.cannabisautomatico
 
 import android.app.AlertDialog
-import android.app.PendingIntent.getActivity
-import android.app.VoiceInteractor
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
-import android.service.voice.VoiceInteractionSession
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.lottie.LottieAnimationView
-import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -115,8 +109,8 @@ class MainActivity: AppCompatActivity() {
                             if (estadodBD=="true") {
                                 obtenerEstadoNoCerrarSesion() //preferens
                                 animacion.visibility = View.VISIBLE
-                                guardando_UsuarioPassword()
                                 irhome()
+                                guardando_UsuarioPassword()
 
 
                             }else{

@@ -133,32 +133,38 @@
             android:text="@string/mensaje_btn"
             android:textSize="18sp" />
 
-        <Button
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_enviarr"
-            style="?android:attr/buttonBarButtonStyle"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
             android:text="@string/enviarr"
             android:textColor="@color/cannabis_verde"
+            android:textStyle="bold"
+            app:strokeColor="@color/cannabis_color_gris"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textoregistrar" />
 
-
     </LinearLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_confirmar"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="170dp"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_gravity="center"
         android:layout_marginBottom="40dp"
-        android:background="@drawable/btn_efectos"
         android:text="@string/confirmar"
+        app:cornerRadius="14dp"
+        app:strokeColor="@color/cannabis_verde"
+        app:strokeWidth="2dp"
         android:textColor="@color/cannabis_verde"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/cargando"

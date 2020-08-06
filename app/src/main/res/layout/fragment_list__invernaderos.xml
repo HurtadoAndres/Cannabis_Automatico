@@ -44,35 +44,58 @@
             android:layout_height="55dp"
             android:background="@drawable/opciones_diseno"
             android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:orientation="horizontal"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/mas_invernadero"
             app:layout_constraintStart_toStartOf="parent">
 
-            <Button
-                android:id="@+id/cancelar"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="1dp"
-                android:background="@drawable/salir" />
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/btn_btn_final"
+                android:gravity="center"
+                android:orientation="vertical">
 
+                <Button
+                    android:id="@+id/cancelar"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/salir" />
+
+            </LinearLayout>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="10dp"
                 android:text="Invernadero"
                 android:textColor="@color/cannabis_color_gris"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
+            <LinearLayout
+                android:id="@+id/activar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/btn_btn_final"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/icon_inver"
+                    android:orientation="vertical" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="70dp"
+                android:layout_marginLeft="10dp"
                 android:background="@drawable/btn_btn_final"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -88,7 +111,7 @@
             <LinearLayout
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/btn_btn_final"
                 android:gravity="center"

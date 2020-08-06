@@ -29,6 +29,7 @@ class Perfil : AppCompatActivity() {
     lateinit var sesion : Button
     lateinit var btn_atras :LinearLayout
     lateinit var invernidad_cantida :TextView
+    lateinit var usuario_perfil :TextView
 
     var URL_USUARIO = "https://cannabisautomatico.000webhostapp.com/ServicioWeb/ConsultaUsuario.php"
     var URL_INVERNADERO = "https://cannabisautomatico.000webhostapp.com/ServicioWeb/consultaInvernadero.php"
@@ -43,10 +44,12 @@ class Perfil : AppCompatActivity() {
         nombre_P = findViewById(R.id.nombre_p)
         sesion = findViewById(R.id.Sesion)
         btn_atras = findViewById(R.id.btn_atras)
+        usuario_perfil = findViewById(R.id.cuenta_perfil)
         invernidad_cantida = findViewById(R.id.invernadero_cantidad)
 
         obtnerNombre()
         obtnerInvernadero()
+        usuario_perfil.text=obtenerEmail()
 
         btn_atras.setOnClickListener {
             finish()

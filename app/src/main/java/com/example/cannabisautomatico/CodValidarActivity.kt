@@ -80,8 +80,9 @@ class CodValidarActivity : AppCompatActivity() {
             try {
                 val json = JSONObject(response)
                 var success = json.getBoolean("success")
+                Toast.makeText(this, "$success" ,Toast.LENGTH_LONG)
                 if (success){
-                    var validado = json.get("estado")
+                    var validado = json.getString("estado")
                     if (validado=="true") {
                         Toast.makeText(this, "Registro con exito", Toast.LENGTH_LONG)
 

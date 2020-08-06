@@ -55,49 +55,74 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="320dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/efectologin"
-        android:drawableStart="@drawable/ico_m"
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/email_p"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="@string/ejemplo_email"
         android:inputType="textEmailAddress"
+        app:startIconDrawable="@drawable/ico_m"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titulo_email" />
+        app:layout_constraintTop_toBottomOf="@+id/titulo_email">
 
-    <EditText
-        android:id="@+id/codigo"
-        android:layout_width="320dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/efectologin"
-        android:drawableLeft="@drawable/ico_p"
+           <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/codigo_p"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="@string/codigoEjem"
         android:inputType="textEmailAddress"
+        app:startIconDrawable="@drawable/ico_p"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        app:layout_constraintTop_toBottomOf="@+id/email_p" >
+
+    <EditText
+            android:id="@+id/codigo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_validar"
-        android:layout_width="230dp"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="52dp"
-        android:background="@drawable/btn_efectos"
+        android:layout_marginBottom="30dp"
         android:text="@string/boton_codigo"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        app:cornerRadius="14dp"
+        app:strokeColor="@color/cannabis_verde"
+        app:strokeWidth="2dp"
         android:textColor="@color/cannabis_verde"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/codigo"
+        app:layout_constraintTop_toBottomOf="@+id/codigo_p"
         app:layout_constraintVertical_bias="0.0" />
 
     <com.airbnb.lottie.LottieAnimationView

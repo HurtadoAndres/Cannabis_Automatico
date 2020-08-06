@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.StrictMode
 import android.view.View
-import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -74,7 +73,8 @@ class RegistrarActivity : AppCompatActivity() {
                         try {
                             val json = JSONObject(response)
                             var success = json.getBoolean("success")
-                            if (success) {
+
+                            if (success==true) {
                                 animacion.visibility = View.VISIBLE
                                 val handler = Handler()
                                 handler.postDelayed(Runnable { // acciones que se ejecutan tras los milisegundos

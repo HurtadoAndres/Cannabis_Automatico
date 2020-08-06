@@ -57,10 +57,11 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/nombre_p"
-        android:layout_width="320dp"
-        android:layout_height="50dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="310dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@drawable/efectologin"
         android:ems="10"
         android:hint="@string/ejemplo_nombre"
         app:startIconDrawable="@drawable/ico_s"
@@ -79,10 +80,11 @@
 
       <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/apellido_p"
-        android:layout_width="320dp"
-        android:layout_height="50dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="310dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:background="@drawable/efectologin"
         android:ems="10"
         android:hint="@string/ejemplo_apellido"
         android:inputType="textEmailAddress"
@@ -101,10 +103,11 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email_p"
-        android:layout_width="320dp"
-        android:layout_height="50dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="310dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:background="@drawable/efectologin"
         android:ems="10"
         android:hint="@string/ejemplo_email"
         app:startIconDrawable="@drawable/ico_m"
@@ -123,10 +126,11 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password_p"
-        android:layout_width="320dp"
-        android:layout_height="50dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="310dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:background="@drawable/efectologin"
         android:ems="10"
         app:startIconDrawable="@drawable/ico_p"
         android:hint="@string/ejemplo_password"
@@ -146,15 +150,19 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_registrar"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="230dp"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginTop="30dp"
-        android:background="@drawable/btn_efectos"
         android:text="@string/btn_registrar"
+        app:cornerRadius="14dp"
+        app:strokeColor="@color/cannabis_verde"
+        app:strokeWidth="2dp"
         android:textColor="@color/cannabis_verde"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

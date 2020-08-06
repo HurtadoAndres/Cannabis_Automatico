@@ -57,11 +57,11 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password_p2"
-        android:layout_width="320dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="310dp"
+        android:layout_gravity="center_horizontal"
         android:layout_height="50sp"
-        android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        android:background="@drawable/efectologin"
         android:ems="10"
         app:startIconDrawable="@drawable/ico_p"
         android:hint="@string/ejemplo_password"
@@ -85,12 +85,11 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password_p"
-        android:layout_width="320dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="310dp"
+        android:layout_gravity="center_horizontal"
         android:layout_height="50sp"
-        android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        android:background="@drawable/efectologin"
-        android:drawableLeft="@drawable/ico_p"
         android:ems="10"
         app:startIconDrawable="@drawable/ico_p"
         android:hint="@string/ejemplo_password"
@@ -111,15 +110,19 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_confirmar"
-        android:layout_width="170dp"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_alignParentStart="true"
+        android:layout_marginBottom="30dp"
+        android:text="Confirmar cambios"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
-        android:background="@drawable/btn_efectos"
-        android:text="Confirmar cambiosr"
+        app:cornerRadius="14dp"
+        app:strokeColor="@color/cannabis_verde"
+        app:strokeWidth="2dp"
         android:textColor="@color/cannabis_verde"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

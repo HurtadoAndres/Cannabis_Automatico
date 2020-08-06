@@ -10,6 +10,31 @@
     app:menu="@menu/bottom_navigation_menu"
     tools:context=".HomeActivity">
 
+    <LinearLayout
+        android:id="@+id/btn_atras"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/fondo_btn_atras"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="25dp"
+                android:background="@drawable/flecha" />
+
+        </LinearLayout>
+    </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/menu"
@@ -27,6 +52,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/tablero_info"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="20"

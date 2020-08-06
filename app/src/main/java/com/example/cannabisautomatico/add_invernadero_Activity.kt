@@ -19,6 +19,7 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
+import android.view.Gravity
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +31,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import java.io.ByteArrayOutputStream
 import java.io.File
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -54,6 +56,9 @@ class add_invernadero_Activity : AppCompatActivity() {
     var KEY_DESCRIPCION = "descripcion"
     var KEY_EMAIL= "email"
     var KEY_CODIGO = "codigo"
+    var KEY_ETAPA = "etapa"
+    var KEY_FECHA = "fecha"
+    var KEY_HORA = "hora"
 
     var UPLOAD_URL = "https://cannabisautomatico.000webhostapp.com/ServicioWeb/subir_imagen.php"
     var UPLOAD_URL2 = "https://cannabisautomatico.000webhostapp.com/ServicioWeb/invernaderoCrear.php"
@@ -75,6 +80,9 @@ class add_invernadero_Activity : AppCompatActivity() {
     var seleccionado_etapa3 : Boolean = false
     var seleccionado_etapa4 : Boolean = false
 
+    var etapaSeleccionada = ""
+    var seleccionEtapa : Boolean = false
+
 
 
 
@@ -94,6 +102,7 @@ class add_invernadero_Activity : AppCompatActivity() {
         etapa3 = findViewById(R.id.select_etapa3)
         etapa4 = findViewById(R.id.select_etapa4)
 
+        horaActual()
 
         btn_buscar.setOnClickListener {
         seleccionarImagen()
@@ -106,7 +115,14 @@ class add_invernadero_Activity : AppCompatActivity() {
 
         crear_invernadero.setOnClickListener {
 
-            insertDatosInfromacion()
+            if (seleccionEtapa) insertDatosInfromacion()
+            else {
+                val toast =
+                    Toast.makeText(this, "Debes de seleccionar una etapa", Toast.LENGTH_LONG)
+                toast.setGravity(Gravity.CENTER, 0, 0)
+                toast.show()
+            }
+
 
         }
 
@@ -114,7 +130,10 @@ class add_invernadero_Activity : AppCompatActivity() {
             seleccionado_etapa1 = !seleccionado_etapa1
             if (seleccionado_etapa1) {
                 etapa1.background = getDrawable(R.drawable.btn_select_etapa_s)
+                seleccionEtapa=true
+                etapaSeleccionada="etapa1"
             }else{
+                seleccionEtapa=false
                 etapa1.background = getDrawable(R.drawable.btn_select_etapa)
             }
         }
@@ -124,7 +143,10 @@ class add_invernadero_Activity : AppCompatActivity() {
             seleccionado_etapa2 = !seleccionado_etapa2
             if (seleccionado_etapa2) {
                 etapa2.background = getDrawable(R.drawable.btn_select_etapa2_s)
+                seleccionEtapa=true
+                etapaSeleccionada="etapa2"
             }else{
+                seleccionEtapa=false
                 etapa2.background = getDrawable(R.drawable.btn_select_etapa2)
             }
         }
@@ -133,7 +155,10 @@ class add_invernadero_Activity : AppCompatActivity() {
             seleccionado_etapa3 = !seleccionado_etapa3
             if (seleccionado_etapa3) {
                 etapa3.background = getDrawable(R.drawable.btn_select_etapa3_s)
+                seleccionEtapa=true
+                etapaSeleccionada="etapa3"
             }else{
+                seleccionEtapa=false
                 etapa3.background = getDrawable(R.drawable.btn_select_etapa3)
             }
         }
@@ -142,7 +167,10 @@ class add_invernadero_Activity : AppCompatActivity() {
             seleccionado_etapa4 = !seleccionado_etapa4
             if (seleccionado_etapa4) {
                 etapa4.background = getDrawable(R.drawable.btn_select_etapa4_s)
+                seleccionEtapa=true
+                etapaSeleccionada="etapa4"
             }else{
+                seleccionEtapa=false
                 etapa4.background = getDrawable(R.drawable.btn_select_etapa4)
             }
         }
@@ -347,6 +375,19 @@ class add_invernadero_Activity : AppCompatActivity() {
 
     }
 
+    fun horaActual():String{
+        val hora: String =
+            SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().time)
+        return hora
+    }
+
+    fun fechaActual():String{
+        val fecha: String =
+            SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().time)
+
+        return fecha
+    }
+
     fun insertDatosInfromacion(){
         val stringRequest: StringRequest = object : StringRequest(
             Method.POST, UPLOAD_URL2,
@@ -375,6 +416,11 @@ class add_invernadero_Activity : AppCompatActivity() {
                 params[KEY_TITULO_S] = titulo_s
                 params[KEY_DESCRIPCION] = descripcion
                 params[KEY_IMAGE_D] = imagen_nombre
+                params[KEY_FECHA] = fechaActual()
+                params[KEY_HORA] = horaActual()
+                params[KEY_ETAPA] = etapaSeleccionada
+
+
 
 
                 return params

@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
 
     <color name="cannabis_verde">#388e3c</color>
     <color name="cannabis_verde_D">#0D6A8F</color>
@@ -12,6 +9,7 @@
     <color name="cannabis_color_gris_osc">#1c313a</color>
     <color name="cannabis_color_oscuro">#718792</color>
     <color name="cannabis_color_negro">#000000</color>
+    <color name="color_presionado">#A9F5F7F8</color>
         --Botones sesores--
     <color name="fondo">#E1E4E8EA</color>
     <color name="fondo_p">#D7B6BBBF</color>
@@ -32,10 +30,10 @@
 
     --color prueba grafica--
     <color name="color1">#0EAA34</color>
-    <color name="color1_1">#52760888</color>
+    <color name="color3_1">#66009688</color>
     <color name="color2">#FF9800</color>
-    <color name="color3">#F82424</color>
-    <color name="color3_1">#63009688</color>
+    <color name="color3">#0581B3</color>
+    <color name="color2_1">#63BD7100</color>
     <color name="color4">#4CAF50</color>
 
 

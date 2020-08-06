@@ -15,6 +15,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -54,11 +55,16 @@ dependencies {
     implementation 'com.jjoe64:graphview:4.2.2'
     implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
 
+    implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
+
 
     //Implementacion para poner las imagenes redondas
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     //------------------------------------------------------------------
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+
+
 
 }

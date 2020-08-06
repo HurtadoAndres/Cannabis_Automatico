@@ -33,16 +33,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bienvenido" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_iniciar"
-        android:layout_width="180dp"
-        android:layout_height="50dp"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_inicia"
         android:layout_marginStart="40dp"
         android:layout_marginTop="55dp"
-        android:background="@drawable/btn_befectos"
-        android:text="@string/btn_inicia"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        app:cornerRadius="14dp"
         android:textColor="@color/cannabis_color_gris"
         android:textStyle="bold"
+        app:strokeColor="@color/cannabis_color_gris"
+        app:strokeWidth="2dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bienvenido2" />
 
@@ -57,15 +62,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_registrar"
-        style="?android:attr/buttonBarButtonStyle"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginBottom="20dp"
         android:text="@string/btn_registrar"
         android:textColor="@color/cannabis_verde"
+        android:textStyle="bold"
+        app:strokeColor="@color/cannabis_color_gris"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textoregistrar" />
 

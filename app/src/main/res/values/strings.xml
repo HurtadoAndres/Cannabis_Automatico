@@ -26,10 +26,10 @@
     <string name="titulo_app">Cannabis</string>
 
     <string name="sensor_Temp"> TEMPERATURA </string>
-    <string name="sensor_Humed"> HUMEDAD</string>
+    <string name="sensor_Humed"> HUMEDAD AMBIENTE</string>
     <string name="sensor_Luz"> LUZ </string>
     <string name="sensor_Ph"> PH </string>
-    <string name="Info_sensores">Informacion de los sensores</string>
+    <string name="Info_sensores">Sensores</string>
     <string name="configuracion"> Configuracion </string>
     <string name="Habilitar_Desh"> Habilitar / Deshabilitar </string>
 
@@ -115,7 +115,11 @@
         - Icono de planta de una hoja Pixel perfect \n
         - Icono de planta de dos hoja Pixel perfect \n
         - Icono de planta de cuatro hojas a dDara
+        - Icono de humedad suelo a Smashicons
 
 
     </string>
+    <string name="sensor_2">sensor 2</string>
+    <string name="sensor_3">sensor 3</string>
+    <string name="sensor_1">sensor 1</string>
 </resources>

@@ -103,7 +103,7 @@
         android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="380dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -111,6 +111,49 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/invernadero"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Usuario : "
+                android:textSize="18sp"/>
+            <TextView
+                android:id="@+id/cuenta_perfil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textStyle="bold"
+                android:textColor="@color/cannabis_verde_D"
+                android:textSize="15sp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/invernadero"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Invernaderos : "
+                android:textSize="18sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
             <ImageView
                 android:layout_width="30dp"
@@ -131,61 +174,28 @@
                 android:textSize="18sp"/>
 
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/invernadero"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Invernaderos : "
-                android:textSize="18sp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/invernadero"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Invernaderos : "
-                android:textSize="18sp"/>
-
-        </LinearLayout>
 
 
     </LinearLayout>
 
 
-
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/Sesion"
-        style="?android:attr/buttonBarButtonStyle"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="170dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_gravity="center"
         android:layout_marginBottom="25dp"
-        android:background="@drawable/btn_efectos"
         android:text="Cerrar Sesion"
+        app:cornerRadius="14dp"
+        app:strokeColor="@color/cannabis_verde"
+        app:strokeWidth="2dp"
         android:textColor="@color/cannabis_verde"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
 
 

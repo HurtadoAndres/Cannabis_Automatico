@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".editar_fr"
     android:background="@drawable/fondo_poppup_opciones">
 
@@ -40,63 +41,81 @@
         android:layout_marginLeft="80dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="270dp"
+        android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content"
         android:layout_marginTop="170dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:gravity="center"
+        app:boxStrokeColor="@color/cannabis_verde"
+        app:hintTextColor="@color/cannabis_verde"
         android:hint="Titulo">
 
         <EditText
             android:id="@+id/titulo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="270dp"
+        android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content"
         android:layout_marginTop="240dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:gravity="center"
-        android:hint="Titulo">
+        app:boxStrokeColor="@color/cannabis_verde"
+        app:hintTextColor="@color/cannabis_verde"
+        android:hint="Subtitulo">
 
         <EditText
             android:id="@+id/titulo_s"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            />
 
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="270dp"
+        android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content"
         android:layout_marginTop="310dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:gravity="center"
-        android:hint="Titulo">
+        app:boxStrokeColor="@color/cannabis_verde"
+        app:hintTextColor="@color/cannabis_verde"
+        android:hint="Descripcion">
 
         <EditText
             android:id="@+id/descripcion"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_confirmar"
-        android:layout_width="170dp"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="380dp"
-        android:background="@drawable/btn_efectos"
         android:text="Confirmar edicion"
-        android:textColor="@color/cannabis_verde" />
-
-
+        app:cornerRadius="14dp"
+        app:strokeColor="@color/cannabis_verde"
+        app:strokeWidth="2dp"
+        android:textColor="@color/cannabis_verde"/>
 </FrameLayout>

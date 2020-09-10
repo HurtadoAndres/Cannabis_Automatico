@@ -17,6 +17,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.text.TextUtils
 import android.util.Base64
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -35,6 +36,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
+import com.google.android.material.textfield.TextInputLayout
 import de.hdodenhof.circleimageview.CircleImageView
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -51,6 +53,9 @@ class editar_fr : Fragment() {
     lateinit var txttitulo : EditText
     lateinit var txttitulo_s : EditText
     lateinit var txtdescripcion : EditText
+    lateinit var txttitulofr : TextInputLayout
+    lateinit var txttitulo_sfr :  TextInputLayout
+    lateinit var txtdescripcionfr :  TextInputLayout
     lateinit var imagen_mostrar : CircleImageView
     lateinit var thiscontext :Context
 
@@ -103,6 +108,9 @@ class editar_fr : Fragment() {
         txttitulo = view.findViewById(R.id.titulo)
         txttitulo_s = view.findViewById(R.id.titulo_s)
         txtdescripcion = view.findViewById(R.id.descripcion)
+        txttitulofr = view.findViewById(R.id.titulofr)
+        txttitulo_sfr = view.findViewById(R.id.titulofr)
+        txtdescripcionfr = view.findViewById(R.id.descripcionfr)
         imagen_mostrar = view.findViewById(R.id.profile_image)
         btn_confirmar = view.findViewById(R.id.btn_confirmar)
         btn_subir_imagen = view.findViewById(R.id.btn_buscar)
@@ -119,7 +127,7 @@ class editar_fr : Fragment() {
         Glide.with(thiscontext).load(ruta_e).into(imagen_mostrar)
 
         btn_confirmar.setOnClickListener {
-            editar()
+            validate()
         }
 
         btn_subir_imagen.setOnClickListener {
@@ -128,6 +136,49 @@ class editar_fr : Fragment() {
         }
 
         return view
+    }
+
+    fun validate() {
+        var tituloValidado : Boolean = false
+        var titulo_sValidado : Boolean = false
+        var descripcionValidado : Boolean = false
+
+        var mailError: String? = null
+        if (TextUtils.isEmpty(txttitulo.text)) {
+            mailError = getString(R.string.mandatory)
+        }else{
+            tituloValidado = true
+        }
+        toggleTextInputLayoutError(txttitulofr, mailError)
+
+        if (TextUtils.isEmpty(txttitulo_s.text)) {
+            mailError = getString(R.string.mandatory)
+        }else{
+            titulo_sValidado = true
+        }
+        toggleTextInputLayoutError(txttitulo_sfr, mailError)
+
+        if (TextUtils.isEmpty(txtdescripcion.text)) {
+            mailError = getString(R.string.mandatory)
+        }else{
+            descripcionValidado = true
+        }
+        toggleTextInputLayoutError(txtdescripcionfr, mailError)
+
+
+        if (tituloValidado && titulo_sValidado && descripcionValidado ){
+            editar()
+        }
+    }
+
+
+
+    private fun toggleTextInputLayoutError(
+        textInputLayout: TextInputLayout,
+        msg: String?
+    ) {
+        textInputLayout.error = msg
+        textInputLayout.isErrorEnabled = msg != null
     }
     fun editar() {
         val stringRequest: StringRequest = object : StringRequest(

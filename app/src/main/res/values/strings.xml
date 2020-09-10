@@ -122,4 +122,10 @@
     <string name="sensor_2">sensor 2</string>
     <string name="sensor_3">sensor 3</string>
     <string name="sensor_1">sensor 1</string>
+
+    <string name="mandatory"> Error campo vacio</string>
+    <string name="mandatoryemail"> Error email no valido</string>
+    <string name="mandatoryPass"> Error, la contraseña no coinciden</string>
+    <string name="mandatoryCodigo"> Error, codigo invalido</string>
+    <string name="mandatoryUsu"> Error, ya existe el usuario</string>
 </resources>

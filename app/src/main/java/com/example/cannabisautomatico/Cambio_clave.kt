@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Patterns
 import android.view.View
 import android.widget.*
 import com.airbnb.lottie.LottieAnimationView
@@ -11,7 +13,14 @@ import com.android.volley.AuthFailureError
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.google.android.material.textfield.TextInputLayout
+import kotlinx.android.synthetic.main.activity_cambio_clave.*
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.email_p
+import kotlinx.android.synthetic.main.activity_main.password
+import kotlinx.android.synthetic.main.activity_main.password_p
 import java.util.*
+import java.util.regex.Pattern
 
 class Cambio_clave : AppCompatActivity() {
 
@@ -44,13 +53,7 @@ class Cambio_clave : AppCompatActivity() {
         email_C = obtenerEmail().toString()
 
         btn_confirmar.setOnClickListener {
-            pass1 = password_primero.text.toString()
-            pass2 = password_segundo.text.toString()
-            if (pass1 == pass2){
-                actualizarPassword()
-            }else{
-                Toast.makeText(this,"Las contraseñas son diferentes", Toast.LENGTH_LONG).show()
-            }
+            validate()//valida los campos que no se encuentren vacion y si todo esta bien ejecuta el metodo actualizar  esta dentro del metodo validate
         }
 
         btn_atras.setOnClickListener {
@@ -64,6 +67,51 @@ class Cambio_clave : AppCompatActivity() {
         }
 
     }
+
+    fun validate() {
+        var passValidado : Boolean = false
+        var passValidado2 : Boolean = false
+
+        var mailError: String? = null
+        if (TextUtils.isEmpty(password_primero.text)) {
+            mailError = getString(R.string.mandatory)
+        }else{
+
+                passValidado = true
+
+
+        }
+        toggleTextInputLayoutError(password_p2, mailError)
+        var passError: String? = null
+        if (TextUtils.isEmpty(password_segundo.text)) {
+            passError = getString(R.string.mandatory)
+        }else{
+            pass1 = password_primero.text.toString()
+            pass2 = password_segundo.text.toString()
+            if (pass1 == pass2){
+                passValidado2 = true
+            }else{
+                passError = getString(R.string.mandatoryPass)
+            }
+
+        }
+        toggleTextInputLayoutError(password_p, passError)
+        //clearFocus()
+
+        if (passValidado && passValidado2){
+            actualizarPassword()
+        }
+    }
+
+    private fun toggleTextInputLayoutError(
+        textInputLayout: TextInputLayout,
+        msg: String?
+    ) {
+        textInputLayout.error = msg
+        textInputLayout.isErrorEnabled = msg != null
+    }
+
+
 
     fun actualizarPassword() {
         cargando.visibility = (View.VISIBLE)

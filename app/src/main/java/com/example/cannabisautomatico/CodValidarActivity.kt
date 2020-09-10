@@ -5,12 +5,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.text.TextUtils
 import android.view.View
 import android.widget.*
 import com.airbnb.lottie.LottieAnimationView
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.activity_cod_validar.*
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONException
@@ -18,6 +20,7 @@ import org.json.JSONObject
 
 class CodValidarActivity : AppCompatActivity() {
    lateinit var codigo : EditText
+    lateinit var codigo_p : TextInputLayout
     lateinit var email : EditText
     private lateinit var progressBar: ProgressBar
     var usuarioID:String?=null
@@ -32,6 +35,7 @@ class CodValidarActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cod_validar)
         codigo = findViewById(R.id.codigo)
+        codigo_p = findViewById(R.id.codigo_p)
         email = findViewById(R.id.email)
         animacion = findViewById(R.id.activado)
         btn_atras = findViewById(R.id.btn_atras)
@@ -54,25 +58,55 @@ class CodValidarActivity : AppCompatActivity() {
 
 
         btn_validar.setOnClickListener {
-            var codigo = codigo.text.toString()
-            var response =  Response.Listener<String> { response ->
-                try {
-                    val json = JSONObject(response)
-                    var success = json.getBoolean("success")
-                    if (success){
-                        ConsultaRequest(email.text.toString(),codigo)
-
-                    }else{
-                        Toast.makeText(this,"Error", Toast.LENGTH_LONG).show()
-                    }
-                }catch (e: JSONException){}
-
-            }
-            var registro = RegisterValidaRequest(email.text.toString(),codigo,response)
-            var queue: RequestQueue = Volley.newRequestQueue(this)
-            queue.add(registro)
+           validate()
         }
 
+    }
+
+    fun validate() {
+        var codigoValidado : Boolean = false
+
+
+        var mailError: String? = null
+        if (TextUtils.isEmpty(codigo.text)) {
+            mailError = getString(R.string.mandatory)
+        }else{
+                codigoValidado = true
+        }
+        toggleTextInputLayoutError(codigo_p, mailError)
+        if (codigoValidado){
+            validarCodigo()
+        }
+    }
+
+    private fun toggleTextInputLayoutError(
+        textInputLayout: TextInputLayout,
+        msg: String?
+    ) {
+        textInputLayout.error = msg
+        textInputLayout.isErrorEnabled = msg != null
+    }
+
+    fun validarCodigo(){
+        var codigo = codigo.text.toString()
+        var response =  Response.Listener<String> { response ->
+            try {
+                val json = JSONObject(response)
+                var success = json.getBoolean("success")
+                if (success){
+                    ConsultaRequest(email.text.toString(),codigo)
+
+                }else{
+                    var mailError: String? = null
+                    mailError = getString(R.string.mandatoryCodigo)
+                    toggleTextInputLayoutError(codigo_p, mailError)
+                }
+            }catch (e: JSONException){}
+
+        }
+        var registro = RegisterValidaRequest(email.text.toString(),codigo,response)
+        var queue: RequestQueue = Volley.newRequestQueue(this)
+        queue.add(registro)
     }
 
     fun ConsultaRequest(email:String, codigo:String){
@@ -95,7 +129,9 @@ class CodValidarActivity : AppCompatActivity() {
 
                     }
                 }else{
-                    Toast.makeText(this,"Error verifica el codigo", Toast.LENGTH_LONG).show()
+                    var mailError: String? = null
+                    mailError = getString(R.string.mandatoryCodigo)
+                    toggleTextInputLayoutError(codigo_p, mailError)
                 }
             }catch (e: JSONException){}
 

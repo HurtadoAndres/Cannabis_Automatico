@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_home_fr.*
 
@@ -15,6 +17,9 @@ import kotlinx.android.synthetic.main.fragment_home_fr.*
 class Home_fr : Fragment() {
 
     var codigo_inver:String = ""
+    lateinit var btn_ver : Button
+    lateinit var campo_codigo : TextView
+    var verboolean : Boolean = false
 
  var expande :Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +45,18 @@ class Home_fr : Fragment() {
         val btn_l = view.findViewById<LinearLayout>(R.id.btn_l)
         val btn_p = view.findViewById<LinearLayout>(R.id.btn_p)
         val btn_c = view.findViewById<LinearLayout>(R.id.btn_c)
+
+        btn_ver = view.findViewById(R.id.btn_ver)
+        campo_codigo = view.findViewById(R.id.campo_texto)
+
+        btn_ver.setOnClickListener {
+            verboolean = !verboolean
+            if (verboolean){
+            campo_codigo.text=codigo_inver
+            }else{
+                campo_codigo.text="*******"
+            }
+        }
 
 
         btn_h.setOnClickListener{

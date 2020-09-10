@@ -41,6 +41,7 @@
         android:layout_marginLeft="80dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
+       android:id="@+id/titulofr"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="270dp"
         android:layout_gravity="center_horizontal"
@@ -63,6 +64,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/titulosfr"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="270dp"
         android:layout_gravity="center_horizontal"
@@ -85,6 +87,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/descripcionfr"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="270dp"
         android:layout_gravity="center_horizontal"

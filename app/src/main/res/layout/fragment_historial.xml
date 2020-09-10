@@ -91,21 +91,16 @@
             app:layout_constraintTop_toBottomOf="@+id/titulo"
             tools:layout_editor_absoluteX="0dp" />
 
-        <TextView
-            android:id="@+id/Nodata"
-            android:layout_width="53dp"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="@string/nodata"
-            android:textColor="@color/boton2_press"
-            android:textSize="20sp"
+        <ImageView
+            android:id="@+id/NOdatos"
+            android:layout_width="220dp"
+            android:layout_height="300dp"
+            android:src="@drawable/triste"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/HistorialList"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/HistorialList"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
+            app:layout_constraintTop_toTopOf="@+id/divider8" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/fondo_cargando"
@@ -121,24 +116,6 @@
             app:lottie_rawRes="@raw/cargando" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <ImageView
-        android:id="@+id/sin_conexion"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@drawable/sin_conexion"
-        android:layout_gravity="center"
-        android:layout_marginBottom="20dp"
-        android:alpha="0.3"/>
-    <TextView
-        android:id="@+id/mensaje_conexion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/no_tienes_internet_n_comprueba_tu_conexion"
-        android:gravity="center"
-        android:textSize="18sp"
-        android:layout_gravity="center"
-        android:layout_marginTop="70dp"
-        android:alpha="0.8"/>
 
 
     <com.getbase.floatingactionbutton.FloatingActionButton

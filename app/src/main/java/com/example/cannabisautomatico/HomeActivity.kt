@@ -1,40 +1,31 @@
 package com.example.cannabisautomatico
 
-
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
-import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.PopupMenu
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.marginLeft
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_home.*
 
-
 class HomeActivity : AppCompatActivity() {
 
-    var menuInteration:Boolean=true
     var usu:String=""
-    lateinit var layoutopciones : LinearLayout
     lateinit var btn_home: LinearLayout
     lateinit var  navegacion : BottomNavigationView
     lateinit var btn_atras : LinearLayout
 
-
-
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-//        layoutopciones = findViewById(R.id.mas_opciones)
-  //      opciones = findViewById(R.id.opciones)
         navegacion = findViewById(R.id.botonNvegacion)
         btn_home = findViewById(R.id.btn_home)
         btn_atras = findViewById(R.id.btn_atras)
@@ -45,6 +36,7 @@ class HomeActivity : AppCompatActivity() {
             paginaAjustes()
         }else if (numero == 3){
             paginaHistorial()
+            navegacion.touchscreenBlocksFocus
         }else {
             val invernadero = List_Invernaderos()
             Descripcion?.text = resources.getText(R.string.Invernadero_titulo)
@@ -60,28 +52,29 @@ class HomeActivity : AppCompatActivity() {
         }
 
 
-            navegacion.setOnNavigationItemSelectedListener { item ->
-                when (item.itemId) {
-                    R.id.home -> {
-                        paginaInvernadero()
-                        normal()
-                    }
-                    R.id.historial -> {
-                        paginaHistorial()
-                        normal()
-                    }
-                    R.id.calendario-> {
-                        normal()
-                        paginaCalendario()
-                    }
-                    R.id.ajustes-> {
-                        normal()
-                       paginaAjustes()
 
-                    }
+        navegacion.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.home -> {
+                    paginaInvernadero()
+                    normal()
                 }
-                return@setOnNavigationItemSelectedListener true
+                R.id.historial -> {
+                    paginaHistorial()
+                    normal()
+                }
+                R.id.calendario-> {
+                    normal()
+                    paginaCalendario()
+                }
+                R.id.ajustes-> {
+                    normal()
+                    paginaAjustes()
+
+                }
             }
+            return@setOnNavigationItemSelectedListener true
+        }
 
 
 
@@ -90,8 +83,8 @@ class HomeActivity : AppCompatActivity() {
             normal()
         }
 
-
     }
+
 
     fun normal(){
         tablero_info.gravity = Gravity.NO_GRAVITY
@@ -142,14 +135,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     fun mostrarPerfil() {
-            estadoNoCerrarSesion(false)
-            startActivity(Intent(this, Perfil::class.java))
+        estadoNoCerrarSesion(false)
+        startActivity(Intent(this, Perfil::class.java))
     }
-
-
-
-
-
-
-
 }

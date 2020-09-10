@@ -4,6 +4,7 @@ package com.example.cannabisautomatico
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -20,6 +21,7 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.airbnb.lottie.LottieAnimationView
 import com.android.volley.AuthFailureError
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -66,14 +68,13 @@ class List_Invernaderos() : Fragment() {
     private val animatorAll: ObjectAnimator? = null
 
     private val animationDuration: Long = 1000
-    lateinit var imagen_sinConexion : ImageView
-    lateinit var mensaje_cone : TextView
+
     //AnimatorSet -> Reproduce un conjunto de ObjectAnimator en un orden especificado. Las animaciones pueden ser todas a la vez o secuenciadas
     private val animatorSet: AnimatorSet? = null
 
     lateinit var eliminar : LinearLayout
     lateinit var editar : LinearLayout
-    lateinit var cancelar : Button
+    lateinit var cancelar : ImageView
 
 
     var tituloArray : ArrayList<String> = ArrayList()
@@ -94,10 +95,14 @@ class List_Invernaderos() : Fragment() {
     var KEY_CODIGO = "codigo"
     var URL_ELIMINAR = "https://cannabisautomatico.000webhostapp.com/ServicioWeb/eliminar_campo.php"
     var URL_VERACTIVADO = "https://cannabisautomatico.000webhostapp.com/ServicioWeb/estadoActivadoInvernadero.php"
+     var URL_VERACTIVADO2 = "https://cannabisautomatico.000webhostapp.com/ServicioWeb/ActivarInvernadero.php"
     var KEY_ESTADO="estado"
 
     lateinit var activar : LinearLayout
     var activar_opcion : Boolean = false
+    lateinit var sindatos : ImageView
+    lateinit var fondo_cargando: LottieAnimationView
+    var estadoInver : Boolean = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -118,10 +123,9 @@ class List_Invernaderos() : Fragment() {
         this.expandablelistview = view.findViewById(R.id.inverdaero)
         menu = view.findViewById(R.id.menu_select)
         contenedorP = view.findViewById(R.id.container)
-        imagen_sinConexion = view.findViewById(R.id.sin_conexion)
-        mensaje_cone = view.findViewById(R.id.mensaje_conexion)
-        imagen_sinConexion.visibility = (View.INVISIBLE)
-        mensaje_cone.visibility = (View.INVISIBLE)
+        sindatos = view.findViewById(R.id.sindatos)
+        fondo_cargando = view.findViewById(R.id.fondo_cargando)
+
 
         eliminar = view.findViewById(R.id.eliminar)
         cancelar = view.findViewById(R.id.cancelar)
@@ -135,6 +139,10 @@ class List_Invernaderos() : Fragment() {
 
         if (container != null) {
             thiscontext = container.context
+        }
+
+        if(idArray.size <= 0){
+
         }
 
 
@@ -152,10 +160,8 @@ class List_Invernaderos() : Fragment() {
         }
 
         eliminar.setOnClickListener {
-            for (i in 0 until posicionCheck.size){
-                eliminarInvernadero(posicionCheck[i].toInt())
-            }
 
+            alertaEliminar()
         }
 
         cancelar.setOnClickListener {
@@ -170,19 +176,15 @@ class List_Invernaderos() : Fragment() {
 
             if (activar_opcion) {
                 activar.background = thiscontext.getDrawable(R.drawable.fondo_btn_s)
-                opcion_VerInvernaderoActivado(posicion,"true")
-                val toast =
-                    Toast.makeText(thiscontext, "Invernadero activado", Toast.LENGTH_SHORT)
-                    toast.setGravity(Gravity.CENTER, 0, 0)
-                    toast.show()
+                estadoInver = true
+                alerta()
+
 
             }else{
                 activar.background = thiscontext.getDrawable(R.drawable.btn_btn_final)
-                opcion_VerInvernaderoActivado(posicion,"false")
-                val toast =
-                    Toast.makeText(thiscontext, "Invernadero desativado", Toast.LENGTH_SHORT)
-                    toast.setGravity(Gravity.CENTER, 0, 0)
-                    toast.show()
+                estadoInver = false
+                alerta()
+
             }
 
         }
@@ -190,6 +192,53 @@ class List_Invernaderos() : Fragment() {
 
         return view
     }
+
+
+    fun alerta(): AlertDialog? {
+        val builder = AlertDialog.Builder(thiscontext)
+            .setMessage("Estas seguro en querer cambiar \n" +
+                    "el estado del invernadero\n${tituloArray[posicion]} ")
+            .setCancelable(false)
+
+            .setPositiveButton("SI") { dialog, which ->
+                op_VerInvernaderoActivado()
+                if (estadoInver){
+                    val toast =
+                        Toast.makeText(thiscontext, "Invernadero activado", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
+                }else{
+                    val toast =
+                        Toast.makeText(thiscontext, "Invernadero desativado", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
+                }
+
+            }
+            .setNegativeButton("NO"){dialog, which -> dialog.cancel() }
+
+        builder.setTitle("Estado invernadero").show()
+        return builder.create()
+    }
+
+    fun alertaEliminar(): AlertDialog? {
+        val builder = AlertDialog.Builder(thiscontext)
+            .setMessage("Estas seguro en querer eliminar \n" +
+                    "el ${tituloArray[posicion]} ")
+            .setCancelable(false)
+
+            .setPositiveButton("SI") { dialog, which ->
+                for (i in 0 until posicionCheck.size){
+                    eliminarInvernadero(posicionCheck[i].toInt())
+                }
+
+            }
+            .setNegativeButton("NO"){dialog, which -> dialog.cancel() }
+
+        builder.setTitle("invernadero").show()
+        return builder.create()
+    }
+
 
 
 
@@ -201,14 +250,11 @@ class List_Invernaderos() : Fragment() {
             connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
         if (capabilities != null) {
             if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-                imagen_sinConexion.visibility = (View.INVISIBLE)
-                mensaje_cone.visibility = (View.INVISIBLE)
                 insertDatosInfropmacion()
             }
         }else{
-            imagen_sinConexion.visibility = (View.VISIBLE)
-            mensaje_cone.visibility = (View.VISIBLE)
             Toast.makeText(thiscontext,"Nose puede conectar, verifique el acceso a internet e Intente nuevamente",Toast.LENGTH_LONG).show()
+            startActivity(Intent(thiscontext,Sin_internet::class.java))
 
         }
     }
@@ -234,7 +280,7 @@ class List_Invernaderos() : Fragment() {
             var check = v.findViewById<CheckBox>(R.id.seleccionado)
             seleccionado = !seleccionado
             posicion = pos
-
+            VerInvernaderoActivado()
 
             animacion("alpha")
             btn_mas_invernadero.visibility = (View.INVISIBLE)
@@ -339,11 +385,16 @@ class List_Invernaderos() : Fragment() {
 
 
     fun insertDatosInfropmacion() {
+        fondo_cargando.visibility=(View.VISIBLE)
         var URLDATOS = "https://cannabisautomatico.000webhostapp.com/ServicioWeb/invernaderoTraer.php"
         val stringRequest: StringRequest = object : StringRequest(
             Method.POST, URLDATOS,
             Response.Listener { response ->
+                fondo_cargando.visibility=(View.INVISIBLE)
                 val json = JSONObject(response)
+                if (json.length() == 1){
+                    sindatos.visibility = (View.VISIBLE)
+                }
                 try {
                     val jsonarray = json.getJSONArray("imagen")
 
@@ -372,7 +423,6 @@ class List_Invernaderos() : Fragment() {
                     }
 
                 } catch (e: JSONException) {
-                    Toast.makeText(thiscontext, "" + e, Toast.LENGTH_LONG).show()
                 }
 
             }, Response.ErrorListener { error ->
@@ -422,7 +472,47 @@ class List_Invernaderos() : Fragment() {
 
     }
 
-    fun opcion_VerInvernaderoActivado(posicion_r:Int, estado:String) {
+    fun op_VerInvernaderoActivado() {
+        val stringRequest: StringRequest = @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+        object : StringRequest(
+            Method.POST, URL_VERACTIVADO2,
+            Response.Listener { response ->
+                val json = JSONObject(response)
+                var getActivado= json.getString("getactivado")
+                if(getActivado == "true") {
+                    activar.background = thiscontext.getDrawable(R.drawable.fondo_btn_s)
+                    activar_opcion = true
+                }
+                else{
+                    activar.background = thiscontext.getDrawable(R.drawable.btn_btn_final)
+                    activar_opcion=false
+                }
+
+
+
+            }, Response.ErrorListener { error ->
+                Toast.makeText(thiscontext, error.message.toString(), Toast.LENGTH_LONG)
+                    .show()
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getParams(): Map<String, String> {
+
+                var params: MutableMap<String, String> =
+                    Hashtable<String, String>()
+                params[KEY_ESTADO] = estadoInver.toString()
+                params[KEY_CODIGO] = idArray[posicion]
+
+
+                return params
+            }
+
+        }
+        val requestQueue = Volley.newRequestQueue(thiscontext)
+        requestQueue.add(stringRequest)
+
+    }
+
+    fun VerInvernaderoActivado() {
         val stringRequest: StringRequest = @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
         object : StringRequest(
             Method.POST, URL_VERACTIVADO,
@@ -449,8 +539,7 @@ class List_Invernaderos() : Fragment() {
 
                 var params: MutableMap<String, String> =
                     Hashtable<String, String>()
-                params[KEY_ESTADO] = estado
-                params[KEY_CODIGO] = idArray[posicion_r]
+                params[KEY_CODIGO] = idArray[posicion]
 
 
                 return params

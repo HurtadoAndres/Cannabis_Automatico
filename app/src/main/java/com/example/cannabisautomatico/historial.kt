@@ -47,7 +47,7 @@ class historial : Fragment() {
     private lateinit var  handler : Handler
     lateinit var thiscontext : Context
     lateinit var fondo_cargando: LottieAnimationView
-    lateinit var nodata : TextView
+    lateinit var nodata : ImageView
     lateinit var imagen_sinConexion : ImageView
     lateinit var mensaje_cone : TextView
 
@@ -75,14 +75,10 @@ class historial : Fragment() {
         // Inflate the layout for this fragment
        val view : View = inflater.inflate(R.layout.fragment_historial, container, false)
 
-        nodata = view.findViewById<TextView>(R.id.Nodata)
+        nodata = view.findViewById(R.id.NOdatos)
         lv=view.findViewById(R.id.HistorialList)
         fondo_cargando = view.findViewById(R.id.fondo_cargando)
-        imagen_sinConexion = view.findViewById(R.id.sin_conexion)
-        mensaje_cone = view.findViewById(R.id.mensaje_conexion)
         btn_eliminar = view.findViewById(R.id.btn_eliminar)
-        imagen_sinConexion.visibility = (View.INVISIBLE)
-        mensaje_cone.visibility = (View.INVISIBLE)
         if (container != null) {
             thiscontext = container.context
         }
@@ -264,15 +260,13 @@ class historial : Fragment() {
         if (capabilities != null) {
             if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || capabilities.hasTransport(
                     NetworkCapabilities.TRANSPORT_WIFI)) {
-                imagen_sinConexion.visibility = (View.INVISIBLE)
-                mensaje_cone.visibility = (View.INVISIBLE)
                 consultaHistorial()
             }
         }else{
-            imagen_sinConexion.visibility = (View.VISIBLE)
-            mensaje_cone.visibility = (View.VISIBLE)
+
             fondo_cargando.visibility=(View.INVISIBLE)
             Toast.makeText(thiscontext,"Nose puede conectar, verifique el acceso a internet e Intente nuevamente",Toast.LENGTH_LONG).show()
+            startActivity(Intent(thiscontext,Sin_internet::class.java))
 
         }
     }

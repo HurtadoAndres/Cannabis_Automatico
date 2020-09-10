@@ -65,6 +65,7 @@
         android:ems="10"
         android:hint="@string/ejemplo_email"
         android:inputType="textEmailAddress"
+        android:imeOptions="actionNext"
         app:startIconDrawable="@drawable/ico_m"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,6 +76,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="15sp"
+            android:inputType="textPersonName"
+
             />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -87,7 +90,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        android:drawableLeft="@drawable/ico_p"
         android:ems="10"
         app:startIconDrawable="@drawable/ico_p"
         android:hint="@string/ejemplo_password"
@@ -125,6 +127,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_iniciar"
+        android:textAppearance="@style/TextStyle"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="170dp"
         android:layout_height="50dp"
@@ -143,6 +146,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_recuperar"
+        android:textAppearance="@style/TextStyle"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -172,11 +176,12 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_registrar"
+        android:textAppearance="@style/TextStyle"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="22dp"
         android:text="@string/btn_registrar"
         android:textColor="@color/cannabis_verde"
         android:textStyle="bold"

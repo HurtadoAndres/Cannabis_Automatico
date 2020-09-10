@@ -7,8 +7,7 @@
     android:fitsSystemWindows="true"
     android:background="@drawable/fondo_p_actual"
     android:orientation="vertical"
-    app:menu="@menu/bottom_navigation_menu"
-    tools:context=".HomeActivity">
+    app:menu="@menu/bottom_navigation_menu">
 
     <LinearLayout
         android:id="@+id/btn_atras"
@@ -21,6 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:id="@+id/btn_f"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_margin="10dp"
@@ -28,6 +28,7 @@
             android:gravity="center">
 
             <ImageView
+                android:id="@+id/btn_im"
                 android:layout_width="24dp"
                 android:layout_height="25dp"
                 android:background="@drawable/flecha" />
@@ -46,14 +47,16 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:id="@+id/btn"
             android:layout_width="match_parent"
             android:layout_height="85dp"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:baselineAligned="false">
 
             <LinearLayout
                 android:id="@+id/tablero_info"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="20"
                 android:orientation="vertical">
@@ -62,7 +65,7 @@
                     android:id="@+id/Titulop"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
+                    android:layout_marginStart="25dp"
                     android:layout_marginTop="20dp"
                     android:text="@string/titulo_app"
                     android:textColor="@android:color/background_light"
@@ -73,7 +76,7 @@
                     android:id="@+id/Descripcion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="28dp"
+                    android:layout_marginStart="28dp"
                     android:text="@string/Info_sensores"
                     android:textColor="@color/boton2_press"
                     android:textSize="18sp"

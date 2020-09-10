@@ -1,10 +1,11 @@
 package com.example.cannabisautomatico
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import kotlinx.android.synthetic.main.activity_main.*
+import androidx.appcompat.app.AppCompatActivity
+
+
 
 class BienvenidoActivity : AppCompatActivity() {
 
@@ -28,6 +29,9 @@ class BienvenidoActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+
+
     }
 
 

@@ -87,14 +87,27 @@
         android:background="@drawable/shadow"
         android:layout_marginTop="250dp"
         android:gravity="center_horizontal"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Proximas cosechas"
+            android:text="Etapas de los Invernaderos"
             android:layout_marginTop="10dp" />
+        <TextView
+            android:id="@+id/panel_info"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Invernadero y su etapa"
+            android:layout_marginTop="10dp"
+            android:ellipsize="marquee"
+            android:focusable="false"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:textSize="25dp"/>
 
     </LinearLayout>
 
@@ -113,13 +126,14 @@
             android:gravity="center"
             android:orientation="horizontal">
             <ImageView
-                android:layout_width="30dp"
+                android:layout_width="25dp"
                 android:layout_height="30dp"
-                android:src="@drawable/invernadero"/>
+                android:src="@drawable/icono_email"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Usuario : "
+                android:layout_marginLeft="5dp"
                 android:textSize="18sp"/>
             <TextView
                 android:id="@+id/cuenta_perfil"
@@ -129,23 +143,6 @@
                 android:textStyle="bold"
                 android:textColor="@color/cannabis_verde_D"
                 android:textSize="15sp"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/invernadero"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Invernaderos : "
-                android:textSize="18sp"/>
 
         </LinearLayout>
 

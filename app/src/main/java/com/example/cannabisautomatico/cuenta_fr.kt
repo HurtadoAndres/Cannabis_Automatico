@@ -65,7 +65,7 @@ class cuenta_fr : Fragment() {
                     "la clave de tu usuario ")
             .setCancelable(false)
 
-            .setPositiveButton("OK") { dialog, which ->
+            .setPositiveButton("SI") { dialog, which ->
                 var numero = (1000 + random.nextInt((9999) - 1000))
 
                 val intet =Intent(thiscontext,verificacion_codigo_cambio_clave::class.java)
@@ -74,7 +74,7 @@ class cuenta_fr : Fragment() {
                 startActivity(intet)
 
             }
-            .setNegativeButton("CANCELAR"){dialog, which -> dialog.cancel() }
+            .setNegativeButton("NO"){dialog, which -> dialog.cancel() }
 
         builder.setTitle("Activar cuenta").show()
         return builder.create()

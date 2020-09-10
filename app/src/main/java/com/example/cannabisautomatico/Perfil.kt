@@ -17,6 +17,8 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_registrar.*
+import org.json.JSONArray
+import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
 
@@ -30,9 +32,10 @@ class Perfil : AppCompatActivity() {
     lateinit var btn_atras :LinearLayout
     lateinit var invernidad_cantida :TextView
     lateinit var usuario_perfil :TextView
+    lateinit var panel :TextView
+    var miLista = ArrayList<String>()
 
     var URL_USUARIO = "https://cannabisautomatico.000webhostapp.com/ServicioWeb/ConsultaUsuario.php"
-    var URL_INVERNADERO = "https://cannabisautomatico.000webhostapp.com/ServicioWeb/consultaInvernadero.php"
     var KEY_EMAIL = "email"
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP_MR1)
@@ -46,10 +49,12 @@ class Perfil : AppCompatActivity() {
         btn_atras = findViewById(R.id.btn_atras)
         usuario_perfil = findViewById(R.id.cuenta_perfil)
         invernidad_cantida = findViewById(R.id.invernadero_cantidad)
+        panel = findViewById(R.id.panel_info)
 
-        obtnerNombre()
-        obtnerInvernadero()
-        usuario_perfil.text=obtenerEmail()
+        panel.isSelected = true
+
+        obtnerUsuario()
+
 
         btn_atras.setOnClickListener {
             finish()
@@ -87,28 +92,52 @@ class Perfil : AppCompatActivity() {
 
     }
 
-    fun obtnerNombre() {
+
+    fun obtnerUsuario() {
         val stringRequest: StringRequest = object : StringRequest(
             Method.POST, URL_USUARIO,
             Response.Listener { response ->
-                 val json = JSONObject(response)
-                var success = json.getBoolean("success")
-                if (success) {
-                    var nombre = json.getString("nombre")
+                val json = JSONObject(response)
+                try {
+                    val jsonarray = json.getJSONArray("informacion")
+                    var cantidad = json.getString("cantidad")
+                    var nombre = json.getString("nombre_a")
                     var apellido = json.getString("apellido")
+                    var email = json.getString("email")
                     nombre_P.text = "$nombre $apellido"
+                    usuario_perfil.text=email
+                    invernidad_cantida.text=cantidad.toString()
+
+
+                    var jsonA : JSONObject
+                    var nameinver : String
+                    var etapa: String
+                    for (i in 0 until jsonarray.length()) {
+                        jsonA = jsonarray.getJSONObject(i)
+                        nameinver = jsonA.getString("nombre")
+                        etapa = jsonA.getString("etapa")
+                        miLista.add("$nameinver: $etapa")
+
+
+                    }
+                    panel.text=miLista.toString().replace("[", "").replace("]", "");
+
+
+                }catch (e:Exception){
+                    Toast.makeText(this,"$e aqui",Toast.LENGTH_LONG).show()
+
                 }
+
             }, Response.ErrorListener { error ->
-                Toast.makeText(this, error.message.toString(), Toast.LENGTH_LONG)
-                    .show()
+                Toast.makeText(this, error.message.toString(), Toast.LENGTH_LONG).show()
             }) {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
+                var email:String = obtenerEmail().toString()
 
                 var params: MutableMap<String, String> =
                     Hashtable<String, String>()
-                params[KEY_EMAIL] = obtenerEmail().toString()
-
+                params[KEY_EMAIL] = email
 
                 return params
             }
@@ -117,34 +146,9 @@ class Perfil : AppCompatActivity() {
         val requestQueue = Volley.newRequestQueue(this)
         requestQueue.add(stringRequest)
 
-    }
-
-    fun obtnerInvernadero() {
-        val stringRequest: StringRequest = object : StringRequest(
-            Method.POST, URL_INVERNADERO,
-            Response.Listener { response ->
-                    invernidad_cantida.text = "$response"
-
-            }, Response.ErrorListener { error ->
-                Toast.makeText(this, error.message.toString(), Toast.LENGTH_LONG)
-                    .show()
-            }) {
-            @Throws(AuthFailureError::class)
-            override fun getParams(): Map<String, String> {
-
-                var params: MutableMap<String, String> =
-                    Hashtable<String, String>()
-                params[KEY_EMAIL] = obtenerEmail().toString()
-
-
-                return params
-            }
-
-        }
-        val requestQueue = Volley.newRequestQueue(this)
-        requestQueue.add(stringRequest)
 
     }
+
 
     fun estadoNoCerrarSesion(b:Boolean){
         var preferenfs= getSharedPreferences("archivo_Sesion", Context.MODE_PRIVATE)

@@ -60,11 +60,11 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <Button
+                <ImageView
                     android:id="@+id/cancelar"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/salir" />
+                    android:src="@drawable/salir" />
 
             </LinearLayout>
             <TextView
@@ -126,31 +126,32 @@
             </LinearLayout>
         </LinearLayout>
 
-
     <ImageView
-        android:id="@+id/sin_conexion"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center"
-        android:alpha="0.3"
-        android:src="@drawable/sin_conexion"
+        android:id="@+id/sindatos"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:src="@drawable/triste_add"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="10dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/inverdaero"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/inverdaero" />
 
-    <TextView
-        android:id="@+id/mensaje_conexion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/fondo_cargando"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
         android:layout_gravity="center"
-        android:alpha="0.8"
-        android:gravity="center"
-        android:text="@string/no_tienes_internet_n_comprueba_tu_conexion"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/sin_conexion"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/cargando"
+        app:layout_constraintBottom_toBottomOf="@+id/inverdaero"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/inverdaero" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

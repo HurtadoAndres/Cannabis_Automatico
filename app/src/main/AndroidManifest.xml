@@ -23,7 +23,15 @@
         android:theme="@style/AppCannabis"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".Atribuciones"></activity>
+        <activity android:name=".Sin_internet"></activity>
+        <activity android:name=".HomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Atribuciones" />
         <activity android:name=".Acerca_de" />
         <activity android:name=".Cambio_clave" />
         <activity android:name=".verificacion_codigo_cambio_clave" />
@@ -40,13 +48,6 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".Olvide_passwordActivity" />
         <activity android:name=".RegistrarActivity" />
-        <activity android:name=".HomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"

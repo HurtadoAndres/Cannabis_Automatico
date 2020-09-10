@@ -17,6 +17,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.text.TextUtils
 import android.util.Base64
 import android.util.Log
 import android.view.Gravity
@@ -29,6 +30,8 @@ import com.android.volley.AuthFailureError
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.google.android.material.textfield.TextInputLayout
+import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.text.SimpleDateFormat
@@ -42,6 +45,9 @@ class add_invernadero_Activity : AppCompatActivity() {
     lateinit var titulo: TextView
     lateinit var titulo_s: TextView
     lateinit var descripcion: TextView
+    lateinit var txttitulofr : TextInputLayout
+    lateinit var txttitulo_sfr :  TextInputLayout
+    lateinit var txtdescripcionfr :  TextInputLayout
 
     lateinit var btn_buscar: LinearLayout
     lateinit var btn_atras: LinearLayout
@@ -94,6 +100,9 @@ class add_invernadero_Activity : AppCompatActivity() {
         titulo = findViewById(R.id.titulo)
         titulo_s = findViewById(R.id.titulo_s)
         descripcion = findViewById(R.id.descripcion)
+        txttitulofr = findViewById(R.id.titulo_p)
+        txttitulo_sfr = findViewById(R.id.titulo_ss)
+        txtdescripcionfr = findViewById(R.id.descripcion_s)
         btn_buscar = findViewById(R.id.btn_buscar)
         imagen_subir = findViewById(R.id.imagen_subir)
         btn_atras = findViewById(R.id.btn_atras)
@@ -115,7 +124,9 @@ class add_invernadero_Activity : AppCompatActivity() {
 
         crear_invernadero.setOnClickListener {
 
-            if (seleccionEtapa) insertDatosInfromacion()
+            if (seleccionEtapa){
+                validate()
+            }
             else {
                 val toast =
                     Toast.makeText(this, "Debes de seleccionar una etapa", Toast.LENGTH_LONG)
@@ -174,6 +185,49 @@ class add_invernadero_Activity : AppCompatActivity() {
                 etapa4.background = getDrawable(R.drawable.btn_select_etapa4)
             }
         }
+    }
+
+    fun validate() {
+        var tituloValidado : Boolean = false
+        var titulo_sValidado : Boolean = false
+        var descripcionValidado : Boolean = false
+
+        var mailError: String? = null
+        if (TextUtils.isEmpty(titulo.text)) {
+            mailError = getString(R.string.mandatory)
+        }else{
+            tituloValidado = true
+        }
+        toggleTextInputLayoutError(txttitulofr, mailError)
+
+        if (TextUtils.isEmpty(titulo_s.text)) {
+            mailError = getString(R.string.mandatory)
+        }else{
+            titulo_sValidado = true
+        }
+        toggleTextInputLayoutError(txttitulo_sfr, mailError)
+
+        if (TextUtils.isEmpty(descripcion.text)) {
+            mailError = getString(R.string.mandatory)
+        }else{
+            descripcionValidado = true
+        }
+        toggleTextInputLayoutError(txtdescripcionfr, mailError)
+
+
+        if (tituloValidado && titulo_sValidado && descripcionValidado ){
+            insertDatosInfromacion()
+        }
+    }
+
+
+
+    private fun toggleTextInputLayoutError(
+        textInputLayout: TextInputLayout,
+        msg: String?
+    ) {
+        textInputLayout.error = msg
+        textInputLayout.isErrorEnabled = msg != null
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -343,7 +397,7 @@ class add_invernadero_Activity : AppCompatActivity() {
 
     fun uploadImage(response: String) {
         var codigo = response
-        val loading = ProgressDialog.show(this, "Subiendo...", "Espere por favor")
+        val loading = ProgressDialog.show(this, "Creando Invernadero...", "Espere por favor")
         val stringRequest: StringRequest = object : StringRequest(
             Method.POST, UPLOAD_URL,
             Response.Listener { response ->
@@ -392,9 +446,9 @@ class add_invernadero_Activity : AppCompatActivity() {
         val stringRequest: StringRequest = object : StringRequest(
             Method.POST, UPLOAD_URL2,
             Response.Listener { response ->
-                uploadImage(response)
-                Toast.makeText(this, "$response", Toast.LENGTH_LONG)
-                    .show()
+                val json = JSONObject(response)
+                var codigo= json.getString("codigo")
+                uploadImage(codigo)
             }, Response.ErrorListener { error ->
 
                 Toast.makeText(this, error.message.toString(), Toast.LENGTH_LONG)

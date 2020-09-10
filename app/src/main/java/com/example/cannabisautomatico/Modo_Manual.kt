@@ -49,7 +49,7 @@ class Modo_Manual : AppCompatActivity() {
         aire = findViewById(R.id.encender_aire)
         btn_atras = findViewById(R.id.btn_atras)
 
-        codigo_inver = intent.getStringExtra("codigo")
+        codigo_inver = intent.getStringExtra("codigo").toString()
         consultaControl()
 
 

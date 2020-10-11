@@ -34,7 +34,7 @@
         android:id="@+id/imageView"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="20dp"
         android:contentDescription="@string/imagen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,24 +102,48 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/email_p"
+        android:id="@+id/telefono_p"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="310dp"
         android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:ems="10"
-        android:hint="@string/ejemplo_email"
-        app:startIconDrawable="@drawable/ico_m"
+        android:hint="3160000001"
+        android:inputType="textEmailAddress"
+        app:startIconDrawable="@drawable/icon_phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/apellido_p" >
 
         <EditText
+            android:id="@+id/telefono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:maxLength="10"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/email_p"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:ems="10"
+        android:layout_marginTop="15dp"
+        android:hint="@string/ejemplo_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/telefono_p"
+        app:startIconDrawable="@drawable/ico_m">
+
+        <EditText
             android:id="@+id/email_e"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -158,7 +182,7 @@
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:text="@string/btn_registrar"
         app:cornerRadius="14dp"
         app:strokeColor="@color/cannabis_verde"

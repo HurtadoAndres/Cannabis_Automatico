@@ -48,9 +48,9 @@
         android:background="@drawable/btn_eliminarf">
 
         <ImageView
-            android:layout_width="35dp"
+            android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:src="@drawable/ic_eliminar"/>
+            android:src="@drawable/ic_eliminar" />
 
     </LinearLayout>
 

@@ -124,13 +124,4 @@ class historial_fr : Fragment() {
 
     }
 
-
-    companion object {
-
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            historial_fr().apply {
-
-            }
-    }
 }

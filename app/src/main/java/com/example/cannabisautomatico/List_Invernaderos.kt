@@ -323,6 +323,7 @@ class List_Invernaderos() : Fragment() {
             val fr1= Home_fr()
             val args = Bundle()
             args.putString("id", idArray[groupPosition])
+            args.putString("titulo", tituloArray[groupPosition])
             fr1.setArguments(args)
             val trantition1 : FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
             trantition1.replace(R.id.contenedor, fr1)

@@ -29,6 +29,11 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
 }
 
 
@@ -73,7 +78,7 @@ dependencies {
    // implementation 'devs.mulham.horizontalcalendar:horizontalcalendar:1.3.4'
     implementation 'com.applandeo:material-calendar-view:1.8.0-rc01'
 
-
-
+    //notificacion
+    implementation 'androidx.work:work-runtime:2.3.0-beta02'
 
 }

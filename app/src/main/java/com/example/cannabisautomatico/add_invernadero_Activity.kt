@@ -68,7 +68,7 @@ class add_invernadero_Activity : AppCompatActivity() {
 
     var UPLOAD_URL = "https://cannabisautomatico.000webhostapp.com/ServicioWeb/subir_imagen.php"
     var UPLOAD_URL2 = "https://cannabisautomatico.000webhostapp.com/ServicioWeb/invernaderoCrear.php"
-
+    var SMS_URL = "https://cannabisautomatico.000webhostapp.com/zang-php-master/examples/send-sms.php"
 
     var carpetaRAIZ: String = "Cannabis_Automatico/"
     var rutaIMAGEN: String = carpetaRAIZ + "MyCannabis"
@@ -449,6 +449,8 @@ class add_invernadero_Activity : AppCompatActivity() {
                 val json = JSONObject(response)
                 var codigo= json.getString("codigo")
                 uploadImage(codigo)
+                smsNotificacion(codigo)
+
             }, Response.ErrorListener { error ->
 
                 Toast.makeText(this, error.message.toString(), Toast.LENGTH_LONG)
@@ -475,6 +477,31 @@ class add_invernadero_Activity : AppCompatActivity() {
                 params[KEY_ETAPA] = etapaSeleccionada
 
 
+
+
+                return params
+            }
+
+        }
+        val requestQueue = Volley.newRequestQueue(this)
+        requestQueue.add(stringRequest)
+
+    }
+
+    fun smsNotificacion( codigo: String) {
+
+        val stringRequest: StringRequest = object : StringRequest(
+            Method.POST, SMS_URL,
+            Response.Listener { response ->
+            }, Response.ErrorListener { error ->
+                Toast.makeText(this, error.message.toString(), Toast.LENGTH_LONG)
+                    .show()
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getParams(): Map<String, String> {
+                var params: MutableMap<String, String> =
+                    Hashtable<String, String>()
+                params[KEY_CODIGO] =  codigo
 
 
                 return params

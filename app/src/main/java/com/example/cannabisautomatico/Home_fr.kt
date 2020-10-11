@@ -20,6 +20,7 @@ class Home_fr : Fragment() {
     lateinit var btn_ver : Button
     lateinit var campo_codigo : TextView
     var verboolean : Boolean = false
+    var titulo : String = ""
 
  var expande :Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +28,7 @@ class Home_fr : Fragment() {
 
         if (arguments != null){
             codigo_inver = arguments?.getString("id").toString()
+            titulo= arguments?.getString("titulo").toString()
 
 
         }
@@ -45,9 +47,11 @@ class Home_fr : Fragment() {
         val btn_l = view.findViewById<LinearLayout>(R.id.btn_l)
         val btn_p = view.findViewById<LinearLayout>(R.id.btn_p)
         val btn_c = view.findViewById<LinearLayout>(R.id.btn_c)
+        val btn_camaraweb = view.findViewById<LinearLayout>(R.id.camaraweb)
 
         btn_ver = view.findViewById(R.id.btn_ver)
         campo_codigo = view.findViewById(R.id.campo_texto)
+
 
         btn_ver.setOnClickListener {
             verboolean = !verboolean
@@ -64,6 +68,7 @@ class Home_fr : Fragment() {
            var intent = Intent(activity,Info_Sensor_Activity::class.java)
                intent.putExtra("sensor", sensor)
                intent.putExtra("codigo", codigo_inver)
+               intent.putExtra("titulo", titulo)
                startActivity(intent)
         }
         btn_t.setOnClickListener{
@@ -71,6 +76,7 @@ class Home_fr : Fragment() {
             var intent = Intent(activity,Info_Sensor_Activity::class.java)
             intent.putExtra("sensor", sensor)
             intent.putExtra("codigo", codigo_inver)
+            intent.putExtra("titulo", titulo)
             startActivity(intent)
         }
         btn_l.setOnClickListener{
@@ -78,19 +84,29 @@ class Home_fr : Fragment() {
             var intent = Intent(activity,Info_Sensor_Activity::class.java)
             intent.putExtra("sensor", sensor)
             intent.putExtra("codigo", codigo_inver)
+            intent.putExtra("titulo", titulo)
             startActivity(intent)
+
         }
         btn_p.setOnClickListener{
             var sensor : String = "ph"
             var intent = Intent(activity,Info_Sensor_Activity::class.java)
             intent.putExtra("sensor", sensor)
             intent.putExtra("codigo", codigo_inver)
+            intent.putExtra("titulo", titulo)
             startActivity(intent)
         }
 
         btn_c.setOnClickListener{
             //startActivity(Intent(activity,Info_Sensor_Activity::class.java))
         }
+
+        btn_c.setOnClickListener {
+            startActivity(Intent(activity,IpActivity::class.java))
+
+
+        }
+
         return view
     }
 

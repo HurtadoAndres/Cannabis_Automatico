@@ -162,6 +162,7 @@
             android:layout_marginBottom="20dp">
 
             <LinearLayout
+                android:id="@+id/camaraweb"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">

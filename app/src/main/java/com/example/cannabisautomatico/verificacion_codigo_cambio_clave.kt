@@ -68,13 +68,13 @@ class verificacion_codigo_cambio_clave : AppCompatActivity() {
         }
 
 
-        var hilo = Hilo(numero!!, email_C)
+        var hilo = Hilo(numero, email_C)
           hilo.start()
 
         btn_enviar.setOnClickListener {
             numero = (1000 + random.nextInt((9999) - 1000))
-            var hilo = Hilo(numero, email_C)
-            hilo.start()
+            var hilos = Hilo(numero, email_C)
+            hilos.start()
             Toast.makeText(this,"Hemos enviado el codigo a tu correo",Toast.LENGTH_LONG).show()
         }
 
@@ -129,4 +129,6 @@ class verificacion_codigo_cambio_clave : AppCompatActivity() {
         var preferenfs= getSharedPreferences("archivo_usu", Context.MODE_PRIVATE)
         return  preferenfs?.getString("email","")
     }
+
+
 }

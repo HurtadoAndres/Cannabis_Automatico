@@ -32,6 +32,7 @@ class Perfil : AppCompatActivity() {
     lateinit var btn_atras :LinearLayout
     lateinit var invernidad_cantida :TextView
     lateinit var usuario_perfil :TextView
+    lateinit var tel_perfil :TextView
     lateinit var panel :TextView
     var miLista = ArrayList<String>()
 
@@ -48,6 +49,7 @@ class Perfil : AppCompatActivity() {
         sesion = findViewById(R.id.Sesion)
         btn_atras = findViewById(R.id.btn_atras)
         usuario_perfil = findViewById(R.id.cuenta_perfil)
+        tel_perfil = findViewById(R.id.tel_perfil)
         invernidad_cantida = findViewById(R.id.invernadero_cantidad)
         panel = findViewById(R.id.panel_info)
 
@@ -104,9 +106,11 @@ class Perfil : AppCompatActivity() {
                     var nombre = json.getString("nombre_a")
                     var apellido = json.getString("apellido")
                     var email = json.getString("email")
+                    var tel = json.getString("tel")
                     nombre_P.text = "$nombre $apellido"
                     usuario_perfil.text=email
                     invernidad_cantida.text=cantidad.toString()
+                    tel_perfil.text = tel
 
 
                     var jsonA : JSONObject

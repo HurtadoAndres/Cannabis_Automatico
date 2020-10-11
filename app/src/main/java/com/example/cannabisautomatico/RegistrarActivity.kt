@@ -41,6 +41,8 @@ class RegistrarActivity : AppCompatActivity() {
     private lateinit var txtemail_p: TextInputLayout
     private lateinit var txtpassword: EditText
     private lateinit var txtpassword_p: TextInputLayout
+    private lateinit var textPhone: EditText
+    private lateinit var textPhone_p : TextInputLayout
     lateinit var animacion: LottieAnimationView
     lateinit var btn_atras : LinearLayout
 
@@ -66,6 +68,8 @@ class RegistrarActivity : AppCompatActivity() {
             txtemail_p = findViewById(R.id.email_p)
             txtpassword = findViewById(R.id.password_e)
             txtpassword_p = findViewById(R.id.password_p)
+            textPhone = findViewById(R.id.telefono)
+            textPhone_p = findViewById(R.id.telefono_p)
             btn_atras = findViewById(R.id.btn_atras)
             animacion = findViewById(R.id.cargando)
 
@@ -88,6 +92,7 @@ class RegistrarActivity : AppCompatActivity() {
         var passValidado : Boolean = false
         var nomValidado : Boolean = false
         var apeValidado : Boolean = false
+        var telValidate : Boolean = false
 
         var mailError: String? = null
         if (TextUtils.isEmpty(txtnombre.text)) {
@@ -104,6 +109,12 @@ class RegistrarActivity : AppCompatActivity() {
         }
         toggleTextInputLayoutError(txtapellido_p, mailError)
 
+        if (TextUtils.isEmpty(textPhone.text)) {
+            mailError = getString(R.string.mandatory)
+        }else{
+            telValidate = true
+        }
+        toggleTextInputLayoutError(textPhone_p, mailError)
 
         if (TextUtils.isEmpty(txtemail.text)) {
             mailError = getString(R.string.mandatory)
@@ -151,6 +162,7 @@ class RegistrarActivity : AppCompatActivity() {
         var apellido :String = txtapellido.text.toString().trim()
         var usuario :String = txtemail.text.toString().trim()
         var password :String = txtpassword.text.toString().trim()
+        var tel : String = textPhone.text.toString().trim()
 
         var response = Response.Listener<String> { response ->
             try {
@@ -197,7 +209,7 @@ class RegistrarActivity : AppCompatActivity() {
 
         }
 
-        var registro = RegisterRequest(nombre,apellido,usuario,password,response)
+        var registro = RegisterRequest(nombre,apellido,usuario,password,tel,response)
         var queue: RequestQueue = Volley.newRequestQueue(this)
         queue.add(registro)
     }

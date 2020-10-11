@@ -4,7 +4,9 @@ package com.example.cannabisautomatico
 
 
 
+import android.app.*
 import android.content.Intent
+import android.graphics.Color
 import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
@@ -13,6 +15,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.android.volley.AuthFailureError
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -76,12 +80,19 @@ class Info_Sensor_Activity: AppCompatActivity() {
     lateinit var sensor_1 : TextView
     lateinit var sensor_2 : TextView
     lateinit var sensor_3 : TextView
+    var titulo : String = ""
+
+    private var pendingIntent: PendingIntent? = null
+    private val CHANNEL_ID = "NOTIFICACION"
+    private val NOTIFICACION_ID = 0
+    var ejecutarAgua=true
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info__sensor)
         atras = findViewById(R.id.btn_atras)
+        ejecutarAgua=true
 
         op1 = findViewById(R.id.fab1)
         op2 = findViewById(R.id.fab2)
@@ -94,6 +105,12 @@ class Info_Sensor_Activity: AppCompatActivity() {
         sensor_2 = findViewById(R.id.sensor_2)
         sensor_3 = findViewById(R.id.sensor_3)
 
+        tipo_Sensor = intent.getStringExtra("sensor")
+        codigo_inver = intent.getStringExtra("codigo")
+        titulo = intent.getStringExtra("titulo").toString()
+
+        dato = ArrayList()
+
 
         atras.setOnClickListener {
             // startActivity(Intent(this,HomeActivity::class.java))
@@ -102,22 +119,22 @@ class Info_Sensor_Activity: AppCompatActivity() {
 
         op2.setOnClickListener {
 
-            var intent = Intent(this,Modo_Manual::class.java)
+            var intent = Intent(this, Modo_Manual::class.java)
             intent.putExtra("codigo", codigo_inver)
+            intent.putExtra("titulo", titulo)
             startActivity(intent)
         }
 
-        tipo_Sensor = intent.getStringExtra("sensor")
-        codigo_inver = intent.getStringExtra("codigo")
+
 
         when(tipo_Sensor){
-            "temperatura"->{
-                sensor_1.text="  Humedad ambiente  "
-                sensor_2.text="  Humedad tierra  "
-                sensor_3.text="    Ph    "
-                sensor1.setOnClickListener{
-                    var sensor : String = "humedad_ambiente"
-                    var intent = Intent(this,Info_Sensor_Activity::class.java)
+            "temperatura" -> {
+                sensor_1.text = "  Humedad ambiente  "
+                sensor_2.text = "  Humedad tierra  "
+                sensor_3.text = "    Ph    "
+                sensor1.setOnClickListener {
+                    var sensor: String = "humedad_ambiente"
+                    var intent = Intent(this, Info_Sensor_Activity::class.java)
                     intent.putExtra("sensor", sensor)
                     intent.putExtra("codigo", codigo_inver)
                     startActivity(intent)
@@ -125,8 +142,8 @@ class Info_Sensor_Activity: AppCompatActivity() {
                 }
 
                 sensor2.setOnClickListener {
-                    var sensor : String = "humedad_tierra"
-                    var intent = Intent(this,Info_Sensor_Activity::class.java)
+                    var sensor: String = "humedad_tierra"
+                    var intent = Intent(this, Info_Sensor_Activity::class.java)
                     intent.putExtra("sensor", sensor)
                     intent.putExtra("codigo", codigo_inver)
                     startActivity(intent)
@@ -134,8 +151,8 @@ class Info_Sensor_Activity: AppCompatActivity() {
                 }
 
                 sensor3.setOnClickListener {
-                    var sensor : String = "ph"
-                    var intent = Intent(this,Info_Sensor_Activity::class.java)
+                    var sensor: String = "ph"
+                    var intent = Intent(this, Info_Sensor_Activity::class.java)
                     intent.putExtra("sensor", sensor)
                     intent.putExtra("codigo", codigo_inver)
                     startActivity(intent)
@@ -144,21 +161,21 @@ class Info_Sensor_Activity: AppCompatActivity() {
 
 
             }
-            "humedad_ambiente"->{
-                sensor_1.text="  Temperatura  "
-                sensor_2.text="  Humedad tierra  "
-                sensor_3.text="    Ph    "
-                sensor1.setOnClickListener{
-                    var sensor : String = "temperatura"
-                    var intent = Intent(this,Info_Sensor_Activity::class.java)
+            "humedad_ambiente" -> {
+                sensor_1.text = "  Temperatura  "
+                sensor_2.text = "  Humedad tierra  "
+                sensor_3.text = "    Ph    "
+                sensor1.setOnClickListener {
+                    var sensor: String = "temperatura"
+                    var intent = Intent(this, Info_Sensor_Activity::class.java)
                     intent.putExtra("sensor", sensor)
                     intent.putExtra("codigo", codigo_inver)
                     startActivity(intent)
                     finish()
                 }
                 sensor2.setOnClickListener {
-                    var sensor : String = "humedad_tierra"
-                    var intent = Intent(this,Info_Sensor_Activity::class.java)
+                    var sensor: String = "humedad_tierra"
+                    var intent = Intent(this, Info_Sensor_Activity::class.java)
                     intent.putExtra("sensor", sensor)
                     intent.putExtra("codigo", codigo_inver)
                     startActivity(intent)
@@ -166,30 +183,30 @@ class Info_Sensor_Activity: AppCompatActivity() {
                 }
 
                 sensor3.setOnClickListener {
-                    var sensor : String = "ph"
-                    var intent = Intent(this,Info_Sensor_Activity::class.java)
+                    var sensor: String = "ph"
+                    var intent = Intent(this, Info_Sensor_Activity::class.java)
                     intent.putExtra("sensor", sensor)
                     intent.putExtra("codigo", codigo_inver)
                     startActivity(intent)
                     finish()
                 }
             }
-            "ph"->{
+            "ph" -> {
 
-                sensor_1.text="  Temperatura  "
-                sensor_2.text="  Humedad tierra  "
-                sensor_3.text="  Humedad ambiente  "
-                sensor1.setOnClickListener{
-                    var sensor : String = "temperatura"
-                    var intent = Intent(this,Info_Sensor_Activity::class.java)
+                sensor_1.text = "  Temperatura  "
+                sensor_2.text = "  Humedad tierra  "
+                sensor_3.text = "  Humedad ambiente  "
+                sensor1.setOnClickListener {
+                    var sensor: String = "temperatura"
+                    var intent = Intent(this, Info_Sensor_Activity::class.java)
                     intent.putExtra("sensor", sensor)
                     intent.putExtra("codigo", codigo_inver)
                     startActivity(intent)
                     finish()
                 }
                 sensor2.setOnClickListener {
-                    var sensor : String = "humedad_tierra"
-                    var intent = Intent(this,Info_Sensor_Activity::class.java)
+                    var sensor: String = "humedad_tierra"
+                    var intent = Intent(this, Info_Sensor_Activity::class.java)
                     intent.putExtra("sensor", sensor)
                     intent.putExtra("codigo", codigo_inver)
                     startActivity(intent)
@@ -197,8 +214,8 @@ class Info_Sensor_Activity: AppCompatActivity() {
                 }
 
                 sensor3.setOnClickListener {
-                    var sensor : String = "humedad_ambiente"
-                    var intent = Intent(this,Info_Sensor_Activity::class.java)
+                    var sensor: String = "humedad_ambiente"
+                    var intent = Intent(this, Info_Sensor_Activity::class.java)
                     intent.putExtra("sensor", sensor)
                     intent.putExtra("codigo", codigo_inver)
                     startActivity(intent)
@@ -206,28 +223,28 @@ class Info_Sensor_Activity: AppCompatActivity() {
                 }
 
             }
-            "humedad_tierra"->{
-                sensor_1.text="T  emperatura  "
-                sensor_2.text="  Humedad ambiente  "
-                sensor_3.text="    Ph    "
-                sensor1.setOnClickListener{
-                    var sensor : String = "temperatura"
-                    var intent = Intent(this,Info_Sensor_Activity::class.java)
+            "humedad_tierra" -> {
+                sensor_1.text = "T  emperatura  "
+                sensor_2.text = "  Humedad ambiente  "
+                sensor_3.text = "    Ph    "
+                sensor1.setOnClickListener {
+                    var sensor: String = "temperatura"
+                    var intent = Intent(this, Info_Sensor_Activity::class.java)
                     intent.putExtra("sensor", sensor)
                     intent.putExtra("codigo", codigo_inver)
                     startActivity(intent)
                 }
                 sensor2.setOnClickListener {
-                    var sensor : String = "humedad_ambiente"
-                    var intent = Intent(this,Info_Sensor_Activity::class.java)
+                    var sensor: String = "humedad_ambiente"
+                    var intent = Intent(this, Info_Sensor_Activity::class.java)
                     intent.putExtra("sensor", sensor)
                     intent.putExtra("codigo", codigo_inver)
                     startActivity(intent)
                 }
 
                 sensor3.setOnClickListener {
-                    var sensor : String = "ph"
-                    var intent = Intent(this,Info_Sensor_Activity::class.java)
+                    var sensor: String = "ph"
+                    var intent = Intent(this, Info_Sensor_Activity::class.java)
                     intent.putExtra("sensor", sensor)
                     intent.putExtra("codigo", codigo_inver)
                     startActivity(intent)
@@ -297,6 +314,12 @@ class Info_Sensor_Activity: AppCompatActivity() {
 
         var tiempo = tiempo(this)
         tiempo.execute()
+
+
+        /*
+        val hilo = Thread(runnable)
+        hilo.start()
+         */
     }
 
 
@@ -351,10 +374,11 @@ class Info_Sensor_Activity: AppCompatActivity() {
         var dato = 0.0
         when (tipo_Sensor) {
             "humedad_ambiente" -> {
-                d_ideal.text = lastX.toString()
+                dato= 80.0
+                d_ideal.text = "$dato"
             }
             "temperatura" -> {
-                dato = 25.0
+                dato = 27.0
                 dato.toInt()
                 d_ideal.text =
                     "$dato°C" //Promedio de temperatura ya que se reuiere que este entre 23°c  y 27°c
@@ -364,13 +388,67 @@ class Info_Sensor_Activity: AppCompatActivity() {
                 d_ideal.text = "$dato" //promedio de PH ya que es entre 6.0 y 7.0
             }
             "humedad_tierra" -> {
-                d_ideal.text = lastX.toString()
+                dato= 75.0
+                d_ideal.text ="$dato%"
             }
             else -> {
                 d_ideal.text = lastX.toString()
             }
         }
         //  serie2.appendData(DataPoint((lastX).toDouble(),dato), false, 10)
+    }
+
+    private fun setPendingIntent() {
+        val intent = Intent(this, Modo_Manual::class.java)
+        val stackBuilder: TaskStackBuilder = TaskStackBuilder.create(this)
+        stackBuilder.addParentStack(Modo_Manual::class.java)
+        stackBuilder.addNextIntent(intent)
+        pendingIntent = stackBuilder.getPendingIntent(1, PendingIntent.FLAG_UPDATE_CURRENT)
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name: CharSequence = "Noticacion"
+            val notificationChannel =
+                NotificationChannel(CHANNEL_ID, name, NotificationManager.IMPORTANCE_DEFAULT)
+            val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(notificationChannel)
+        }
+    }
+
+    private fun createNotification(descripcion: String, titulo: String) {
+        val builder: NotificationCompat.Builder = NotificationCompat.Builder(
+            applicationContext, CHANNEL_ID
+        )
+        builder.setSmallIcon(R.drawable.hoja)
+        builder.setContentTitle(titulo)
+        builder.setContentText(descripcion)
+        builder.color = Color.BLUE
+        builder.priority = NotificationCompat.PRIORITY_DEFAULT
+        builder.setLights(Color.MAGENTA, 1000, 1000)
+        builder.setVibrate(longArrayOf(1000, 1000, 1000, 1000, 1000))
+        builder.setDefaults(Notification.DEFAULT_SOUND)
+        builder.setContentIntent(pendingIntent)
+        val notificationManagerCompat = NotificationManagerCompat.from(
+            applicationContext
+        )
+        notificationManagerCompat.notify(NOTIFICACION_ID, builder.build())
+    }
+
+    var runnable = Runnable {
+        // Esto se ejecuta en segundo plano una única vez
+        while (true) {
+            // Pero usamos un truco y hacemos un ciclo infinito
+            try {
+                // En él, hacemos que el hilo duerma
+                Thread.sleep(20000)
+                // Y después realizamos las operaciones
+                ejecutarAgua = !ejecutarAgua
+                // Así, se da la impresón de que se ejecuta cada cierto tiempo
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
+            }
+        }
     }
 
 
@@ -382,54 +460,69 @@ class Info_Sensor_Activity: AppCompatActivity() {
                 val json = JSONObject(response)
 
                 try {
-                //  var humedad_tierra = json.getString("humedad_t")
-                var humedad_ambiente = json.getString("humedad_a")
-                var temperatura = json.getString("temperatura")
-                var ph = json.getString("ph")
+                    var humedad_tierra = json.getString("humedad_t")
+                    var humedad_ambiente = json.getString("humedad_a")
+                    var temperatura = json.getString("temperatura")
+                    var ph = json.getString("ph")
+                    var nivel = json.getString("nivel")
+                    var detector_luz = json.getString("detector_luz")
+                    var nombre_inver = json.getString("nombre_inver")
 
-                when (tipo_Sensor) {
-                    "humedad_ambiente" -> {
-                        dato_sensor = humedad_ambiente.toDouble()
+                    var titulo = "Tu invernadero $nombre_inver"
+                    var descripcion = "Necesita agua (Agua agotada)"
+                    if (nivel == "0") {
+                        if (ejecutarAgua) {
+                            setPendingIntent()
+                            createNotificationChannel()
+                            createNotification(descripcion, titulo)
+                            ejecutarAgua=false
+                        }
                     }
-                    "temperatura" -> {
-                        dato_sensor = temperatura.toDouble()
-                    }
-                    "ph" -> {
-                        dato_sensor = ph.toDouble()
-                    }
-                    "humedad_tierra" -> {
-                        // dato_sensor = humedad_tierra.toDouble()
-                    }
-                    else -> {
-                        dato_sensor = 0.0
-                    }
-                }
-                tableroDatosSensor()
-                numero = lastX++
 
-                val serieData: ArrayList<DataEntry> = ArrayList()
-                dato.add(dato_sensor.toInt())
+                    when (tipo_Sensor) {
+                        "humedad_ambiente" -> {
+                            dato_sensor = humedad_ambiente.toDouble()
+                        }
+                        "temperatura" -> {
+                            dato_sensor = temperatura.toDouble()
+                        }
+                        "ph" -> {
+                            dato_sensor = ph.toDouble()
+                        }
+                        "humedad_tierra" -> {
+                            dato_sensor = humedad_tierra.toDouble()
+                        }
+                        else -> {
+                            dato_sensor = 0.0
+                        }
+                    }
+                    tableroDatosSensor()
+                    numero = lastX++
 
-                if (dato.size >= 2) {
+                    val serieData: ArrayList<DataEntry> = ArrayList()
+                    dato.add(dato_sensor.toInt())
 
-                    for (i in 0 until dato.size) {
-                        serieData.add(
-                            CustomDataEntry(
-                                i,
-                                dato[i],
-                                dato[i],
-                                dato[i]
+                    if (dato.size >= 2) {
+
+                        for (i in 0 until dato.size) {
+                            serieData.add(
+                                CustomDataEntry(
+                                    i,
+                                    dato[i],
+                                    dato[i],
+                                    dato[i]
+                                )
                             )
-                        )
+                        }
+                        set.data(serieData)
+
                     }
-                    set.data(serieData)
 
+
+                    d_actual.text = dato_sensor.toString()
+
+                } catch (e: Exception) {
                 }
-
-
-                d_actual.text=dato_sensor.toString()
-
-               }catch (e:Exception){}
 
             }, Response.ErrorListener { error ->
                 Toast.makeText(this, error.message.toString(), Toast.LENGTH_LONG)

@@ -23,8 +23,11 @@
         android:theme="@style/AppCannabis"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".Sin_internet"></activity>
-        <activity android:name=".HomeActivity">
+        <activity android:name=".IpActivity"
+            android:theme="@style/transparente" ></activity>
+        <activity android:name=".CamaraWebActivity" />
+        <activity android:name=".Sin_internet" />
+        <activity android:name=".AnimacionActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,13 +41,19 @@
         <activity
             android:name=".pantalla_home_opciones"
             android:theme="@style/transparente" />
-        <activity android:name=".Modo_Manual" />
+        <activity android:name=".Modo_Manual"
+            android:parentActivityName=".HomeActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".HomeActivity"
+            />
+        </activity>
         <activity android:name=".Info_Sensor_Activity" />
         <activity android:name=".Perfil" />
         <activity android:name=".BienvenidoActivity" />
         <activity android:name=".add_invernadero_Activity" />
         <activity android:name=".CodValidarActivity" />
-        <activity android:name=".AnimacionActivity" />
+        <activity android:name=".HomeActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Olvide_passwordActivity" />
         <activity android:name=".RegistrarActivity" />

@@ -476,9 +476,6 @@ class add_invernadero_Activity : AppCompatActivity() {
                 params[KEY_HORA] = horaActual()
                 params[KEY_ETAPA] = etapaSeleccionada
 
-
-
-
                 return params
             }
 

@@ -15,3 +15,9 @@ Medical cannabis is currently an economic boom for everything that this product 
 Currently in Colombia there is 44% of medical cannabis exports worldwide.
 And it can become number 1, because its production per gram of this product is much lower compared to other powerful countries.
 It is important for the cannabis industry since as the system works automatically, the cultivation can be adapted to the medicinal conditions required.
+
+- https://drive.google.com/file/d/1riYeVKOEbbTycPOr8RxsYR9A9hGkwcNV/view?usp=sharing
+-https://drive.google.com/file/d/1kjjBIt_m6cpxzd3ETV_ODGBdiFNLwvgi/view?usp=sharing
+- https://drive.google.com/file/d/1aUUEsqBFYDUypG0GOBByRuImS9GMkVsv/view?usp=sharing
+- https://drive.google.com/file/d/17DpHyVsGriV0CJevN8qPhIFao2tST4xE/view?usp=sharing
+- https://drive.google.com/file/d/1KX3PVxMHZ8B218isxvdaMzURGbPd9ei9/view?usp=sharing
